@@ -1,11 +1,8 @@
-﻿
-@model IEnumerable<BuildingDemo.Models.Building>
-
+﻿@model IEnumerable<BuildingDemo.Models.Building>
 @{
     ViewBag.Title = "index";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
-
 
 
 <section id="center" class="center_home clearfix">
@@ -102,69 +99,27 @@
             <div class="popular_2 clearfix">
                 @foreach (var building in Model)
                 {
-                <div class="col-sm-4">
-                    <div class="popular_2i clearfix">
-                        <div class="popular_2i1 clearfix">
-                            <a href="@Url.Action("Details","Property", new { id = building.ID })"><img src="@building.Image" class="iw" alt="abc"></a>
+                    <div class="col-sm-4">
+                        <div class="popular_2i clearfix">
+                            <div class="popular_2i1 clearfix">
+                                <a href="@Url.Action("Details","Property", new { id = building.ID })"><img src="@building.Image" class="iw" alt="abc"></a>
+                            </div>
+                            <div class="popular_2i2 clearfix">
+                                <h5 class="mgt"><a href="#">FOR RENT</a></h5>
+                            </div>
                         </div>
-                        <div class="popular_2i2 clearfix">
-                            <h5 class="mgt"><a href="#">FOR RENT</a></h5>
+                        <div class="popular_2i3 clearfix">
+                            <h5 class="mgt"><a href="@Url.Action("Details","Property", new { id = building.ID })">@building.Name <i class="fa fa-check-square col_1"></i></a></h5>
+                            <h4 class="col_1">@building.PurchasePrice / <span class="col_2">Month</span></h4>
+                            <h6><i class="fa fa-hotel col_2"></i> 3 Beds <span><i class="fa fa-home col_2"></i> 2 Bath</span></h6>
                         </div>
                     </div>
-                    <div class="popular_2i3 clearfix">
-                        <h5 class="mgt"><a href="@Url.Action("Details","Property", new { id = building.ID })">@building.Name <i class="fa fa-check-square col_1"></i></a></h5>
-                        <h4 class="col_1">@building.PurchasePrice / <span class="col_2">Month</span></h4>
-                        <h6><i class="fa fa-hotel col_2"></i> 3 Beds <span><i class="fa fa-home col_2"></i> 2 Bath</span></h6>
-                    </div>
-                </div>
+
                 }
-                @*<div class="col-sm-4">
-                    <div class="popular_2i clearfix">
-                        <div class="popular_2i1 clearfix">
-                            <a href="#"><img src="~/Assets/img/5.jpg" class="iw" alt="abc"></a>
-                        </div>
-                        <div class="popular_2i2 clearfix">
-                            <h5 class="mgt"><a href="#">FOR RENT</a></h5>
-                        </div>
-                    </div>
-                    <div class="popular_2i3 clearfix">
-                        <h5 class="mgt"><a href="#">Energy Certificate For EU <i class="fa fa-check-square col_1"></i></a></h5>
-                        <h4 class="col_1">$13,599 / <span class="col_2">Month</span></h4>
-                        <h6><i class="fa fa-hotel col_2"></i> 3 Beds <span><i class="fa fa-home col_2"></i> 2 Bath</span></h6>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="popular_2i clearfix">
-                        <div class="popular_2i1 clearfix">
-                            <a href="#"><img src="~/Assets/img/6.jpg" class="iw" alt="abc"></a>
-                        </div>
-                        <div class="popular_2i2 clearfix">
-                            <h5 class="mgt"><a href="#">FOR SALE</a></h5>
-                        </div>
-                    </div>
-                    <div class="popular_2i3 clearfix">
-                        <h5 class="mgt"><a href="#">Modern Family Home <i class="fa fa-check-square col_1"></i></a></h5>
-                        <h4 class="col_1">$11,550 / <span class="col_2">Month</span></h4>
-                        <h6><i class="fa fa-hotel col_2"></i> 3 Beds <span><i class="fa fa-home col_2"></i> 2 Bath</span></h6>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="popular_2i clearfix">
-                        <div class="popular_2i1 clearfix">
-                            <a href="#"><img src="~/Assets/img/7.jpg" class="iw" alt="abc"></a>
-                        </div>
-                        <div class="popular_2i2 clearfix">
-                            <h5 class="mgt"><a href="#">FOR RENT</a></h5>
-                        </div>
-                    </div>
-                    <div class="popular_2i3 clearfix">
-                        <h5 class="mgt"><a href="#">Real Luxury Villa <i class="fa fa-check-square col_1"></i></a></h5>
-                        <h4 class="col_1">$10,599 / <span class="col_2">Month</span></h4>
-                        <h6><i class="fa fa-hotel col_2"></i> 3 Beds <span><i class="fa fa-home col_2"></i> 2 Bath</span></h6>
-                    </div>
-                </div>*@
             </div>
         </div>
+      
+
     </div>
 </section>
 

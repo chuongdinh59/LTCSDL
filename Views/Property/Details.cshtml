@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
@@ -48,12 +47,11 @@
                     <div class="list_detail_1l clearfix">
                         <div class="list_detail_1l1 clearfix">
                             <h3 class="mgt">
-                                $2299 / <span class="span_1">Monthly</span>
+                                $@Model.PurchasePrice / <span class="span_1">Monthly</span>
                                 <span class="span_2">For Rental</span>
                             </h3>
                             <p>
-                                <i class="fa fa-map-marker"></i> 538 Country St. Lorem City,
-                                GM
+                                <i class="fa fa-map-marker"></i> @Model.Address
                             </p>
                         </div>
                         <div class="list_detail_1l2 clearfix">
@@ -62,11 +60,11 @@
                             <div class="list_detail_1l2i clearfix">
                                 <div class="col-sm-3 space_left">
                                     <h5 class="mgt">Bedrooms</h5>
-                                    <h6 class="col_1">3</h6>
+                                    <h6 class="col_1">@Model.Bed</h6>
                                 </div>
                                 <div class="col-sm-3 space_left">
                                     <h5 class="mgt">Bathrooms</h5>
-                                    <h6 class="col_1">1</h6>
+                                    <h6 class="col_1">@Model.Bath</h6>
                                 </div>
                                 <div class="col-sm-3 space_left">
                                     <h5 class="mgt">Garage</h5>
@@ -77,6 +75,7 @@
                                     <h6 class="col_1">490 sq ft</h6>
                                 </div>
                             </div>
+                           
                             <div class="list_detail_1l2i clearfix">
                                 <div class="col-sm-3 space_left">
                                     <h5 class="mgt">Type</h5>
@@ -84,18 +83,19 @@
                                 </div>
                                 <div class="col-sm-3 space_left">
                                     <h5 class="mgt">price</h5>
-                                    <h6 class="col_1">$33244</h6>
+                                    <h6 class="col_1">$@Model.PurchasePrice</h6>
                                 </div>
                                 <div class="col-sm-3 space_left">
                                     <h5 class="mgt">City</h5>
-                                    <h6 class="col_1">London</h6>
+                                    <h6 class="col_1">@Model.Address</h6>
                                 </div>
                                 <div class="col-sm-3 space_left">
                                     <h5 class="mgt">Build On</h5>
-                                    <h6 class="col_1">2004</h6>
+                                    <h6 class="col_1">@Model.YearBuild</h6>
                                 </div>
                             </div>
                         </div>
+                     
                         <div class="list_detail_1l2 clearfix">
                             <h4 class="mgt">Description</h4>
                             <hr />

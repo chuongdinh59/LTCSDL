@@ -15,5 +15,9 @@ namespace BuildingDemo.Service
         {
             return buildingRepository.test();
         }
+        public IEnumerable<Building> getTop(int x)
+        {
+            return buildingRepository.getTop(x);
+        }
     }
 }

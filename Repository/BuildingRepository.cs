@@ -14,5 +14,9 @@ namespace BuildingDemo.Repository
         {
             return db.Buildings.ToList();
         }
+        public IEnumerable<Building> getTop(int x)
+        {
+            return db.Buildings.Take(x).ToList();
+        }
     }
 }
