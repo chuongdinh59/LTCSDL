@@ -20,7 +20,6 @@ namespace BuildingDemo.Models
         public virtual DbSet<Employee> Employees { get; set; }
         public virtual DbSet<ManagementBuilding> ManagementBuildings { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
