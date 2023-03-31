@@ -1,0 +1,166 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create Building</h2>
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <div class="alert alert-danger">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thêm thất bại</h5>
+                <p>@TempData["ErrorMessage"].</p>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@using (Html.BeginForm("Create", "Building", FormMethod.Post,
+            HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+{
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="inputCity">Tên tòa nhà</label>
+            <input placeholder ="ex: Time city.." name="Name" type="text" class="form-control" id="inputCity">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputZip">Năm xây dựng</label>
+            <input placeholder ="ex: 2012.." name="YearBuild"  type="number" class="form-control" id="inputZip">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputZip">Số Tầng</label>
+            <input name="NumFloors" placeholder ="ex: 2.."  type="number" class="form-control" id="inputZip">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputZip">Số phòng ngủ</label>
+            <input name="Bed" placeholder ="ex: 2.."  type="number" class="form-control" id="inputZip">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="inputZip">Số nhà vệ sinh</label>
+            <input name="Bath"  placeholder ="ex: 2.."  type="number" class="form-control" id="inputZip">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Giá bán</label>
+        <div class="col-sm-10">
+            <input name="PurchasePrice" type="number" class="form-control" id="inputEmail3" placeholder="Tính bằng triệu">
+        </div>
+
+
+    </div>
+
+    <div class="form-group row">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Địa chỉ</label>
+        <div class="col-sm-10">
+            <input name="Address" type="text" class="form-control" id="inputEmail3" placeholder="Địa chỉ">
+        </div>
+
+
+    </div>
+    <fieldset class="form-group">
+        <div class="row">
+            <label class="col-form-label col-sm-2 pt-0">Quyền sở hữu</label>
+            <div class="col-sm-10">
+                <div class="radio">
+                    <input type="radio" name="ID" id="gridRadios1" value="KG">
+                    <label for="gridRadios1">
+                        Khách kí gửi
+                    </label>
+                </div>
+                <div class="radio">
+                    <div class="form-group col-md-4">
+                        <label for="inputZip" style="color:red">**Nếu là kí gửi điền ID</label>
+                        <input placeholder="ex: 2.." name="CustomerID" type="number" class="form-control" id="inputZip">
+                    </div>
+                    @if (TempData.ContainsKey("CustomerIDMessage"))
+                    {
+                        <div class="alert alert-danger">
+                            @TempData["CustomerIDMessage"]
+                        </div>
+                    }
+                </div>
+                <div class="radio">
+                    <input type="radio" name="ID" id="gridRadios2" value="HT">
+                    <label for="gridRadios2">
+                        Hệ thống
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <fieldset class="form-group">
+        <div class="row">
+            <label class="col-form-label col-sm-2 pt-0">Trạng thái</label>
+            <div class="col-sm-10">
+                <div class="radio">
+                    <input type="radio" name="IsOccupied" id="isOcc1" value="true">
+                    <label for="isOcc1">
+                        Đang rao bán
+                    </label>
+                </div>
+                <div class="radio">
+                    <input type="radio" name="IsOccupied" id="isOcc2" value="false">
+                    <label for="isOcc2">
+                       Đang cho thuê
+                    </label>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    <div class="form-group row">
+        <div class="col-sm-2">Loại nhà</div>
+        <div class="col-sm-10" style="
+
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr;
+                                gap: 10px;
+
+                            ">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="radio">
+                    <input type="radio" name="BuildingTypeID" id="BuildingTypeID@(i)" value="@Model[i].ID">
+                    <label for="BuildingTypeID@(i)">
+                        @Model[i].Name
+                    </label>
+                </div>
+            }   
+
+
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-6">
+            <div class="custom-file">
+                <input name="Image" type="file" class="custom-file-input" id="thumbnailFile" accept="image/*">
+                <label class="custom-file-label" for="thumbnailFile">Choose thumbnail</label>
+            </div>
+            <div id="uploadSuccessNotification" style="display: none;">
+                <i class="fas fa-check-circle"></i> Thumbnail uploaded successfully!
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="custom-file">
+                <input type="file" class="custom-file-input" id="customFile" multiple accept="image/*" name="Images">
+                <label class="custom-file-label" for="customFile">Choose file for details</label>
+            </div>
+            <div id="uploadIcon" style="display: none;">
+                <i class="fas fa-check-circle"></i> <span id="numUploaded"></span> images uploaded successfully!
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Thêm dữ liệu</button>
+        </div>
+    </div>
+}
+
+

@@ -28,6 +28,20 @@ namespace BuildingDemo.Models
 
         public DateTime? CreateDate { get; set; }
 
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [StringLength(50)]
+        public string Phone { get; set; }
+
+        [StringLength(50)]
+        public string Note { get; set; }
+
+        [StringLength(100)]
+        public string Email { get; set; }
+
+        public bool? Status { get; set; }
+
         public virtual Account Account { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

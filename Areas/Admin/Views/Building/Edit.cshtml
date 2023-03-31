@@ -1,0 +1,236 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit page</h2>
+
+@if (TempData.ContainsKey("SaveSuccess"))
+{
+    <div class="alert alert-success">
+        <div class="d-flex align-items-center justify-content-start">
+            <span class="alert-icon">
+                <i class="anticon anticon-check-o"></i>
+            </span>
+            <span>@TempData["SaveSuccess"]</span>
+        </div>
+    </div>
+}
+@if (TempData.ContainsKey("SaveError"))
+{
+    <div class="alert alert-danger">
+        <div class="d-flex align-items-center justify-content-start">
+            <span class="alert-icon">
+                <i class="anticon anticon-check-o"></i>
+            </span>
+            <span>@TempData["SaveError"]</span>
+        </div>
+    </div>
+}
+
+<form method="post" enctype="multipart/form-data">
+
+    <div class="page-header no-gutters has-tab">
+        <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+            <div class="media align-items-center m-b-15">
+                <div class="avatar avatar-image rounded" style="height: 70px; width: 70px">
+                    <img src="@ViewBag.building.Image" alt="">
+                </div>
+                <div class="m-l-15">
+                    <h4 class="m-b-0">Code: #@ViewBag.building.ID</h4>
+                </div>
+            </div>
+            <div class="m-b-15">
+                <button class="btn btn-primary">
+                    <i class="anticon anticon-save"></i>
+                    <span>Save</span>
+                </button>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#product-edit-basic">Basic Info</a>
+            </li>
+        </ul>
+    </div>
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-edit-basic">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="inputCity">Tên tòa nhà</label>
+                            <input value="@ViewBag.building.Name" placeholder="ex: Time city.." name="Name" type="text" class="form-control" id="inputCity">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Năm xây dựng</label>
+                            <input value="@ViewBag.building.YearBuild" placeholder="ex: 2012.." name="YearBuild" type="number" class="form-control" id="inputZip">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Số Tầng</label>
+                            <input value="@ViewBag.building.NumFloors" name="NumFloors" placeholder="ex: 2.." type="number" class="form-control" id="inputZip">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Số phòng ngủ</label>
+                            <input value="@ViewBag.building.Bed" name="Bed" placeholder="ex: 2.." type="number" class="form-control" id="inputZip">
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="inputZip">Số nhà vệ sinh</label>
+                            <input value="@ViewBag.building.Bath" name="Bath" placeholder="ex: 2.." type="number" class="form-control" id="inputZip">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-2">Loại nhà</div>
+                        <div class="col-sm-10" style="
+
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr;
+                                gap: 10px;
+
+                            ">
+                            @for (int i = 0; i < ViewBag.buildingTypes.Count; i++)
+                            {
+                                <div class="radio">
+                                    @if (ViewBag.building != null && ViewBag.buildingTypes[i].ID == ViewBag.building.BuildingTypeID)
+                                    {
+                                        <input checked type="radio" name="BuildingTypeID" id="BuildingTypeID@(i)" value="@ViewBag.buildingTypes[i].ID">
+
+                                    }
+                                    else
+                                    {
+                                        <input type="radio" name="BuildingTypeID" id="BuildingTypeID@(i)" value="@ViewBag.buildingTypes[i].ID">
+
+                                    }
+                                    <label for="BuildingTypeID@(i)">
+                                        @ViewBag.buildingTypes[i].Name
+                                    </label>
+                                </div>
+                            }
+
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mb-2">
+                        <p>Hình ảnh:</p>
+                        <input accept="image/*" class="form-control" type="file" id="Image" name="Image" onchange="previewImage()" />
+                    </div>
+                    <div class="col-sm-12 mb-2">
+                        <img id="product-image" src="@ViewBag.building.Image" style="width: 100%;  max-height: 500px; object-fit: contain" />
+                    </div>
+                    <div class="tab-pane fade" id="product-edit-description">
+                        <div class="card">
+                            <div class="card-body">
+                                <div id="productDescription">
+                                    <p>Special cloth alert. The key to more success is to have a lot of pillows. Surround yourself with angels, positive energy, beautiful people, beautiful souls, clean heart, angel. They will try to close the door on you, just open it. A major key, never panic. Don’t panic, when it gets crazy and rough, don’t panic, stay calm. They key is to have every key, the key to open every door.The other day the grass was brown, now it’s green because I ain’t give up. Never surrender. Lion! I’m up to something. Always remember in the jungle there’s a lot of they in there, after you overcome they, you will make it to paradise.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 mb-2">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="customFile" multiple accept="image/*" name="Images">
+                        <label class="custom-file-label" for="customFile">Choose file for details</label>
+                    </div>
+                    <div id="uploadIcon" style="display: none;">
+                        <i class="fas fa-check-circle"></i> <span id="numUploaded"></span> images uploaded successfully!
+                    </div>
+                </div>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="@ViewBag.building.Image" class="d-block w-100" alt="...">
+                        </div>
+                        @foreach (var img in ViewBag.building.Images)
+                        {
+                            <div class="carousel-item col-sm-12 mb-2">
+                                <img style=" width: 100%; max-height: 500px; object-fit: contain" src="@img.URL" class="d-block w-100" alt="...">
+                            </div>
+                        }
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" data-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" data-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<script>
+    function previewImage() {
+        var fileInput = document.getElementById('Image');
+        var img = document.getElementById('product-image');
+
+        if (fileInput.files && fileInput.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                img.src = e.target.result;
+            }
+            reader.readAsDataURL(fileInput.files[0]);
+        }
+    }
+
+
+    // event listener for file input change
+    // function to preview images
+    function previewImages() {
+        var preview = document.querySelector('.carousel-inner');
+        var indicators = document.querySelector('.carousel-indicators');
+        preview.innerHTML = '';
+        indicators.innerHTML = '';
+        var files = document.getElementById('customFile').files;
+
+        if (files) {
+            // create carousel item for each image
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    var item = document.createElement('div');
+                    var img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.style.maxHeight = '500px';
+                    img.style.objectFit = 'contain';
+                    img.className = 'd-block w-100';
+                    item.className = 'carousel-item';
+                    item.appendChild(img);
+                    preview.appendChild(item);
+                };
+                reader.readAsDataURL(file);
+
+                // create carousel indicator for each image
+                var indicator = document.createElement('li');
+                indicator.setAttribute('data-target', '#carouselExampleIndicators');
+                indicator.setAttribute('data-slide-to', i);
+                if (i == 0) {
+                    indicator.className = 'active';
+                }
+                indicators.appendChild(indicator);
+            }
+            setTimeout(function () {
+                if (preview.firstChild) {
+                    preview.firstChild.classList.add('active');
+                }
+            }, 100);
+        }
+    }
+
+    // event listener for file input change
+    document.getElementById('customFile').addEventListener('change', function () {
+        previewImages();
+        document.getElementById('uploadIcon').style.display = 'block';
+        document.getElementById('numUploaded').innerHTML = this.files.length;
+    });
+</script>

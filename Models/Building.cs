@@ -12,10 +12,10 @@ namespace BuildingDemo.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Building()
         {
-            Appointments = new HashSet<Appointment>();
+            Images = new HashSet<Image>();
         }
 
-        [StringLength(20)]
+        [StringLength(255)]
         public string ID { get; set; }
 
         public int BuildingTypeID { get; set; }
@@ -34,7 +34,7 @@ namespace BuildingDemo.Models
 
         public double? PurchasePrice { get; set; }
 
-        public int CustomerID { get; set; }
+        public int? CustomerID { get; set; }
 
         public DateTime? CreateDate { get; set; }
 
@@ -48,11 +48,11 @@ namespace BuildingDemo.Models
         [StringLength(50)]
         public string Name { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Appointment> Appointments { get; set; }
-
         public virtual BuildingType BuildingType { get; set; }
 
         public virtual Customer Customer { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Image> Images { get; set; }
     }
 }

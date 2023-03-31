@@ -18,6 +18,7 @@ namespace BuildingDemo.Models
         public virtual DbSet<BuildingType> BuildingTypes { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<ManagementBuilding> ManagementBuildings { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
@@ -54,11 +55,6 @@ namespace BuildingDemo.Models
                 .Property(e => e.Image)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Building>()
-                .HasMany(e => e.Appointments)
-                .WithRequired(e => e.Building)
-                .WillCascadeOnDelete(false);
-
             modelBuilder.Entity<BuildingType>()
                 .HasMany(e => e.Buildings)
                 .WithRequired(e => e.BuildingType)
@@ -69,12 +65,23 @@ namespace BuildingDemo.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Customer>()
-                .HasMany(e => e.Buildings)
-                .WithRequired(e => e.Customer)
-                .WillCascadeOnDelete(false);
+                .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Customer>()
+                .Property(e => e.Note)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
                 .Property(e => e.Phone)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Image>()
+                .Property(e => e.BuildingID)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Image>()
+                .Property(e => e.URL)
                 .IsUnicode(false);
 
             modelBuilder.Entity<ManagementBuilding>()

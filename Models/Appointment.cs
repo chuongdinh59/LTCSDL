@@ -21,8 +21,6 @@ namespace BuildingDemo.Models
 
         public DateTime? CreateDate { get; set; }
 
-        public virtual Building Building { get; set; }
-
         public virtual Customer Customer { get; set; }
 
         public virtual Employee Employee { get; set; }
