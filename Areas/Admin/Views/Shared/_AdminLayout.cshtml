@@ -218,12 +218,23 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="@Url.Action("Index", "Employee")">
+                            <a class="dropdown-toggle" href="javascript:void(0);">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-build"></i>
                                 </span>
+                                <span class="arrow">
+                                    <i class="arrow-icon"></i>
+                                </span>
                                 <span class="title">Quản lý nhân viên</span>
                             </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="@Url.Action("Index", "Employee")">Phân công nhân viên </a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Employee")">Quản lý thông tin nhân viên</a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="@Url.Action("Index", "Account")">
@@ -250,14 +261,6 @@
                                     <i class="anticon anticon-form"></i>
                                 </span>
                                 <span class="title">Quản lý Blogs</span>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="javascript:void(0);">
-                                <span class="icon-holder">
-                                    <i class="anticon anticon-file"></i>
-                                </span>
-                                <span class="title">Phân công nhân viên</span>
                             </a>
                         </li>
                     </ul>

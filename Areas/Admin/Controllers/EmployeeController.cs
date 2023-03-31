@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BuildingDemo.Areas.Admin.Service;
+using BuildingDemo.Models;
 
 namespace BuildingDemo.Areas.Admin.Controllers
 {
     public class EmployeeController : Controller
     {
+        private EmployeeService employeeService = new EmployeeService();
         // GET: Admin/Employee
         public ActionResult Index()
         {
-            return View();
+            List<Employee> employees = employeeService.getAll();
+            return View(employees);
         }
 
         // GET: Admin/Employee/Details/5
@@ -28,13 +32,22 @@ namespace BuildingDemo.Areas.Admin.Controllers
 
         // POST: Admin/Employee/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [Obsolete]
+        public ActionResult Create(Employee employee, HttpPostedFileBase Avatar)
         {
             try
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                bool result = employeeService.CreateEmployee(employee, Avatar);
+                if (result)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    TempData["SavevError"] = "Fail to save the employee record.";
+                    return RedirectToAction("Create");
+                }
+                // TODO: Add insert logic here  
             }
             catch
             {
@@ -45,18 +58,28 @@ namespace BuildingDemo.Areas.Admin.Controllers
         // GET: Admin/Employee/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Employee employee = employeeService.findByID(id);
+            return View(employee);
         }
 
         // POST: Admin/Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [Obsolete]
+        public ActionResult Edit(int id, HttpPostedFileBase Avatar, Employee employee)
         {
             try
             {
-                // TODO: Add update logic here
+                bool isUpdated = employeeService.UpdateEmployee(employee, Avatar);
 
-                return RedirectToAction("Index");
+                if (isUpdated)
+                {
+                    TempData["SaveSuccess"] = "Thay đổi thông tin thành công";
+                }
+                else
+                {
+                    TempData["SaveError"] = "Thay đổi thông tin không thành công";
+                }
+                return RedirectToAction("Edit", new { id = id });
             }
             catch
             {
@@ -76,8 +99,16 @@ namespace BuildingDemo.Areas.Admin.Controllers
         {
             try
             {
+                bool IsDeleted = employeeService.DeleteEmploye(id);
                 // TODO: Add delete logic here
-
+                if (IsDeleted)
+                {
+                    TempData["DeleteSuccess"] = "Xóa thông tin thành công";
+                }
+                else
+                {
+                    TempData["DeleteError"] = "Xóa thông tin thất bại hoặc không tìm thấy thông tin";
+                }
                 return RedirectToAction("Index");
             }
             catch

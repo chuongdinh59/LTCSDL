@@ -362,10 +362,13 @@
     <Compile Include="Areas\Admin\Repository\BuildingTypeRepository.cs" />
     <Compile Include="Areas\Admin\Repository\CustomerRepository.cs" />
     <Compile Include="Areas\Admin\Repository\ImageRepository.cs" />
+    <Compile Include="Areas\Admin\Service\AccountService.cs" />
     <Compile Include="Areas\Admin\Service\BuildingService.cs" />
     <Compile Include="Areas\Admin\Service\BuildingTypeService.cs" />
     <Compile Include="Areas\Admin\Service\CustomerService.cs" />
+    <Compile Include="Areas\Admin\Service\EmployeeService.cs" />
     <Compile Include="Areas\Admin\Service\ImageService.cs" />
+    <Compile Include="Areas\Admin\Service\RoleService.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -1261,6 +1264,10 @@
     <Content Include="Areas\Admin\Views\Building\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Customer\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Customer\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Employee\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

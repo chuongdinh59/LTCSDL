@@ -26,22 +26,12 @@ namespace BuildingDemo.Models
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>()
-                .Property(e => e.Phone)
+                .Property(e => e.Password)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
                 .Property(e => e.Username)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.Customers)
-                .WithRequired(e => e.Account)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<Account>()
-                .HasMany(e => e.Employees)
-                .WithRequired(e => e.Account)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Appointment>()
                 .Property(e => e.BuildingID)
@@ -76,6 +66,14 @@ namespace BuildingDemo.Models
                 .Property(e => e.Phone)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Employee>()
+                .Property(e => e.Avatar)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Image>()
                 .Property(e => e.BuildingID)
                 .IsUnicode(false);
@@ -88,9 +86,9 @@ namespace BuildingDemo.Models
                 .Property(e => e.BuildingID)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<ManagementBuilding>()
-                .HasMany(e => e.Employees)
-                .WithRequired(e => e.ManagementBuilding)
+            modelBuilder.Entity<Role>()
+                .HasMany(e => e.Accounts)
+                .WithRequired(e => e.Role)
                 .WillCascadeOnDelete(false);
         }
     }

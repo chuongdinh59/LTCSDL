@@ -18,21 +18,15 @@ namespace BuildingDemo.Models
 
         public int ID { get; set; }
 
-        [StringLength(12)]
-        public string Phone { get; set; }
-
-        [StringLength(50)]
-        public string Email { get; set; }
-
         [StringLength(50)]
         public string Password { get; set; }
 
-        public bool Active { get; set; }
+        public bool? Active { get; set; }
 
         [StringLength(150)]
         public string Username { get; set; }
 
-        public int? RoleID { get; set; }
+        public int RoleID { get; set; }
 
         public DateTime? LastLogin { get; set; }
 

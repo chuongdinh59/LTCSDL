@@ -10,7 +10,6 @@ namespace BuildingDemo.Areas.Admin.Service
 {
     public class CustomerService
     {
-        private CustomerRepository customerRepository = new CustomerRepository();
             
 
         public List<Customer> getAll ()
@@ -39,7 +38,6 @@ namespace BuildingDemo.Areas.Admin.Service
                     target.Address = customer.Address;
                     target.Name = customer.Name;
                     target.Phone = customer.Phone;
-                    target.Status = customer.Status;
                     target.Email = customer.Email;
                     if(Avatar != null)
                     {
@@ -102,7 +100,6 @@ namespace BuildingDemo.Areas.Admin.Service
                     {
                         customer.Avatar = CloudinaryController.UploadImage(Avatar);
                     }
-                    customer.Status = true;
                     db.Customers.Add(customer);
                     db.SaveChanges();
                 }

@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit Account</h2>
+@if (TempData.ContainsKey("SaveSuccess"))
+{
+    <div class="alert alert-success">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thao tác thành công</h5>
+                <p>@TempData["SaveSuccess"].</p>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData.ContainsKey("SaveError"))
+{
+    <div class="alert alert-danger">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thao tác thất bại</h5>
+                <p>@TempData["SaveError"].</p>
+            </div>
+        </div>
+    </div>
+}
+<form method="post" enctype="multipart/form-data">
+    <div class="page-header no-gutters has-tab">
+        <div class="d-md-flex m-b-15 align-items-center justify-content-between">
+            <div class="media align-items-center m-b-15">
+            </div>
+            <div class="m-b-15">
+                <button class="btn btn-primary">
+                    <i class="anticon anticon-save"></i>
+                    <span>Thay đổi thông tin</span>
+                </button>
+            </div>
+        </div>
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active"
+                   data-toggle="tab"
+                   href="#product-edit-basic">Basic Info</a>
+            </li>
+
+        </ul>
+    </div>
+    <div class="tab-content m-t-15">
+        <div class="tab-pane fade show active" id="product-edit-basic">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productName">Username</label>
+                        <input type="text"
+                               readonly
+                               class="form-control"
+                               name="Username"
+                               value="@ViewBag.Account.Username"
+                               id="productName"
+                               placeholder=" Username" />
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-semibold" for="productPrice">Password</label>
+                        <div class="input-group">
+                            <input type="password"
+                                   class="form-control"
+                                   id="productPrice"
+                                   placeholder="Password"
+                                   value="@ViewBag.Account.Password"
+                                   name="Password" />
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputState">Role</label>
+                        <select name="RoleID" id="inputState" class="form-control">
+                            @foreach (var role in ViewBag.Roles)
+                            {
+                                if (role.ID == ViewBag.Account.RoleID)
+                                {
+                                    <option value="@role.ID" selected>@role.RoleName</option>
+                                }
+                                else
+                                {
+                                    <option value="@role.ID">@role.RoleName</option>
+                                }
+                            }
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputState">Status</label>
+                        <select name="Active" id="inputState" class="form-control">
+                            @if (ViewBag.Account.Active == true)
+                            {
+                                <option value="true" selected>Active</option>
+                                <option value="false">Pending</option>
+                            }
+                            else
+                            {
+                                <option value="true">Active</option>
+                                <option value="false" selected>Pending</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+<script>
+    window.addEventListener('DOMContentLoaded', function () {
+        var togglePassword = document.getElementById('togglePassword');
+        var passwordInput = document.getElementById('productPrice');
+
+        togglePassword.addEventListener('click', function () {
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                togglePassword.innerHTML = '<i class="fa fa-eye" aria-hidden="true"></i>';
+            } else {
+                passwordInput.type = 'password';
+                togglePassword.innerHTML = '<i class="fa fa-eye-slash" aria-hidden="true"></i>';
+            }
+        });
+    });
+
+
+</script>

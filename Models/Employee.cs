@@ -20,14 +20,23 @@ namespace BuildingDemo.Models
         public int AccountID { get; set; }
 
         [StringLength(100)]
-        public string FullName { get; set; }
+        public string Name { get; set; }
 
         [StringLength(20)]
         public string Phone { get; set; }
 
-        public int ManagementBuildingID { get; set; }
+        public int? ManagementBuildingID { get; set; }
 
         public DateTime? CreateDate { get; set; }
+
+        [StringLength(250)]
+        public string Address { get; set; }
+
+        [StringLength(255)]
+        public string Email { get; set; }
+
+        [Column(TypeName = "text")]
+        public string Avatar { get; set; }
 
         public virtual Account Account { get; set; }
 

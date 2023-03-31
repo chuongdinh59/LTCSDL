@@ -143,18 +143,20 @@
     </div>
 </div>
 <script>
-    // Show the modal when the Building.ID button is clicked
-    const buildingIDButton = document.querySelector('.deleteBtn');
-    buildingIDButton.addEventListener('click', function () {
-        // Get the modal element
-        const modal = document.querySelector('#exampleModalCenter');
-        console.log(10);
-        // Set the building ID in the modal body element
-        const modalBody = modal.querySelector('.modal-body');
-        modalBody.setAttribute('data-building-id', buildingIDButton.dataset.content);
+    const buildingIDButtons = document.querySelectorAll('.deleteBtn');
+    buildingIDButtons.forEach(function (buildingIDButton) {
+        buildingIDButton.addEventListener('click', function () {
+            // Get the modal element
+            console.log(1);
+            const modal = document.querySelector('#exampleModalCenter');
 
-        // Show the modal
-        $(modal).modal('show');
+            // Set the building ID in the modal body element
+            const modalBody = modal.querySelector('.modal-body');
+            modalBody.setAttribute('data-building-id', buildingIDButton.dataset.content);
+
+            // Show the modal
+            $(modal).modal('show');
+        });
     });
     // Get the delete button
     const deleteButton = document.querySelector('#exampleModalCenter .btn-danger');
