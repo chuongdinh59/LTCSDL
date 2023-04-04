@@ -14,7 +14,6 @@ namespace BuildingDemo.Areas.Admin.Service
         private BuildingDB db = new BuildingDB();
         public bool save(Building building)
         {
-            Console.WriteLine(building);
             return buildingRepository.save(building);
         }
         public bool update()
