@@ -8,14 +8,15 @@ using System.Web.Mvc;
 namespace BuildingManagement.Controllers
 {
 
-    
+
     public class HomeController : Controller
     {
         private BuildingService buildingService = new BuildingService();
 
-        public ActionResult Index()
+        public ActionResult Index(int x = 3)
         {
-            IEnumerable<Building> buildings = buildingService.testService() ;
+            IEnumerable<Building> buildings = buildingService.getTop(x);
+
             return View(buildings);
         }
 

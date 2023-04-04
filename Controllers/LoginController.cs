@@ -3,87 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BuildingDemo.Service;
+using BuildingDemo.Models;
 
-namespace BuildingManagement.Controllers
+namespace BuildingDemo.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
-        public ActionResult Index()
+        private AccountService accountService = new AccountService();
+        [HttpGet]
+        public ActionResult Login()
         {
             return View();
         }
 
-        // GET: Login/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Login/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Login/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Login(Account account)
         {
-            try
-            {
-                // TODO: Add insert logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            var user = accountService.getAccount().SingleOrDefault(u => u.Username == account.Username);
+            if (user != null)
             {
-                return View();
+                bool passwordMatches = BCrypt.Net.BCrypt.Verify(account.Password, user.Password);
+                if (passwordMatches)
+                {
+                    ViewBag.Error = "";
+                    Session["ID"] = user.ID;
+                    Session["Username"] = user.Username;
+                }
+                else
+                {
+                    // Đăng nhập thất bại
+                    ViewBag.Error = "username hoặc mật khẩu không đúng!";
+                }
             }
-        }
 
-        // GET: Login/Edit/5
-        public ActionResult Edit(int id)
-        {
             return View();
         }
 
-        // POST: Login/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Login/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Login/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }
