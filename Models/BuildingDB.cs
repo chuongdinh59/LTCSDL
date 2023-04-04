@@ -8,7 +8,7 @@ namespace BuildingDemo.Models
     public partial class BuildingDB : DbContext
     {
         public BuildingDB()
-            : base("name=BuildingDB")
+            : base("name=BuildingDB1")
         {
         }
 

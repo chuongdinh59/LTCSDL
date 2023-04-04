@@ -85,7 +85,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
                 {
                     TempData["SaveError"] = "Thay đổi thông tin không thành công";
                 }
-                return RedirectToAction("Edit", new { id = id });
+                return RedirectToAction("Edit");
             }
             catch
             {

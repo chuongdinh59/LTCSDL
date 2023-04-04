@@ -12,7 +12,7 @@ namespace BuildingManagement.Controllers
     public class PropertyController : Controller
     {
         private BuildingService buildingService = new BuildingService();
-
+        private BuildingTypeService buildingTypeService = new BuildingTypeService();
         // GET: Property
         public ActionResult Index(int? page, int? pageSize)
         {
@@ -35,17 +35,19 @@ namespace BuildingManagement.Controllers
         // GET: Property/Create
         public ActionResult Create()
         {
-            return View();
+            List<BuildingType> buildingTypes = buildingTypeService.getAll();
+            return View(buildingTypes);
         }
+
 
         // POST: Property/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Building building, HttpPostedFileBase Image)
         {
             try
             {
                 // TODO: Add insert logic here
-
+                bool IsCreated = buildingService.CreateBuilding(building, Image);
                 return RedirectToAction("Index");
             }
             catch

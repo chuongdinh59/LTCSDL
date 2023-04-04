@@ -48,6 +48,10 @@ namespace BuildingDemo.Models
         [StringLength(50)]
         public string Name { get; set; }
 
+        public bool? IsResolve { get; set; }
+
+        public double? Area { get; set; }
+
         public virtual BuildingType BuildingType { get; set; }
 
         public virtual Customer Customer { get; set; }
