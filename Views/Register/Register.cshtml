@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@if (TempData.ContainsKey("CreatedSuccess") && ViewBag.Error == "")
+{
+    <section id="center" class="clearfix center_about">
+        <div class="container clearfix">
+            <div class="row">
+                <div class="center_about_1 text-center clearfix">
+                    <div class="col-sm-12">
+                        <h1 class="mgt">@TempData["CreatedSuccess"]</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+@if (ViewBag.Error != "")
+{
+    <section id="center" class="clearfix center_about">
+        <div class="container clearfix">
+            <div class="row">
+                <div class="center_about_1 text-center clearfix">
+                    <div class="col-sm-12">
+                        <h1 class="mgt">Register</h1>
+                        <p>Find new & top rated property for you.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {
+        <div class="container clearfix">
+            <div class="row">
+                <div class="center_about_1 text-center clearfix">
+                    <div class="col-sm-12">
+                        <h1 class="mgt" style="color:red">@TempData["UsernameExists"]</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <section id="login">
+        <div class="container clearfix">
+            <div class="row">
+                <div class="login_1 clearfix">
+                    <div class="account-box">
+
+                        <form class="form-signin" method="post">
+                            <div class="form-group">
+                                <input type="text" id="Username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+                            </div>
+                            <div class="form-group">
+                                    <input type="email" id="Email" name="email" class="form-control" placeholder="Email" required="">
+                                </div>
+                            <div class="form-group">
+                                <input type="password" id="Password" name="password" class="form-control" placeholder="Password" required="">
+                            </div>
+
+
+                            <button class="btn btn-lg btn-block purple-bg" type="submit">
+                                Register
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+
+

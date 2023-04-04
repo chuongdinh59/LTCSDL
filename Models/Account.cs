@@ -18,7 +18,7 @@ namespace BuildingDemo.Models
 
         public int ID { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         public string Password { get; set; }
 
         public bool? Active { get; set; }
@@ -31,6 +31,9 @@ namespace BuildingDemo.Models
         public DateTime? LastLogin { get; set; }
 
         public DateTime? CreateDate { get; set; }
+
+        [StringLength(50)]
+        public string Email { get; set; }
 
         public virtual Role Role { get; set; }
 

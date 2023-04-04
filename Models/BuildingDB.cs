@@ -21,16 +21,15 @@ namespace BuildingDemo.Models
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<ManagementBuilding> ManagementBuildings { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>()
-                .Property(e => e.Password)
+                .Property(e => e.Username)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Account>()
-                .Property(e => e.Username)
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Appointment>()
