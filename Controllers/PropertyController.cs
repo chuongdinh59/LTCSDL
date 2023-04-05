@@ -35,6 +35,7 @@ namespace BuildingManagement.Controllers
         // GET: Property/Create
         public ActionResult Create()
         {
+            // check coi nó login chưa, nếu chưa redirect sang login
             List<BuildingType> buildingTypes = buildingTypeService.getAll();
             return View(buildingTypes);
         }
@@ -48,6 +49,13 @@ namespace BuildingManagement.Controllers
             {
                 // TODO: Add insert logic here
                 bool IsCreated = buildingService.CreateBuilding(building, Image);
+
+                if (!IsCreated)
+                {
+                    TempData["FailMessage"] = "Thêm tòa nhà thất bại, vui lòng điền đúng hoặc liên hệ 0334436231";
+                    return RedirectToAction("Create");
+                }
+
                 return RedirectToAction("Index");
             }
             catch

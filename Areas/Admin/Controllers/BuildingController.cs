@@ -157,6 +157,8 @@ namespace BuildingDemo.Areas.Admin.Controllers
                 return View();
             }
 
+
+        
         // POST: Admin/Building/Delete/5
         [HttpPost]
         public ActionResult Delete(string id)

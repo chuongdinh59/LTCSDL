@@ -85,11 +85,11 @@
                             <li>
                                 <a class="tag_menu" href="@Url.Action("Logout", "Logout")">Logout</a>
                             </li>
-                        }
-                        else
-                        {
+                            }
+                            else
+                         {
                             <a class="tag_menu" href="@Url.Action("Login", "LogIn")">Log In / Sign Up</a>
-                        }
+                            }
 
                             </li>
                             <li>
@@ -164,48 +164,8 @@
 
         <script src="~/Assets/js/classie.js"></script>
         <script src="~/Assets/js/cbpAnimatedHeader.js"></script>
-
-        <script>
-            const fileInput1 = document.getElementById('thumbnailFile');
-            const uploadNotification = document.getElementById('uploadSuccessNotification');
-
-            fileInput1.addEventListener('change', () => {
-                const files = fileInput1.files;
-                const numFiles = files.length;
-
-                // Show the upload notification
-                if (numFiles === 1) {
-                    uploadNotification.style.display = 'block';
-                }
-
-                // You can also handle the file upload here using JavaScript or submit the form to the server
-            });
-        </script>
-        <script>
-            const fileInput = document.getElementById('customFile');
-            const uploadIcon = document.getElementById('uploadIcon');
-            const numUploaded = document.getElementById('numUploaded');
-
-            fileInput.addEventListener('change', () => {
-                const files = fileInput.files;
-                const numFiles = files.length;
-
-                // Show the upload icon/notification
-                if (numFiles === 1) {
-                    numUploaded.innerText = '1';
-                    uploadIcon.style.display = 'block';
-                } else if (numFiles > 1 && numFiles < 4) {
-                    numUploaded.innerText = numFiles;
-                    uploadIcon.style.display = 'block';
-                } else if (numFiles >= 4) {
-                    uploadIcon.style.opacity = '0.5';
-                    numUploaded.innerText = '3+';
-                    uploadIcon.style.display = 'block';
-                }
-
-                // You can also handle the file upload here using JavaScript or submit the form to the server
-            });
-            </script>
+        <script src="~/Assets/js/bootstrap.min.js"></script>
+      
             </body >
 
 </html >

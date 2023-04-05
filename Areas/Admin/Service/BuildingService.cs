@@ -116,6 +116,26 @@ namespace BuildingDemo.Areas.Admin.Service
                 return false;
             }
         }
+
+        public List<Building> GetBuildingsNotResolve()
+        {
+            return db.Buildings.Where(b => b.IsResolve == false).ToList();
+
+        }
+        public bool chageResolve(String id)
+        {
+            try {
+                Building target = db.Buildings.Find(id);
+                if (target == null) return false;
+                target.IsResolve = true;
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
    
 }

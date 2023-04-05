@@ -1,9 +1,41 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "CheckBuilding";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
+<h2>CheckBuilding</h2>
+
+
+
+@if (TempData.ContainsKey("ChangeResolveSucc"))
+{
+    <div class="alert alert-success">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thao tác thành công</h5>
+                <p>@TempData["ChangeResolveSucc"].</p>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData.ContainsKey("ChangeResolveErr"))
+{
+    <div class="alert alert-danger">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thao tác thất bại</h5>
+                <p>@TempData["ChangeResolveErr"].</p>
+            </div>
+        </div>
+    </div>
+}
 @if (TempData.ContainsKey("DeleteSuccess"))
 {
     <div class="alert alert-success">
@@ -32,10 +64,6 @@
         </div>
     </div>
 }
-
-
-
-
 <div class="page-header">
     <h2 class="header-title">Data Table</h2>
     <div class="header-sub-title">
@@ -63,8 +91,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên tòa nhà</th>
-                        <th>Người sở hữu</th>
-                        <th>Giá bán </th>
+                        <th>Trạng thái tòa nhà</th>
+                        <th></th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -77,16 +105,20 @@
                             <td>@building.ID</td>
                             <td>@building.Name</td>
                             <td>
-                                @if (building.CustomerID != null)
+                                @if (building.IsOccupied != null)
                                 {
-                                    @building.Customer.Name
+                                    <span>Đang rao bán</span>
                                 }
                                 else
                                 {
-                                    <span>Hệ thống</span>
+                                    <span>Đang cho thuê</span>
                                 }
                             </td>
-                            <td>61</td>
+                            <td>
+                                <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                    <a data-content="@building.ID" class="resolve-btn btn btn-success"><i class="fa-solid fa-plus"></i></a>
+                                </div>
+                            </td>
                             <td>
                                 <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
                                     <a href="@Url.Action("Edit", "Building", new { id = building.ID })" class="btn btn-warning">
@@ -118,9 +150,7 @@
                 </tfoot>
 
             </table>
-            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                <a href="@Url.Action("Create", "Building")" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
-            </div>
+
         </div>
 
 
@@ -147,6 +177,29 @@
     </div>
 </div>
 <script>
+
+
+
+    const resolveBtnAll = document.querySelectorAll(".resolve-btn");
+    resolveBtnAll.forEach((resolveBtn) => {
+        resolveBtn.addEventListener("click", (event) => {
+            if (event.target.tagName.toLowerCase() === 'i') {
+                event.preventDefault(); // prevent default behavior of the <i> element
+                event.stopPropagation(); // stop the event from propagating further
+                event.target.closest('a').click(); // simulate a click on the <a> element
+            } else if (event.target.tagName.toLowerCase() === 'a') {
+                console.log(event.currentTarget);
+                const ID = event.target.dataset.content
+                fetch("https://localhost:44327/Admin/CheckedBuilding/Edit/" + ID, {
+                    method: "post",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                })
+            }
+        });
+    });
+
     const buildingIDButtons = document.querySelectorAll('.deleteBtn');
     buildingIDButtons.forEach(function (buildingIDButton) {
         buildingIDButton.addEventListener('click', function () {
@@ -182,7 +235,11 @@
                 'Content-Type': 'application/json'
             },
         }).then(res => {
-            window.location.href = "https://localhost:44327/Admin/Building";
+            if (res.status === 200) {
+                // Display success message
+                alert('Xóa thành công');
+            }
+            window.location.href = "https://localhost:44327/Admin/Building/CheckBuilding";
         });
     });
 

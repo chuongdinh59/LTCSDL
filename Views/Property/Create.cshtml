@@ -4,6 +4,7 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+
 <section id="center" class="clearfix center_about">
     <div class="container clearfix">
         <div class="row">
@@ -16,7 +17,20 @@
         </div>
     </div>
 </section>
-
+@if (TempData.ContainsKey("FailMessage"))
+{
+    <div class="alert alert-danger text-center">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thêm thất bại</h5>
+                <p>@TempData["FailMessage"].</p>
+            </div>
+        </div>
+    </div>
+}
 <section id="prop">
     <form method="post" enctype="multipart/form-data" class="container">
         <div class="row">
@@ -69,7 +83,7 @@
             </div>
             <div class="submit_1 clearfix">
                 <h4 class="mgt col_1">Ảnh chính</h4>
-                <div class="col-md-6">
+                <div class="col-md-12">
                     <div class="custom-file">
                         <input name="Image" type="file" class="form-control custom-file-input" id="thumbnailFile" accept="image/*">
                         <label class="custom-file-label" for="thumbnailFile">Choose thumbnail</label>
@@ -77,6 +91,7 @@
                     <div id="uploadSuccessNotification" style="display: none;">
                         + Thumbnail uploaded successfully!
                     </div>
+                    <img id="thumbnailPreview" src="#" alt="Thumbnail preview" style="display:none; max-width:100%">
                 </div>
             </div>
             <div class="submit_1 clearfix">
@@ -123,10 +138,32 @@
                 </div>
             </div>
         </div>
-   
+
         <div class="submit_3 clearfix m-r-auto">
             <h5 class="mgt"><button class="button mgt" href="#">Submit Property</button></h5>
         </div>
     </form>
 </section>
+
+<script>
+    const thumbnailInput = document.getElementById('thumbnailFile');
+    const thumbnailPreview = document.getElementById('thumbnailPreview');
+    thumbnailInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+                thumbnailPreview.src = this.result;
+                thumbnailPreview.style.display = 'block';
+                document.getElementById('uploadSuccessNotification').style.display = 'block';
+            });
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+This will create an input file field for users to upload an image file, and then display a thumbnail preview of the selected image. When the image is selected, the JavaScript code will read the file and display the image preview. Additionally, a notification will appear indicating that the image was uploaded successfully.
+
+
+
+
 
