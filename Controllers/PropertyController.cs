@@ -35,7 +35,12 @@ namespace BuildingManagement.Controllers
         // GET: Property/Create
         public ActionResult Create()
         {
+
             // check coi nó login chưa, nếu chưa redirect sang login
+            if (Session["ID"] == null)
+            {
+                return RedirectToAction("Login", "LogIn");
+            }
             List<BuildingType> buildingTypes = buildingTypeService.getAll();
             return View(buildingTypes);
         }
@@ -43,6 +48,7 @@ namespace BuildingManagement.Controllers
 
         // POST: Property/Create
         [HttpPost]
+        [Obsolete]
         public ActionResult Create(Building building, HttpPostedFileBase Image)
         {
             try
@@ -57,6 +63,7 @@ namespace BuildingManagement.Controllers
                 }
 
                 return RedirectToAction("Index");
+
             }
             catch
             {

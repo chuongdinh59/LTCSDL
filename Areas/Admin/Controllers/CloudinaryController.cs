@@ -17,9 +17,9 @@ namespace BuildingDemo.Areas.Admin.Controllers
         {   
             if (Image != null && Image.ContentLength > 0)
             {
-                string IsExists = GetImageUrl(Image.FileName);
-                if (IsExists != null)
-                    return IsExists;
+                //string IsExists = GetImageUrl(Image.FileName);
+                //if (IsExists != null)
+                //    return IsExists;
                 Cloudinary cloudinary = new Cloudinary(account);
                 var uploadResult = cloudinary.Upload(new ImageUploadParams() {
                     File = new FileDescription(Image.FileName, Image.InputStream),
