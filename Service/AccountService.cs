@@ -31,5 +31,9 @@ namespace BuildingDemo.Service
         {
             return db.Accounts.ToList();
         }
+        public Account findByID(int id)
+        {
+            return db.Accounts.Find(id);
+        }
     }
 }

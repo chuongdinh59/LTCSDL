@@ -10,8 +10,6 @@ namespace BuildingDemo.Areas.Admin.Service
 {
     public class CustomerService
     {
-            
-
         public List<Customer> getAll ()
         {
             using(BuildingDB db = new BuildingDB())

@@ -45,7 +45,7 @@ namespace BuildingDemo.Areas.Admin.Service
                 }
                 return true;
             }
-            catch(Exception e)
+            catch(Exception ex)
             {
                 return false;
             }

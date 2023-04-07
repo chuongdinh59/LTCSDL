@@ -671,3 +671,4 @@ C:\Users\chuon\Desktop\BD\LTCSDL\bin\Microsoft.CodeDom.Providers.DotNetCompilerP
 C:\Users\chuon\Desktop\BD\LTCSDL\bin\DevOne.Security.Cryptography.BCrypt.dll
 C:\Users\chuon\Desktop\BD\LTCSDL\bin\PagedList.Mvc.dll
 C:\Users\chuon\Desktop\BD\LTCSDL\bin\PagedList.Mvc.xml
+D:\LGBT\LTCSDL\bin\DevOne.Security.Cryptography.BCrypt.dll

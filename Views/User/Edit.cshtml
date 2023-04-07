@@ -1,0 +1,202 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section id="center" class="clearfix center_about">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="center_about_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h1 class="mgt">Submit Property</h1>
+                    <p>Just Submit Your Property</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@if (TempData.ContainsKey("SaveSuccess"))
+{
+    <div class="alert alert-success text-center">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading"></h5>
+                <p>@TempData["SaveSuccess"].</p>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData.ContainsKey("SaveError"))
+{
+    <div class="alert alert-danger text-center">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading"></h5>
+                <p>@TempData["SaveError"].</p>
+            </div>
+        </div>
+    </div>
+}
+<section id="prop">
+    <form method="post" enctype="multipart/form-data" class="container">
+        <div class="row">
+            <div class="submit_1 mgt clearfix">
+                <h4 class="mgt col_1">Thông tin tòa nhà</h4>
+                <hr>
+                <h5>Tên tòa nhà</h5>
+                <input name="Name" class="form-control" placeholder="Tên tòa nhà" type="text" value="@ViewBag.building.Name">
+                <div class="submit_1i clearfix">
+                    <div class="col-sm-6 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <h5>Trạng thái</h5>
+                            <select class="form-control">
+                                <option>Trạng thái </option>
+                                <option value="1">Đang rao bán</option>
+                                <option value="0">Đang cho thuê</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6 space_all">
+                        <div class="submit_1i1 clearfix">
+                            <h5>Loại tòa nhà</h5>
+                            <select class="form-control" name="BuildingTypeID">
+                                @for (int i = 0; i < ViewBag.buildingTypes.Count; i++)
+                                {
+
+                                    if (ViewBag.building != null && ViewBag.buildingTypes[i].ID == ViewBag.building.BuildingTypeID)
+                                    {
+                                        <option value="@ViewBag.buildingTypes[i].ID" for="BuildingTypeID@(i)">
+                                            @ViewBag.buildingTypes[i].Name
+                                        </option>
+                                    }
+                                    else
+                                    {
+                                        <span>Chọn loại tòa nhà</span>
+
+                                    }
+
+                                }
+                                @for (int i = 0; i < ViewBag.buildingTypes.Count; i++)
+                                {
+                                    <option value="@ViewBag.buildingTypes[i].ID" for="BuildingTypeID@(i)">
+                                        @ViewBag.buildingTypes[i].Name
+                                    </option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="submit_1i clearfix">
+                    <div class="col-sm-6 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <h5>Giá</h5>
+                            <input value="@ViewBag.building.PurchasePrice" name="PurchasePrice" class="form-control" placeholder="Tính bằng triệu" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 space_right">
+                        <div class="submit_1i1 clearfix">
+                            <h5>Diện tích</h5>
+                            <input value="@ViewBag.building.Area" name="Area" class="form-control" placeholder="Tính bằng m²" type="text">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="submit_1 clearfix">
+                <h4 class="mgt col_1">Ảnh chính</h4>
+                <div class="col-md-12">
+                    <div class="custom-file">
+                        <input name="Image" type="file" class="form-control custom-file-input" id="thumbnailFile" accept="image/*">
+                        <label class="custom-file-label" for="thumbnailFile">Choose thumbnail</label>
+                    </div>
+                    <div id="uploadSuccessNotification" style="display: none;">
+                        + Thumbnail uploaded successfully!
+                    </div>
+                    <img id="thumbnailPreview" src="#" alt="Thumbnail preview" style="display:none; max-width:100%">
+                </div>
+            </div>
+            <div class="submit_1 clearfix">
+                <h4 class="mgt col_1">Địa chỉ tòa nhà</h4>
+                <hr>
+                <div class="submit_1i clearfix">
+                    <div class="col-sm-12 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <h5 class="mgt">Địa chỉ</h5>
+                            <input value="@ViewBag.building.Address" name="Address" class="form-control" placeholder="Địa chỉ tòa nhà" type="text">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="submit_1 clearfix">
+                <h4 class="mgt col_1">Thông tin thêm</h4>
+                <hr>
+                <div class="submit_1i clearfix">
+                    <div class="col-sm-4 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <div class="submit_1i1 clearfix">
+                                <h5 class="mgt">Năm xây dựng</h5>
+                                <input value="@ViewBag.building.YearBuild" name="YearBuild" class="form-control" placeholder="ví dụ: 2016, 2017.." type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <div class="submit_1i1 clearfix">
+                                <h5 class="mgt">Số phòng ngủ</h5>
+                                <input value="@ViewBag.building.Bed" name="Bed" class="form-control" placeholder="ví dụ: 2,3.." type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <div class="submit_1i1 clearfix">
+                                <h5 class="mgt">Số phòng vệ sinh</h5>
+                                <input value="@ViewBag.building.Bath" name="Bath" class="form-control" placeholder="ví dụ: 2,3.." type="text">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit_3 clearfix m-r-auto">
+            <h5 class="mgt"><button class="button mgt" href="@Url.Action("List", "Property")">Save Property</button></h5>
+        </div>
+    </form>
+</section>
+
+<script>
+    const thumbnailInput = document.getElementById('thumbnailFile');
+    const thumbnailPreview = document.getElementById('thumbnailPreview');
+    thumbnailInput.addEventListener('change', function () {
+        const file = this.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+                thumbnailPreview.src = this.result;
+                thumbnailPreview.style.display = 'block';
+                document.getElementById('uploadSuccessNotification').style.display = 'block';
+            });
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+This will create an input file field for users to upload an image file, and then display a thumbnail preview of the selected image. When the image is selected, the JavaScript code will read the file and display the image preview. Additionally, a notification will appear indicating that the image was uploaded successfully.
+
+
+
+
+
+
+
