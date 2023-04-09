@@ -16,17 +16,14 @@ namespace BuildingDemo.Controllers
         private CustomerService customerService = new CustomerService();
 
         // GET: User
-        public ActionResult Index(/*int? page*/)
+        public ActionResult Index()
         {
             int id = (int)Session["ID"];
             List<Building> buildings = buildingService.GetAll().Where(b => b.IsResolve == false).ToList();
             Customer customer = customerService.FindByAccountID(id);
-
-            //int pageSize = 3; // số phần tử trên mỗi trang
-            //int pageNumber = (page ?? 1); // trang hiện tại (nếu không có thì mặc định là trang 1)
-            return View(buildings/*.ToPagedList(pageNumber, pageSize)*/, customer);
+            return View(buildings, customer);
         }
-        private ActionResult View(/*IPaged*/List<Building> buildings, Customer customer)
+        private ActionResult View(List<Building> buildings, Customer customer)
         {
             ViewBag.buildings = buildings;
             ViewBag.customer = customer;

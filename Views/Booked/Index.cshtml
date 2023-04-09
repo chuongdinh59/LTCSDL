@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<section id="center" class="clearfix center_about">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="center_about_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h1 class="mgt">Welcome, @Session["Username"]</h1>
+                    <p>Your Information in here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact" class="center_list clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="center_home_1 clearfix">
+                    <h1>Booked List</h1>
+
+                    <table id="myTable">
+                        <thead>
+                            <tr>
+                                <th>Mã tòa nhà</th>
+                                <th>Tên</th>
+                                <th>Giá</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<script>
+    $(document).ready(function () {
+        // Lấy dữ liệu từ localStorage
+        var data = JSON.parse(localStorage.getItem("Book"));
+
+        // Đổ dữ liệu vào bảng
+        var $tbody = $("#myTable tbody");
+        for (var i = 0; i < data.length; i++) {
+            var row =
+                "<tr>" +
+                "<td>" + data[i].ma + "</td>" +
+                "<td>" + data[i].ten + "</td>" +
+                "<td>" + data[i].gia + "</td>" +
+                "</tr>";
+            $tbody.append(row);
+        }
+    });
+</script>

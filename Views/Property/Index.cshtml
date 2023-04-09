@@ -107,10 +107,14 @@
                             </div>
                         </div>
                         <div class="popular_2i3 clearfix">
-                            <h5 class="mgt"><a href="@Url.Action("Details", "Property", new { id = building.ID })">@building.Name<i class="fa fa-check-square col_1"></i></a></h5>
+                            <h5 class="mgt" ><a href="@Url.Action("Details", "Property", new { id = building.ID })">@building.Name<i class="fa fa-check-square col_1"></i></a></h5>
                             <h4 class="col_1">@building.PurchasePrice / <span class="col_2">Month</span></h4>
                             <h6><i class="fa fa-hotel col_2"></i> @building.Bed Beds <span><i class="fa fa-home col_2"></i> @building.Bath Bath</span></h6>
-                            <h5 class="inline"><a class="button" href="detail.html">Request Info</a></h5>
+                            <h5 class="inline">
+                            <a  class="button" href="#" onclick="RequestInfo('@building.ID', '@building.Name', '@building.PurchasePrice')">
+                                Request Info
+                            </a>
+                            </h5>
                             <h5 class="inline"><a class="button_1" href="@Url.Action("Details", "Property", new { id = building.ID } )">Property Detail</a></h5>
                         </div>
                     </div>
@@ -122,4 +126,32 @@
         </div>
     </div>
 </section>
+
+
+<script>
+    var Book = [];
+    if (window.localStorage) {
+        Book = JSON.parse(window.localStorage.getItem("Book"));
+    }
+
+    function RequestInfo( id, name, price) {
+        var exist = false;
+        for (var i = 0; i < Book.length; i++) {
+            if (Book[i].ma == id) {
+                alert("Ban da dat lich xem toa nha nay roi!");
+                exist = true;
+                break;
+            }
+        }
+        if (!exist) {
+            var building = { ma: id, ten: name, gia: price};
+            Book.push(building);
+            window.localStorage.setItem("Book", JSON.stringify(Book));
+            alert("Them lich xem thanh cong!");
+            $('#BookCart').Text('Tong toa nha da book lich: ' + Book.length + '\t Ten toa nha da book: ' + Book.name);
+        }
+    }
+
+</script>
+
 
