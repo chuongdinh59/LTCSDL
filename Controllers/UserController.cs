@@ -21,10 +21,7 @@ namespace BuildingDemo.Controllers
             int id = (int)Session["ID"];
             List<Building> buildings = buildingService.GetAll().Where(b => b.IsResolve == false).ToList();
             Customer customer = customerService.FindByAccountID(id);
-
-            //int pageSize = 3; // số phần tử trên mỗi trang
-            //int pageNumber = (page ?? 1); // trang hiện tại (nếu không có thì mặc định là trang 1)
-            return View(buildings/*.ToPagedList(pageNumber, pageSize)*/, customer);
+            return View(buildings, customer);
         }
         private ActionResult View(/*IPaged*/List<Building> buildings, Customer customer)
         {
