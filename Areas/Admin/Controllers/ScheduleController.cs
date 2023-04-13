@@ -3,42 +3,37 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BuildingDemo.Areas.Admin.Service;
-using BuildingDemo.Models;
 
 namespace BuildingDemo.Areas.Admin.Controllers
 {
-    public class CheckedBuildingController : Controller
+    public class ScheduleController : Controller
     {
-        private BuildingService buildingService = new BuildingService();
-        // GET: Admin/CheckedBuilding
+        // GET: Admin/Schedule
         public ActionResult Index()
         {
-            List<Building> buildings = buildingService.GetBuildingsNotResolve();
-            return View(buildings);
+            return View();
         }
-       
-     
-        // GET: Admin/CheckedBuilding/Details/5
+
+        // GET: Admin/Schedule/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Admin/CheckedBuilding/Create
+        // GET: Admin/Schedule/Create
         public ActionResult Create()
         {
-            
-            return RedirectToAction("Index");
+            return View();
         }
 
-        // POST: Admin/CheckedBuilding/Create
+        // POST: Admin/Schedule/Create
         [HttpPost]
-        public ActionResult Create(string id)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
                 // TODO: Add insert logic here
+
                 return RedirectToAction("Index");
             }
             catch
@@ -47,28 +42,20 @@ namespace BuildingDemo.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/CheckedBuilding/Edit/5
+        // GET: Admin/Schedule/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Admin/CheckedBuilding/Edit/5
+        // POST: Admin/Schedule/Edit/5
         [HttpPost]
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             try
             {
                 // TODO: Add update logic here
-                bool isResolve = buildingService.chageResolve(id);
-                if (isResolve)
-                {
-                    TempData["ChangeResolveSucc"] = "Chuyển trạng thái thành công";
-                }
-                else
-                {
-                    TempData["ChangeResolveErr"] = "Không thể chuyển trạng thái vì không tồn tại";
-                }
+
                 return RedirectToAction("Index");
             }
             catch
@@ -77,13 +64,13 @@ namespace BuildingDemo.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/CheckedBuilding/Delete/5
+        // GET: Admin/Schedule/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Admin/CheckedBuilding/Delete/5
+        // POST: Admin/Schedule/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

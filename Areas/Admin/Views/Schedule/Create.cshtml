@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Create Schedule</h2>
+
+@if (TempData.ContainsKey("ErrorMessage"))
+{
+    <div class="alert alert-danger">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thêm thất bại</h5>
+                <p>@TempData["ErrorMessage"].</p>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@using (Html.BeginForm("Create", "Schedule", FormMethod.Post,
+            HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+{
+
+
+    <div class="form-group">
+        <label for="input readonlyState">ID Tòa nhà</label>
+        <select name="RoleID" id="input readonlyState" class="form-control">
+            @*@foreach (var role in Model)
+                {
+                    <option value="@role.ID" selected>@role.RoleName</option>
+                }*@
+            <option>a</option>
+            <option>b</option>
+            <option>c</option>
+            <option>d</option>
+        </select>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="input readonlyCity">Tên tòa nhà</label>
+            <input readonly placeholder="ex: Time city.." name="Name" type="text" class="form-control" id="input readonlyCity">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="input readonlyZip">Năm xây dựng</label>
+            <input readonly placeholder="ex: 2012.." name="YearBuild" type="number" class="form-control" id="input readonlyZip">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="input readonlyZip">Số Tầng</label>
+            <input readonly name="NumFloors" placeholder="ex: 2.." type="number" class="form-control" id="input readonlyZip">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="input readonlyZip">Số phòng ngủ</label>
+            <input readonly name="Bed" placeholder="ex: 2.." type="number" class="form-control" id="input readonlyZip">
+        </div>
+        <div class="form-group col-md-2">
+            <label for="input readonlyZip">Số nhà vệ sinh</label>
+            <input readonly name="Bath" placeholder="ex: 2.." type="number" class="form-control" id="input readonlyZip">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="input readonlyState">ID Nhân Viên</label>
+        <select name="RoleID" id="input readonlyState" class="form-control">
+            @*@foreach (var role in Model)
+                {
+                    <option value="@role.ID" selected>@role.RoleName</option>
+                }*@
+            <option>a</option>
+            <option>b</option>
+            <option>c</option>
+            <option>d</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="font-weight-semibold" for="productName">Tên người dùng</label>
+        <input type="text"
+               readonly
+               class="form-control"
+               name="Name"
+               id="productName"
+               placeholder="Product Name"
+               value="" />
+    </div>
+    <div class="form-group">
+        <label class="font-weight-semibold" for="productPrice">Số điện thoại</label>
+        <input type="text"
+               class="form-control"
+               id="productPrice"
+               placeholder="Phone"
+               value=""
+               name="Phone" />
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-sm-10">
+            <button type="submit" class="btn btn-primary">Thêm dữ liệu</button>
+        </div>
+    </div>
+}
+
+<script>
+    document.querySelectorAll("label").forEach(function (label) {
+        label.addEventListener("click", function (event) {
+            event.preventDefault();
+            // Your code here
+        });
+    });
+</script>

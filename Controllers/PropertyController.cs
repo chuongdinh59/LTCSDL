@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using BuildingDemo.Areas.Admin.Controllers;
 
 namespace BuildingManagement.Controllers
 {
@@ -55,7 +56,6 @@ namespace BuildingManagement.Controllers
                     TempData["FailMessage"] = "Thêm tòa nhà thất bại, vui lòng điền đúng hoặc liên hệ 0334436231";
                     return RedirectToAction("Create");
                 }
-
                 return RedirectToAction("Index");
             }
             catch

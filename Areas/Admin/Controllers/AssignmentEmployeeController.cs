@@ -8,67 +8,38 @@ using BuildingDemo.Models;
 
 namespace BuildingDemo.Areas.Admin.Controllers
 {
-    public class CheckedBuildingController : Controller
+    public class AssignmentEmployeeController : Controller
     {
+        private EmployeeService employeeService = new EmployeeService();
         private BuildingService buildingService = new BuildingService();
-        // GET: Admin/CheckedBuilding
+        private AssignBuildingService assignBuildingService = new AssignBuildingService();
+        // GET: Admin/AssignmentEmployee
         public ActionResult Index()
         {
-            List<Building> buildings = buildingService.GetBuildingsNotResolve();
-            return View(buildings);
+            List<Employee> employees = employeeService.getAll();
+            return View(employees);
         }
-       
-     
-        // GET: Admin/CheckedBuilding/Details/5
+
+        // GET: Admin/AssignmentEmployee/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Admin/CheckedBuilding/Create
+        // GET: Admin/AssignmentEmployee/Create
         public ActionResult Create()
-        {
-            
-            return RedirectToAction("Index");
-        }
-
-        // POST: Admin/CheckedBuilding/Create
-        [HttpPost]
-        public ActionResult Create(string id)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Admin/CheckedBuilding/Edit/5
-        public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Admin/CheckedBuilding/Edit/5
+        // POST: Admin/AssignmentEmployee/Create
         [HttpPost]
-        public ActionResult Edit(string id)
+        public ActionResult Create(FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
-                bool isResolve = buildingService.chageResolve(id);
-                if (isResolve)
-                {
-                    TempData["ChangeResolveSucc"] = "Chuyển trạng thái thành công";
-                }
-                else
-                {
-                    TempData["ChangeResolveErr"] = "Không thể chuyển trạng thái vì không tồn tại";
-                }
+                // TODO: Add insert logic here
+
                 return RedirectToAction("Index");
             }
             catch
@@ -77,13 +48,45 @@ namespace BuildingDemo.Areas.Admin.Controllers
             }
         }
 
-        // GET: Admin/CheckedBuilding/Delete/5
+        // GET: Admin/AssignmentEmployee/Edit/5
+        public ActionResult Edit(int id)
+        {
+            List<Building> buildings = buildingService.getAll().ToList();
+            Employee employee = employeeService.findByID(id);
+            List<ManagementBuilding> buildingChecked = assignBuildingService.getAll();
+            return View(buildings, employee, buildingChecked);
+        }
+        private ActionResult View(List<Building> buildings, Employee employee, List<ManagementBuilding> buildingChecked)
+        {
+            ViewBag.buildings = buildings;
+            ViewBag.employee = employee;
+            ViewBag.buildingChecked = buildingChecked;
+            return View();
+        }
+
+        // POST: Admin/AssignmentEmployee/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, List<String> buildingids)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                bool result = employeeService.AssignBuilding(id, buildingids);
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: Admin/AssignmentEmployee/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Admin/CheckedBuilding/Delete/5
+        // POST: Admin/AssignmentEmployee/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

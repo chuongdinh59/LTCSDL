@@ -112,5 +112,50 @@ namespace BuildingDemo.Areas.Admin.Service
                 return false;
             }
         }
+
+
+        public bool AssignBuilding( int id, List<String> buildingids)
+        {
+            try
+            {
+                using (BuildingDB db = new BuildingDB())
+                {
+                    //Employee employee = db.Employees.Find(id);
+                    //if (employee == null)
+                    //    return false;
+                    List<string> currBuildingIDOfEmpl = db.ManagementBuildings
+                                                        .Where(mb => mb.EmployeeID == id)
+                                                        .Select(mb => mb.BuildingID).ToList();
+                    foreach (var buildingId in buildingids)
+                    {
+
+                        if (!currBuildingIDOfEmpl.Contains(buildingId))
+                        {
+                            ManagementBuilding mb = new ManagementBuilding {
+                                EmployeeID = id,
+                                BuildingID = buildingId
+                            };
+                            db.ManagementBuildings.Add(mb);
+                        }
+                        else
+                        {
+                            ManagementBuilding item = db.ManagementBuildings
+                               .FirstOrDefault(mbx => mbx.BuildingID == buildingId );
+                            if (item != null)
+                            {
+                                db.ManagementBuildings.Remove(item);
+                            }
+                        }
+                    }
+                    db.SaveChanges();
+                }
+                return true;
+
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

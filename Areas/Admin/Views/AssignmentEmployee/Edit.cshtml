@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h3>Tên nhân viên: @ViewBag.employee.Name</h3>
+<h3>Mã nhân viên: #@ViewBag.employee.ID</h3>
+<div class="page-header">
+    <h2 class="header-title">Data Table</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" href="#">Tables</a>
+            <span class="breadcrumb-item active">Data Table</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4>Data Table</h4>
+        <p>
+            DataTables is a plug-in for the jQuery Javascript library. It
+            is a highly flexible tool, built upon the foundations of
+            progressive enhancement, that adds all of these advanced
+            features to any HTML table. Below is an example of zero
+            configuration.
+        </p>
+        <div class="m-t-25">
+            <table id="data-table" class="table">
+                <thead>
+
+                    <tr>
+                        @*<th>
+                            <div class="checkbox">
+                                <input id="checkAll" type="checkbox">
+                                <label for="checkAll" class="m-b-0"></label>
+                            </div>
+                        </th>*@
+                        <th>
+                            Chọn
+                        </th>
+                        <th>ID</th>
+                        <th>Tên tòa nhà</th>
+                        <th>Người sở hữu</th>
+                        <th>Giá bán </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var building in ViewBag.buildings)
+                    {
+                    <tr>
+                        <td>
+                            <div class="checkbox">
+                                <div class="checkbox">
+                                    @{
+                                        bool isChecked = false;
+                                        foreach (var bc in ViewBag.buildingChecked)
+                                        {
+                                            if (bc.BuildingID == building.ID && bc.EmployeeID == ViewBag.employee.ID)
+                                            {
+                                                isChecked = true;
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    @if (isChecked)
+                                    {
+                                        <input checked id="checkAll @building.ID" type="checkbox">
+                                    }
+                                    else
+                                    {
+                                        <input id="checkAll @building.ID" type="checkbox">
+                                    }
+                                    <label for="checkAll @building.ID" class="m-b-0" />
+                                </div>
+                            </div>
+                        </td>
+                        <td>@building.ID</td>
+                        <td>@building.Name</td>
+                        <td>
+                            @if (building.CustomerID != null)
+                            {
+                                @building.Customer.Name
+                            }
+                            else
+                            {
+                                <span>Hệ thống</span>
+                            }
+                        </td>
+                        <td>61</td>
+                    </tr>
+
+                    }
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>
+                            Chọn
+                        </th>
+                        <th>ID</th>
+                        <th>Tên tòa nhà</th>
+                        <th>Người sở hữu</th>
+                        <th>Giá bán </th>
+                    </tr>
+                </tfoot>
+
+            </table>
+            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                <a id="submit"  class="btn btn-success">Phân công nhân viên</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getSelectedIds() {
+        var selectedIds = [];
+        var checkboxes = document.querySelectorAll('input[type=checkbox]');
+        for (var i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked) {
+                var row = checkboxes[i].closest('tr');
+                var id = row.getElementsByTagName('td')[1].textContent;
+                selectedIds.push(id);
+            }
+        }
+        return selectedIds;
+    }
+    function postSelectedIds() {
+        var selectedIds = getSelectedIds();
+        fetch(window.location.href, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ "buildingids": selectedIds})
+        })
+            .then(function (response) {
+                if (response.ok) {
+                    // handle success
+                } else {
+                    // handle error
+                }
+            })
+            .catch(function (error) {
+                // handle network error
+            });
+    }
+    var postButton = document.getElementById('submit');
+    postButton.addEventListener('click', function () {
+        postSelectedIds();
+    });
+</script>

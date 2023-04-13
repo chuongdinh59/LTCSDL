@@ -8,7 +8,7 @@ namespace BuildingDemo.Models
     public partial class BuildingDB : DbContext
     {
         public BuildingDB()
-            : base("name=BuildingDB1")
+            : base("name=BuildingDB2")
         {
         }
 
@@ -21,6 +21,7 @@ namespace BuildingDemo.Models
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<ManagementBuilding> ManagementBuildings { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -73,6 +74,11 @@ namespace BuildingDemo.Models
                 .Property(e => e.Avatar)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Employee>()
+                .HasMany(e => e.Appointments)
+                .WithOptional(e => e.Employee)
+                .WillCascadeOnDelete();
+
             modelBuilder.Entity<Image>()
                 .Property(e => e.BuildingID)
                 .IsUnicode(false);
@@ -84,6 +90,11 @@ namespace BuildingDemo.Models
             modelBuilder.Entity<ManagementBuilding>()
                 .Property(e => e.BuildingID)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<ManagementBuilding>()
+                .HasMany(e => e.Employees)
+                .WithOptional(e => e.ManagementBuilding)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Role>()
                 .HasMany(e => e.Accounts)

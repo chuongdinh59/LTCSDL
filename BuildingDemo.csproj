@@ -365,17 +365,21 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AppointmentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AssignmentEmployeeController.cs" />
     <Compile Include="Areas\Admin\Controllers\BuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\CheckedBuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\CloudinaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
     <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ScheduleController.cs" />
     <Compile Include="Areas\Admin\Repository\BuildingRepository.cs" />
     <Compile Include="Areas\Admin\Repository\BuildingTypeRepository.cs" />
     <Compile Include="Areas\Admin\Repository\CustomerRepository.cs" />
     <Compile Include="Areas\Admin\Repository\ImageRepository.cs" />
     <Compile Include="Areas\Admin\Service\AccountService.cs" />
+    <Compile Include="Areas\Admin\Service\AssignBuildingService.cs" />
     <Compile Include="Areas\Admin\Service\BuildingService.cs" />
     <Compile Include="Areas\Admin\Service\BuildingTypeService.cs" />
     <Compile Include="Areas\Admin\Service\CustomerService.cs" />
@@ -401,6 +405,7 @@
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\ManagementBuilding.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BuildingRepository.cs" />
     <Compile Include="Service\AccountService.cs" />
@@ -1287,6 +1292,10 @@
     <Content Include="Areas\Admin\Views\Account\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\CheckedBuilding\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AssignmentEmployee\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AssignmentEmployee\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Schedule\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Schedule\Create.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1325,6 +1334,7 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Admin\Views\Cloudary\" />
     <Folder Include="Areas\Admin\Views\Cloudinary\" />
+    <Folder Include="Areas\Admin\Views\Email\" />
     <Folder Include="Views\Logout\" />
   </ItemGroup>
   <ItemGroup>

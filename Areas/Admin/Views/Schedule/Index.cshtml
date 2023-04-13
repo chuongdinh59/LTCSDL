@@ -1,0 +1,201 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Schedule Index</h2>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@if (TempData.ContainsKey("DeleteSuccess"))
+{
+    <div class="alert alert-success">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Xóa thành công</h5>
+                <p>@TempData["DeleteSuccess"].</p>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData.ContainsKey("DeleteError"))
+{
+    <div class="alert alert-danger">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Xóa thất bại</h5>
+                <p>@TempData["DeleteError"].</p>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+<div class="page-header">
+    <h2 class="header-title">Data Table</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" href="#">Tables</a>
+            <span class="breadcrumb-item active">Data Table</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4>Data Table</h4>
+        <p>
+            DataTables is a plug-in for the jQuery Javascript library. It
+            is a highly flexible tool, built upon the foundations of
+            progressive enhancement, that adds all of these advanced
+            features to any HTML table. Below is an example of zero
+            configuration.
+        </p>
+        <div class="m-t-25">
+            <table id="data-table" class="table">
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên tòa nhà</th>
+                        <th>Người sở hữu</th>
+                        <th>Tên nhân vien</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*@foreach (var building in Model)
+                    {
+                        <tr>
+
+                            <td>@building.ID</td>
+                            <td>@building.Name</td>
+                            <td>
+                                @if (building.CustomerID != null)
+                                {
+                                    @building.Customer.Name
+                                }
+                                else
+                                {
+                                    <span>Hệ thống</span>
+                                }
+                            </td>
+                            <td>61</td>
+                            <td>
+                                <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                    <a href="@Url.Action("Edit", "Building", new { id = building.ID })" class="btn btn-warning">
+                                        <i class="fa-solid fa-pen-to-square">
+                                        </i>
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <a data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
+                                    <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
+                                </a>
+                            </td>
+                        </tr>
+
+                    }*@
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+
+            </table>
+            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                <a href="@Url.Action("Create", "Schedule")" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                    <i class="anticon anticon-close"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Bạn có chắc chắn xóa </h3>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Quay về</button>
+                <button type="button" class="btn btn-danger m-r-5">Xóa</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const buildingIDButtons = document.querySelectorAll('.deleteBtn');
+    buildingIDButtons.forEach(function (buildingIDButton) {
+        buildingIDButton.addEventListener('click', function () {
+            // Get the modal element
+            console.log(1);
+            const modal = document.querySelector('#exampleModalCenter');
+
+            // Set the building ID in the modal body element
+            const modalBody = modal.querySelector('.modal-body');
+            modalBody.setAttribute('data-building-id', buildingIDButton.dataset.content);
+
+            // Show the modal
+            $(modal).modal('show');
+        });
+    });
+    // Get the delete button
+    const deleteButton = document.querySelector('#exampleModalCenter .btn-danger');
+
+    // Add an event listener to the delete button
+    deleteButton.addEventListener('click', function () {
+        // Get the modal body element
+        const modalBody = document.querySelector('#exampleModalCenter .modal-body');
+
+        // Get the building ID from the modal body element
+        const buildingID = modalBody.getAttribute('data-building-id');
+
+        console.log(buildingID)
+        // Do something with the building ID (e.g., send an AJAX request to delete the building)
+        //console.log('Deleting building with ID:', buildingID);
+        //fetch("https://localhost:44327/Admin/Building/Delete/" + buildingID, {
+        //    method: 'POST',
+        //    headers: {
+        //        'Content-Type': 'application/json'
+        //    },
+        //}).then(res => {
+        //    window.location.href = "https://localhost:44327/Admin/Building";
+        //});
+    });
+
+
+</script>
+
+
+

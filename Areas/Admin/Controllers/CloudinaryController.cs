@@ -17,6 +17,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
         {   
             if (Image != null && Image.ContentLength > 0)
             {
+                
                 string IsExists = GetImageUrl(Image.FileName);
                 if (IsExists != null)
                     return IsExists;
