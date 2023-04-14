@@ -30,15 +30,19 @@
 
     <div class="form-group">
         <label for="input readonlyState">ID Tòa nhà</label>
-        <select name="RoleID" id="input readonlyState" class="form-control">
-            @*@foreach (var role in Model)
-                {
-                    <option value="@role.ID" selected>@role.RoleName</option>
-                }*@
-            <option>a</option>
-            <option>b</option>
-            <option>c</option>
-            <option>d</option>
+        <select name="BuildingID" id="input readonlyState" class="form-control">
+            <option disabled selected value="0">Chọn nhà</option>
+            @foreach (var building in ViewBag.buildings)
+            {
+                <option value="@building.ID"
+                        data-building-name="@building.Name"
+                        data-building-year="@building.YearBuild"
+                        data-building-floors="@building.NumFloors"
+                        data-building-bed="@building.Bed"
+                        data-building-bath="@building.Bath">
+                    @(building.ID + "_" + building.Name)
+                </option>
+            }
         </select>
     </div>
 
@@ -49,7 +53,7 @@
         </div>
         <div class="form-group col-md-2">
             <label for="input readonlyZip">Năm xây dựng</label>
-            <input readonly placeholder="ex: 2012.." name="YearBuild" type="number" class="form-control" id="input readonlyZip">
+            <input readonly placeholder="ex: 2012.." name="YearBuild" type="number" class="form-control" id="year">
         </div>
         <div class="form-group col-md-2">
             <label for="input readonlyZip">Số Tầng</label>
@@ -65,16 +69,17 @@
         </div>
     </div>
     <div class="form-group">
-        <label for="input readonlyState">ID Nhân Viên</label>
-        <select name="RoleID" id="input readonlyState" class="form-control">
-            @*@foreach (var role in Model)
-                {
-                    <option value="@role.ID" selected>@role.RoleName</option>
-                }*@
-            <option>a</option>
-            <option>b</option>
-            <option>c</option>
-            <option>d</option>
+        <label for="EmployeeBlock">ID Nhân Viên</label>
+        <select name="EmployeeID" id="EmployeeBlock" class="form-control" onchange="updateInputValue()">
+            <option value="0" disabled selected>Chọn nhân viên</option>
+            @foreach (var employee in ViewBag.employees)
+            {
+                <option value="@employee.ID"
+                        data-employee-name="@employee.Name"
+                        data-employee-phone="@employee.Phone">
+                    @(employee.ID +"_"+employee.Name)
+                </option>
+            }
         </select>
     </div>
     <div class="form-group">
@@ -84,19 +89,30 @@
                class="form-control"
                name="Name"
                id="productName"
-               placeholder="Product Name"
+               placeholder="Tên nhân viên"
                value="" />
     </div>
     <div class="form-group">
-        <label class="font-weight-semibold" for="productPrice">Số điện thoại</label>
+        <label class="font-weight-semibold" for="productPhone">Số điện thoại</label>
         <input type="text"
+               readonly
                class="form-control"
-               id="productPrice"
-               placeholder="Phone"
+               id="productPhone"
+               placeholder="Số điện thoại"
                value=""
                name="Phone" />
     </div>
-
+    <div class="form-group">
+        <label for="Time">Chọn buổi</label>
+        <select  name="Time" id="Time" class="form-control" onchange="updateInputValue()">
+            <option selected value="true">Sáng</option>
+            <option value="false">Chiều</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label class="font-weight-semibold" for="datepicker">Chọn ngày</label>
+        <input name="DateAppointment" type="date" id="datepicker" class="form-control datepicker" />
+    </div>
 
     <div class="form-group row">
         <div class="col-sm-10">
@@ -111,5 +127,49 @@
             event.preventDefault();
             // Your code here
         });
+    });
+
+    // get references to the select and input elements
+    var selectElement = document.getElementById("input readonlyState");
+    var nameInput = document.getElementById("input readonlyCity");
+    var yearInput = document.getElementById("year");
+    var floorsInput = document.getElementsByName("NumFloors")[0];
+    var bedInput = document.getElementsByName("Bed")[0];
+    var bathInput = document.getElementsByName("Bath")[0];
+
+    // add an event listener to the select element
+    selectElement.addEventListener("change", function () {
+        // get the selected option
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+
+        // update the value of the name input element
+        nameInput.value = selectedOption.dataset.buildingName;
+
+        // update the value of the year input element
+        yearInput.value = selectedOption.dataset.buildingYear;
+
+        // update the value of the floors input element
+        floorsInput.value = selectedOption.dataset.buildingFloors;
+
+        // update the value of the bed input element
+        bedInput.value = selectedOption.dataset.buildingBed;
+
+        // update the value of the bath input element
+        bathInput.value = selectedOption.dataset.buildingBath;
+    });
+
+
+    function updateInputValue() {
+        var selectElement = document.getElementById("EmployeeBlock");
+        var selectedOption = selectElement.options[selectElement.selectedIndex];
+        let phone = selectedOption.getAttribute("data-employee-phone");
+        let name = selectedOption.getAttribute("data-employee-name");
+        console.log(name)
+        document.getElementById("productName").value = name;
+        document.getElementById("productPhone").value = phone;
+    }
+    $(function () {
+        // Initialize the date picker component
+        $('.datepicker').datepicker();
     });
 </script>

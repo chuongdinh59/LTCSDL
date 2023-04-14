@@ -71,46 +71,35 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên tòa nhà</th>
-                        <th>Người sở hữu</th>
+                        <th>Thời gian</th>
                         <th>Tên nhân vien</th>
                         <th></th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @*@foreach (var building in Model)
+                    @foreach (var schedule in Model)
                     {
-                        <tr>
-
-                            <td>@building.ID</td>
-                            <td>@building.Name</td>
-                            <td>
-                                @if (building.CustomerID != null)
-                                {
-                                    @building.Customer.Name
-                                }
-                                else
-                                {
-                                    <span>Hệ thống</span>
-                                }
-                            </td>
-                            <td>61</td>
-                            <td>
-                                <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                                    <a href="@Url.Action("Edit", "Building", new { id = building.ID })" class="btn btn-warning">
-                                        <i class="fa-solid fa-pen-to-square">
-                                        </i>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <a data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
-                                    <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
+                    <tr>
+                        <td>@schedule.Schedule.ID</td>
+                        <td>@schedule.BuildingName</td>
+                        <td>@schedule.Schedule.Time.ToString("MM/dd/yyyy")</td>
+                        <td>@schedule.EmployeeName</td>
+                        <td>
+                            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                <a href="@Url.Action("Edit", "Building", new { id = 1 })" class="btn btn-warning">
+                                    <i class="fa-solid fa-pen-to-square">
+                                    </i>
                                 </a>
-                            </td>
-                        </tr>
-
-                    }*@
+                            </div>
+                        </td>
+                        <td>
+                            <a data-toggle="modal" data-content="1" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
+                                <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    }
 
 
                 </tbody>

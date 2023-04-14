@@ -6,22 +6,20 @@ namespace BuildingDemo.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Appointment")]
-    public partial class Appointment
+    [Table("Schedule")]
+    public partial class Schedule
     {
         public int ID { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(256)]
         public string BuildingID { get; set; }
 
-        public int? EmployeeID { get; set; }
+        public int EmployeeID { get; set; }
 
-        public int? CustomerID { get; set; }
+        public DateTime? Time { get; set; }
 
-        public DateTime? CreateDate { get; set; }
-
-        public virtual Customer Customer { get; set; }
+        public bool? Session { get; set; }
 
         public virtual Employee Employee { get; set; }
     }

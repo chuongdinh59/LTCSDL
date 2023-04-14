@@ -8,12 +8,11 @@ namespace BuildingDemo.Models
     public partial class BuildingDB : DbContext
     {
         public BuildingDB()
-            : base("name=BuildingDB")
+            : base("name=BuildingDB1")
         {
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Appointment> Appointments { get; set; }
         public virtual DbSet<Building> Buildings { get; set; }
         public virtual DbSet<BuildingType> BuildingTypes { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
@@ -21,6 +20,7 @@ namespace BuildingDemo.Models
         public virtual DbSet<Image> Images { get; set; }
         public virtual DbSet<ManagementBuilding> ManagementBuildings { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<Schedule> Schedules { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -31,10 +31,6 @@ namespace BuildingDemo.Models
 
             modelBuilder.Entity<Account>()
                 .Property(e => e.Email)
-                .IsUnicode(false);
-
-            modelBuilder.Entity<Appointment>()
-                .Property(e => e.BuildingID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Building>()
@@ -74,11 +70,6 @@ namespace BuildingDemo.Models
                 .Property(e => e.Avatar)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<Employee>()
-                .HasMany(e => e.Appointments)
-                .WithOptional(e => e.Employee)
-                .WillCascadeOnDelete();
-
             modelBuilder.Entity<Image>()
                 .Property(e => e.BuildingID)
                 .IsUnicode(false);
@@ -100,6 +91,10 @@ namespace BuildingDemo.Models
                 .HasMany(e => e.Accounts)
                 .WithRequired(e => e.Role)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Schedule>()
+                .Property(e => e.BuildingID)
+                .IsUnicode(false);
         }
     }
 }
