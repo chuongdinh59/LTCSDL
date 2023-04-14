@@ -82,24 +82,26 @@
                             {
                             <li>
                                 <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, @Session["Username"]!<span class="caret"></span></a>
-                                        <ul class="dropdown-menu drop_1" role="menu">
-                                            <li><a href="@Url.Action("Index", "User")">My Information</a></li>
-                                            <li><a href="@Url.Action("Logout", "Logout")">Logout</a></li>
-                                        </ul>
+                                <ul class="dropdown-menu drop_1" role="menu">
+                                    <li><a href="@Url.Action("Index", "User")">My Information</a></li>
+                                    <li><a href="@Url.Action("Index", "Solved")">Solved</a></li>
+                                    <li><a id="BookCart" href="@Url.Action("Index", "Booked")">Booked</a></li>
+                                    <li><a href="@Url.Action("Logout", "Logout")">Logout</a></li>
+                                </ul>
                             </li>
 
-                            }
-                            else
-                            {
-                                <a class="tag_menu" href="@Url.Action("Login", "LogIn")">Log In / Sign Up</a>
-                            }
+                        }
+                        else
+                        {
+                            <a class="tag_menu" href="@Url.Action("Login", "LogIn")">Log In / Sign Up</a>
+                        }
 
-                        </li>
+                            </li>
 
                             <li>
                                 <a class="tag_menu button_1 mgt" href="@Url.Action("Create", "Property")">Submit Property</a>
                             </li>
-                    </ul>
+                        </ul>
 
                     </div>
                     <!-- /.navbar-collapse -->
@@ -117,7 +119,7 @@
                             <div class="footer_1i1 clearfix">
                                 <h4 class="mgt col">About Us</h4>
                                 <p class="col_2">This My Template is a team of young professionals that has been successfully creating Creative Website templates already for several years.</p>
-                                <h5><a class="button col_2" href="#"><i class="fa fa-android"></i> Google Store</a></h5>
+                                <h5><a class="button col_2" href="#"><i class="fa-brands fa-google-play"></i>Google Store</a></h5>
                             </div>
                         </div>
                         <div class="col-sm-3">
@@ -148,10 +150,10 @@
                                 <p class="col_2">Follow & Subscribe your email to get new business tips.</p>
                                 <ul class="social-network social-circle">
                                     <li><a href="#" class="icoRss" title="Rss"><i class="fa fa-rss"></i></a></li>
-                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa fa-google-plus"></i></a></li>
-                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa fa-linkedin"></i></a></li>
+                                    <li><a href="#" class="icoFacebook" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+                                    <li><a href="#" class="icoTwitter" title="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+                                    <li><a href="#" class="icoGoogle" title="Google +"><i class="fa-brands fa-google-plus-g"></i></a></li>
+                                    <li><a href="#" class="icoLinkedin" title="Linkedin"><i class="fa-brands fa-linkedin-in"></i></a></li>
                                 </ul>
                                 <input class="form-control" placeholder="Your Email" type="text">
                             </div>
@@ -165,11 +167,10 @@
                 </div>
             </div>
         </section>
-
         <script src="~/Assets/js/classie.js"></script>
         <script src="~/Assets/js/cbpAnimatedHeader.js"></script>
-      
-            </body >
+    </body>
 
-</html >
+</html>
+
 

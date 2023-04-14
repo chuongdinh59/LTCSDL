@@ -3,23 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BuildingDemo.Models;
 using BuildingDemo.Service;
-using PagedList;
+using BuildingDemo.Models;
 
 namespace BuildingDemo.Controllers
 {
-    public class UserController : Controller
+    public class SolvedController : Controller
     {
         private BuildingService buildingService = new BuildingService();
         private BuildingTypeService buildingTypeService = new BuildingTypeService();
         private CustomerService customerService = new CustomerService();
-
-        // GET: User
+        // GET: Solved
         public ActionResult Index()
         {
             int id = (int)Session["ID"];
-            List<Building> buildings = buildingService.GetAll().Where(b => b.IsResolve == false).ToList();
+            List<Building> buildings = buildingService.GetAll().Where(b => b.IsResolve == true).ToList();
             Customer customer = customerService.FindByAccountID(id);
             return View(buildings, customer);
         }
@@ -29,19 +27,19 @@ namespace BuildingDemo.Controllers
             ViewBag.customer = customer;
             return View();
         }
-        // GET: User/Details/5
-        public ActionResult Infor(int id)
+        // GET: Solved/Details/5
+        public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: User/Create
+        // GET: Solved/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: User/Create
+        // POST: Solved/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
@@ -57,65 +55,35 @@ namespace BuildingDemo.Controllers
             }
         }
 
-        // GET: User/Edit/5
-        public ActionResult Edit(string id)
+        // GET: Solved/Edit/5
+        public ActionResult Edit(int id)
         {
-            List<BuildingType> buildingTypes = buildingTypeService.getAll().ToList();
-            Building building = buildingService.FindByID(id);
-            return View(buildingTypes, building);
-        }
-        private ActionResult View(List<BuildingType> buildingTypes, Building building)
-        {
-            ViewBag.buildingTypes = buildingTypes;
-            ViewBag.building = building;
             return View();
         }
-        // POST: Admin/Building/Edit/5
-        [HttpPost]
-        [Obsolete]
-        public ActionResult Edit(Building newBuilding)
-        {
 
-            // Delete hình cũ
-            // Delete trong bảng Images
+        // POST: Solved/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
             try
             {
-                if (newBuilding == null)
-                {
-                    return HttpNotFound();
-                }
-                else
-                {
+                // TODO: Add update logic here
 
-                    bool result = buildingService.EditInfoBuilding(newBuilding);
-                    //bool updateImage = buildingService.UpdateImage(newBuilding, Image, Images);
-                    if (result)
-                    {
-                        TempData["SaveSuccess"] = "Sửa thông tin thành công";
-                    }
-                    else
-                    {
-                        TempData["SaveError"] = "Sửa thông tin thất bại";
-                    }
-                }
-                return RedirectToAction("Edit", new { id = newBuilding.ID });
-
+                return RedirectToAction("Index");
             }
             catch
             {
-                return RedirectToAction("Index");
+                return View();
             }
         }
 
-
-
-        // GET: User/Delete/5
+        // GET: Solved/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: User/Delete/5
+        // POST: Solved/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {

@@ -1,0 +1,192 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section id="center" class="clearfix center_about">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="center_about_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h1 class="mgt">Welcome, @Session["Username"]</h1>
+                    <p>Your building solved in here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section style="background-color: #03a9f414; padding-bottom:50px ">
+    <div class="container">
+        <div class="row">
+            <div class="popular_1  clearfix">
+                <div class="col-sm-12">
+                    <h5>Solved</h5>
+                    <table id="data-table" class="table">
+                        <thead style="background-color:#fff">
+                            <tr>
+                                <th>Thông tin</th>
+                                <th>Địa chỉ</th>
+                                <th>Năm xây dựng</th>
+                                <th>Giá bán</th>
+                            </tr>
+                        </thead>
+                        <tbody style="background-color:#fff">
+                            @foreach (var building in ViewBag.buildings)
+                            {
+                                <tr>
+
+                                    <td style="max-width: 600px">
+                                        <h6>Tên nhà: @building.Name</h6>
+                                        <ul style="display: flex">
+                                            <li style="font-size: 12px; min-width:100px">
+                                                <span>Bed: @building.Bed</span>
+                                            </li>
+                                            <li style="font-size: 12px;  min-width:100px">
+                                                <span>Bath:@building.Bath</span>
+                                            </li>
+                                            <li style="font-size: 12px; min-width:100px">
+                                                <span>Area:@building.Area</span>
+                                            </li>
+                                            <li style="font-size: 12px; min-width:100px">
+                                                <span>NumFloors:@building.NumFloors</span>
+                                            </li>
+
+                                        </ul>
+                                        
+                                    </td>
+                                    <td>@building.Address</td>
+
+                                    <td>
+                                        @building.YearBuild
+                                    </td>
+
+                                    <td>
+                                        @if (building.CustomerID != null)
+                                        {
+                                            @building.PurchasePrice<span>$</span>
+                                        }
+
+                                    <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white;">
+                                        <a href="#" class="btn btn-success" style="width: 120px">
+                                            Thanh toán <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                                        </a>
+                                    </div>
+                                    </td>
+
+                                </tr>
+
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--<div id="dashboard-favorites" class="dashboard-favorites">
+    <div class="dashboard-posts-list">
+        <div class="dashboard-posts-list-head">
+            <div class="large-column-wrap">
+                <div class="column column-thumbnail"><span>Hình ảnh</span></div>
+                <div class="column column-info"><span>Thông tin</span></div>
+            </div>
+            <div class="small-column-wrap">
+                <div class="column column-date"><span>Ngày đăng</span></div>
+                <div class="column column-property-status"><span>Loại BĐS</span></div>
+                <div class="column column-status"><span>Trạng Thái</span></div>
+                <div class="column column-price"><span>Giá</span></div>
+            </div>
+        </div>                    
+        <div class="dashboard-posts-list-body">
+            <div class="property-column-wrap">
+                <div class="large-column-wrap">
+                    <div class="column column-thumbnail">
+                        <figure>
+                            <a href="https://bannhatanbinh.com.vn/BDS/nha-pham-van-hai-p-03-tan-binh-4-15x10-2m-7-2-ty-2/">
+                                <img width="680" height="510" src="https://bannhatanbinh.com.vn/wp-content/uploads/2023/04/pham-van-hai-7-ty-0789319739-Long-Tan-Binh-2-680x510.jpg?v=1681456765" class="attachment-modern-property-child-slider size-modern-property-child-slider wp-post-image" alt="" decoding="async" loading="lazy">
+                            </a>
+                        </figure>
+                    </div>
+                    <div class="column column-info">
+                        <div class="property-info-wrap">
+                            <h3 class="property-title"><a href="https://bannhatanbinh.com.vn/BDS/nha-pham-van-hai-p-03-tan-binh-4-15x10-2m-7-2-ty-2/">Nhà Phạm Văn Hai, P.03 Tân Bình – (4.15X10.2m) – 7.2 Tỷ.</a></h3>
+                            <p class="property-excerpt">-Diện tích: (4.15X10.2m) vuông vức, CN…</p>
+                            <ul class="property-meta">
+                                <li>
+                                    <span class="property-meta-label">
+                                        Phòng ngủ
+                                    </span>
+                                    <div class="property-meta-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M1111.91,600.993h16.17a2.635,2.635,0,0,1,2.68,1.773l1.21,11.358a2.456,2.456,0,0,1-2.61,2.875h-18.73a2.46,2.46,0,0,1-2.61-2.875l1.21-11.358A2.635,2.635,0,0,1,1111.91,600.993Zm0.66-7.994h3.86c1.09,0,2.57.135,2.57,1l0.01,3.463c0.14,0.838-1.72,1.539-2.93,1.539h-4.17c-1.21,0-2.07-.7-1.92-1.539l0.37-3.139A2.146,2.146,0,0,1,1112.57,593Zm11,0h3.86a2.123,2.123,0,0,1,2.2,1.325l0.38,3.139c0.14,0.838-.72,1.539-1.93,1.539h-5.17c-1.21,0-2.07-.7-1.92-1.539L1121,594C1121,593.1,1122.48,593,1123.57,593Z" transform="translate(-1108 -593)"></path></svg>                                <span class="figure">4</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="property-meta-label">
+                                        Phòng tắm
+                                    </span>
+                                    <div class="property-meta-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="23.69" height="24" viewBox="0 0 23.69 24"><path d="M1204,601a8,8,0,0,1,16,0v16h-2V601a6,6,0,0,0-12,0v1h-2v-1Zm7,6a6,6,0,0,0-12,0h12Zm-6,2a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,609Zm0,5a1,1,0,0,1,1,1v1a1,1,0,0,1-2,0v-1A1,1,0,0,1,1205,614Zm4.94-5.343a1,1,0,0,1,1.28.6l0.69,0.878a1,1,0,0,1-1.88.685l-0.69-.879A1,1,0,0,1,1209.94,608.657Zm2.05,4.638a1,1,0,0,1,1.28.6l0.35,0.94a1.008,1.008,0,0,1-.6,1.282,1,1,0,0,1-1.28-.6l-0.35-.939A1.008,1.008,0,0,1,1211.99,613.295Zm-11.93-4.638a1,1,0,0,1,.6,1.282l-0.69.879a1,1,0,1,1-1.87-.682l0.68-.88A1,1,0,0,1,1200.06,608.657Zm-2.05,4.639a1,1,0,0,1,.6,1.281l-0.34.941a1,1,0,0,1-1.88-.683l0.34-.94A1,1,0,0,1,1198.01,613.3Z" transform="translate(-1196.31 -593)"></path></svg>
+                                        <span class="figure">3</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="property-meta-label">
+                                        Diện tích
+                                    </span>
+                                    <div class="property-meta-icon">
+                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="24px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve">
+<g><circle cx="2" cy="2" r="2"></circle></g>
+<g><circle cx="2" cy="22" r="2"></circle></g>
+<g><circle cx="22" cy="2" r="2"></circle></g>
+<rect x="1" y="1" width="2" height="22"></rect>
+<rect x="1" y="1" width="22" height="2"></rect>
+<path opacity="0.5" d="M23,20.277V1h-2v19.277C20.7,20.452,20.452,20.7,20.277,21H1v2h19.277c0.347,0.596,0.984,1,1.723,1
+	c1.104,0,2-0.896,2-2C24,21.262,23.596,20.624,23,20.277z"></path>
+</svg>
+                                        <span class="figure">42</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-column-wrap">
+                    <div class="column column-date">
+                        <span class="property-date">14 April, 2023</span>
+                    </div>
+                    <div class="column column-property-status">
+                        <span class="property-status">Nhà Bán Tân Bình</span>
+                    </div>
+                    <div class="column column-status">
+                        <span class="property-status-tag property-status-tag-publish">Published</span>			<span class="property-featured-tag">Featured</span>
+                    </div>
+                    <div class="column column-price">
+                        <p class="property-price"> 7.2 Tỷ</p>            <div class="property-payment-info"></div>
+                    </div>
+                </div>
+                <div class="property-actions-wrapper">
+                    <strong>Hành động</strong>
+                    <a class="delete" href="#">
+                        <i class="fas fa-trash"></i>
+                        Xoá yêu thích
+                    </a>
+                    <span class="confirmation hide">
+                        <a class="remove-from-favorite" data-property-id="70835" href="https://bannhatanbinh.com.vn/wp-admin/admin-ajax.php">
+                            <i class="fas fa-check confirm-icon"></i>
+                            <i class="fas fa-spinner fa-spin loader hide"></i>
+                            Confirm
+                        </a>
+                        <a href="#" class="cancel">
+                            <i class="fas fa-times"></i>
+                            Cancel
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>-->
+@*</div>*@
+@*  *@

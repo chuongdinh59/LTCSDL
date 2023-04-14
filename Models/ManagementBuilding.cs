@@ -18,7 +18,7 @@ namespace BuildingDemo.Models
         public int ID { get; set; }
 
         [Required]
-        [StringLength(256)]
+        [StringLength(20)]
         public string BuildingID { get; set; }
 
         public int EmployeeID { get; set; }

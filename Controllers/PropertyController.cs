@@ -6,7 +6,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
-using BuildingDemo.Areas.Admin.Controllers;
 
 namespace BuildingManagement.Controllers
 {
@@ -38,7 +37,10 @@ namespace BuildingManagement.Controllers
         {
 
             // check coi nó login chưa, nếu chưa redirect sang login
-
+            if (Session["ID"] == null)
+            {
+                return RedirectToAction("Login", "LogIn");
+            }
             List<BuildingType> buildingTypes = buildingTypeService.getAll();
             return View(buildingTypes);
         }
@@ -59,6 +61,7 @@ namespace BuildingManagement.Controllers
                     TempData["FailMessage"] = "Thêm tòa nhà thất bại, vui lòng điền đúng hoặc liên hệ 0334436231";
                     return RedirectToAction("Create");
                 }
+
                 return RedirectToAction("Index");
 
             }
