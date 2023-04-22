@@ -104,5 +104,9 @@ namespace BuildingDemo.Service
                 return false;
             }
         }
+        public List<Building> GetBuildingFromCustomer(Customer customer)
+        {
+            return customer.Buildings.ToList();
+        }
     }
 }

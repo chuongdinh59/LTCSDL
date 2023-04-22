@@ -19,8 +19,8 @@ namespace BuildingDemo.Controllers
         public ActionResult Index(/*int? page*/)
         {
             int id = (int)Session["ID"];
-            List<Building> buildings = buildingService.GetAll().Where(b => b.IsResolve == false).ToList();
             Customer customer = customerService.FindByAccountID(id);
+            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer);
             return View(buildings, customer);
         }
         private ActionResult View(/*IPaged*/List<Building> buildings, Customer customer)
