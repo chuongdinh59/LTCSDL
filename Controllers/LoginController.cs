@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BuildingDemo.Service;
 using BuildingDemo.Models;
+using BuildingDemo.Filter;
 
 namespace BuildingDemo.Controllers
 {
@@ -12,12 +13,14 @@ namespace BuildingDemo.Controllers
     {
         private AccountService accountService = new AccountService();
         [HttpGet]
+        [AnonymousFilter]
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [AnonymousFilter]
         public ActionResult Login(Account account)
         {
 
@@ -30,6 +33,15 @@ namespace BuildingDemo.Controllers
                     ViewBag.Error = "";
                     Session["ID"] = user.ID;
                     Session["Username"] = user.Username;
+                    switch (user.RoleID)
+                    {
+                        case 1:
+                            return RedirectToAction("Index", "Admin");
+                        case 2:
+                            return RedirectToAction("Index", "Property");
+                        case 3:
+                            return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
@@ -37,9 +49,8 @@ namespace BuildingDemo.Controllers
                     ViewBag.Error = "username hoặc mật khẩu không đúng!";
                 }
             }
-
             return View();
         }
 
     }
-}
+} 

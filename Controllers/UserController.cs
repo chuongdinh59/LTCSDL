@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BuildingDemo.Filter;
 using BuildingDemo.Models;
 using BuildingDemo.Service;
-using PagedList;
 
 namespace BuildingDemo.Controllers
 {
@@ -16,11 +16,12 @@ namespace BuildingDemo.Controllers
         private CustomerService customerService = new CustomerService();
 
         // GET: User
+        [AuthenticationFilter]
         public ActionResult Index()
         {
             int id = (int)Session["ID"];
             Customer customer = customerService.FindByAccountID(id);
-            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer);
+            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer).Where(b => b.IsResolve == false).ToList();
             return View(buildings, customer);
         }
         private ActionResult View(List<Building> buildings, Customer customer)
@@ -58,6 +59,7 @@ namespace BuildingDemo.Controllers
         }
 
         // GET: User/Edit/5
+        [AuthenticationFilter]
         public ActionResult Edit(string id)
         {
             List<BuildingType> buildingTypes = buildingTypeService.getAll().ToList();

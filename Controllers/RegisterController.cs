@@ -5,12 +5,14 @@ using System.Web;
 using System.Web.Mvc;
 using BuildingDemo.Service;
 using BuildingDemo.Models;
+using BuildingDemo.Filter;
 
 namespace BuildingDemo.Controllers
 {
     public class RegisterController : Controller
     {
         private AccountService accountService = new AccountService();
+        [AnonymousFilter]
         public ActionResult Register()
         {
             return View();

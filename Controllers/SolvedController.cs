@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BuildingDemo.Service;
 using BuildingDemo.Models;
+using BuildingDemo.Filter;
 
 namespace BuildingDemo.Controllers
 {
@@ -14,11 +15,12 @@ namespace BuildingDemo.Controllers
         private BuildingTypeService buildingTypeService = new BuildingTypeService();
         private CustomerService customerService = new CustomerService();
         // GET: Solved
+        [AuthenticationFilter]
         public ActionResult Index()
         {
             int id = (int)Session["ID"];
-            List<Building> buildings = buildingService.GetAll().Where(b => b.IsResolve == true).ToList();
             Customer customer = customerService.FindByAccountID(id);
+            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer).Where(b => b.IsResolve == true).ToList();
             return View(buildings, customer);
         }
         private ActionResult View(List<Building> buildings, Customer customer)

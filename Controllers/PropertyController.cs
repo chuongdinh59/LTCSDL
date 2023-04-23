@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using BuildingDemo.Filter;
 
 namespace BuildingManagement.Controllers
 {
@@ -33,14 +34,9 @@ namespace BuildingManagement.Controllers
         }
 
         // GET: Property/Create
+        [AuthenticationFilter]
         public ActionResult Create()
         {
-
-            // check coi nó login chưa, nếu chưa redirect sang login
-            if (Session["ID"] == null)
-            {
-                return RedirectToAction("Login", "LogIn");
-            }
             List<BuildingType> buildingTypes = buildingTypeService.getAll();
             return View(buildingTypes);
         }

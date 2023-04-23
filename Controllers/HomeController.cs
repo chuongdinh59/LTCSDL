@@ -7,8 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 namespace BuildingManagement.Controllers
 {
-
-
     public class HomeController : Controller
     {
         private BuildingService buildingService = new BuildingService();
