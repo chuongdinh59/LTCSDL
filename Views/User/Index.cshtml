@@ -8,46 +8,21 @@
         <div class="row">
             <div class="center_about_1 text-center clearfix">
                 <div class="col-sm-12">
-                    <h1 class="mgt">Welcome, @Session["Username"]</h1>
-                    <p>Your Information in here</p>
+                    <h1 class="mgt">Chào mừng, @Session["Username"]!</h1>
+                    <p>Những tòa nhà ký gửi chưa được duyệt của bạn sẽ hiển thị ở đây</p>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<section id="contact">
-    <div class="container clearfix">
+<section style="background-color: #03a9f414; padding-bottom:50px ">
+    <div class="container">
         <div class="row">
-            <div class="contact_1 clearfix">
-                <div class="col-sm-5">
-                    <div class="contact_1r clearfix">
-                        <h3 class="mgt">@Session["Username"]</h3>
-                        <div class="mission_1ri clearfix">
-                            <div class="col-sm-1 space_all">
-                                <span><i class="fa fa-envelope col_1"></i></span>
-                            </div>
-                            <div class="col-sm-11">
-                                <h5 class="mgt">
-                                    Email: @ViewBag.customer.Email
-                                </h5>
-
-                            </div>
-                        </div>
-                        <div class="mission_1ri clearfix">
-                            <div class="col-sm-1 space_all">
-                                <span><i class="fa fa-phone col_1"></i></span>
-                            </div>
-                            <div class="col-sm-11">
-                                <h5 class="mgt">Phone: @ViewBag.customer.Phone</h5>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-7">
-                    <h5>Pending building</h5>
+            <div class="popular_1  clearfix">
+                <div class="col-sm-12">
                     <table id="data-table" class="table">
-                        <thead>
+                        <thead style="background-color:#fff">
 
                             <tr>
                                 <th>Tên tòa nhà</th>
@@ -57,65 +32,70 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody style="background-color:#fff">
                             @foreach (var building in ViewBag.buildings)
                             {
                                 <tr>
 
-                                    <td>@building.Name</td>
-                                    <td>@building.Address</td>
+                                    <td style="width: 500px">
+                                        <h6 style="margin-top:0px; padding: 5px 0 5px 0">Tên nhà: @building.Name</h6>
+                                        <ul style="display: flex">
+                                            <li style="font-size: 12px; min-width:100px">
+                                                <span>Bed: @building.Bed</span>
+                                            </li>
+                                            <li style="font-size: 12px;  min-width:100px">
+                                                <span>Bath:@building.Bath</span>
+                                            </li>
+                                            <li style="font-size: 12px; min-width:100px">
+                                                <span>Area:@building.Area</span>
+                                            </li>
+                                            <li style="font-size: 12px; min-width:100px">
+                                                <span>NumFloors:@building.NumFloors</span>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td style="width: 250px">@building.Address</td>
+
                                     <td>
                                         @if (building.CustomerID != null)
                                         {
-                                            @building.PurchasePrice
+                                            @building.PurchasePrice 
                                         }
                                         else
                                         {
                                             <span>Chưa xác định</span>
                                         }
+                                        $
                                     </td>
 
-                                    <td>
-                                        <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                                            <a href="@Url.Action("Edit", "User", new { id = building.ID })" class="btn btn-warning">
+                                    <td style="width:100px">
+                                        <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white;">
+                                            <a style="width:80px" href="@Url.Action("Edit", "User", new { id = building.ID })" class="btn btn-warning">
                                                 <i class="fa-solid fa-pen-to-square">
                                                 </i>
                                             </a>
                                         </div>
                                     </td>
-                                    <td>
-                                        <a data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
+                                    <td style="width:100px">
+                                        <a style="width:80px; align-items:center" data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
                                             <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
 
                             }
-
-
                         </tbody>
-                        @*<tfoot>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Position</th>
-                                    <th>Office</th>
-                                    <th>Age</th>
-                                    <th>Start date</th>
-                                    <th>Salary</th>
-                                </tr>
-                            </tfoot>*@
-
                     </table>
-                    @*<div style="text-align:center; padding-top:20px">
-                        @html.pagedlistpager(model, page => url.action("index", new { page }))
-                    </div>*@
-                    <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                        <a href="@Url.Action("Create", "Property")" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
+
+                    <div style=" display: flex; justify-content:right; font-size: 20px; color: white; ">
+                        <a style="width:80px" href="@Url.Action("Create", "Property")" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </section>
+
 
 
 

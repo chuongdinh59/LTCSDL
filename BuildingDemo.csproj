@@ -388,6 +388,10 @@
     <Compile Include="Areas\Admin\Service\RoleService.cs" />
     <Compile Include="Areas\Admin\Service\ScheduleService.cs" />
     <Compile Include="Areas\Admin\Service\ScheduleViewModel.cs" />
+    <Compile Include="Areas\Staff\Controllers\BuildingStaffController.cs" />
+    <Compile Include="Areas\Staff\Controllers\HomeStaffController.cs" />
+    <Compile Include="Areas\Staff\Controllers\ScheduleStaffController.cs" />
+    <Compile Include="Areas\Staff\StaffAreaRegistration.cs" />
     <Compile Include="Controllers\BookedController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -973,6 +977,7 @@
     <Content Include="Assets\css\list.css" />
     <Content Include="Assets\css\login.css" />
     <Content Include="Assets\css\property.css" />
+    <Content Include="Assets\StaffAssets\ScheduleStaff.css" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Assets\img\1.jpg" />
@@ -1302,6 +1307,13 @@
     <Content Include="Areas\Admin\Views\AssignmentEmployee\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Schedule\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Schedule\Create.cshtml" />
+    <Content Include="Areas\Staff\Views\web.config" />
+    <Content Include="Areas\Staff\Views\Shared\_StaffLayout.cshtml" />
+    <Content Include="Areas\Staff\Views\HomeStaff\Index.cshtml" />
+    <Content Include="Areas\Staff\Views\BuildingStaff\Index.cshtml" />
+    <Content Include="Areas\Staff\Views\BuildingStaff\Success.cshtml" />
+    <Content Include="Areas\Staff\Views\BuildingStaff\Details.cshtml" />
+    <Content Include="Areas\Staff\Views\ScheduleStaff\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1338,6 +1350,8 @@
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\Booked\Index.cshtml" />
     <Content Include="Views\Solved\Index.cshtml" />
+    <Content Include="Views\User\Infor.cshtml" />
+    <Content Include="Views\User\EditInfor.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1345,6 +1359,7 @@
     <Folder Include="Areas\Admin\Views\Cloudary\" />
     <Folder Include="Areas\Admin\Views\Cloudinary\" />
     <Folder Include="Areas\Admin\Views\Email\" />
+    <Folder Include="Areas\Staff\Data\" />
     <Folder Include="Views\Logout\" />
   </ItemGroup>
   <ItemGroup>

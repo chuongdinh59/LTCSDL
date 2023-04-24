@@ -38,7 +38,7 @@ namespace BuildingDemo.Controllers
                         case 1:
                             return RedirectToAction("Index", "Admin");
                         case 2:
-                            return RedirectToAction("Index", "Property");
+                            return RedirectToAction("Index", "Staff");
                         case 3:
                             return RedirectToAction("Index", "Home");
                     }

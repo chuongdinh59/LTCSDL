@@ -1,0 +1,88 @@
+﻿
+@{
+    ViewBag.Title = "EditInfor";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section id="center" class="clearfix center_about">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="center_about_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h1 class="mgt">Chỉnh sửa thông tin cá nhan</h1>
+                    <p>Điều chỉnh theo ý muốn của bạn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@if (TempData.ContainsKey("SaveSuccess"))
+{
+    <div class="alert alert-success text-center">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading"></h5>
+                <p>@TempData["SaveSuccess"].</p>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData.ContainsKey("SaveError"))
+{
+    <div class="alert alert-danger text-center">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading"></h5>
+                <p>@TempData["SaveError"].</p>
+            </div>
+        </div>
+    </div>
+}
+<section id="prop">
+    <form method="post" enctype="multipart/form-data" class="container">
+        <div class="row">
+            <div class="submit_1 mgt clearfix">
+                <h4 class="mgt col_1">Thông tin tòa nhà</h4>
+                <hr>
+                <h5>Tên</h5>
+                <input name="Name" class="form-control" placeholder="Tên" type="text" value="@Model.Name">
+                <div class="submit_1i clearfix" style="padding-top:10px">
+                    <div class="col-sm-12 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <h5 class="mgt">Địa chỉ</h5>
+                            <input value="@Model.Address" name="Address" class="form-control" placeholder="Địa chỉ tòa nhà" type="text">
+                        </div>
+                    </div>
+                </div>
+                <div class="submit_1i clearfix">
+                    <div class="col-sm-6 space_left">
+                        <div class="submit_1i1 clearfix">
+                            <h5>Số điện thoại</h5>
+                            <input value="@Model.Phone" name="PurchasePrice" class="form-control" placeholder="Tính bằng triệu" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-6 space_right">
+                        <div class="submit_1i1 clearfix">
+                            <h5>Mail</h5>
+                            <input value="@Model.Email" name="Area" class="form-control" placeholder="Tính bằng m²" type="text">
+                        </div>
+                    </div>
+                </div>
+                <h5>Note</h5>
+                <input name="Name" class="form-control" placeholder="Tên" type="text" value="@Model.Note">
+            </div>
+            
+        </div>
+
+        <div class="submit_3 clearfix m-r-auto">
+            <h5 class="mgt"><button class="button mgt" href="@Url.Action("Infor", "User")">Lưu thông tin</button></h5>
+        </div>
+    </form>
+</section>
+

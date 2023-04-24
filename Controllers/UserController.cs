@@ -31,9 +31,52 @@ namespace BuildingDemo.Controllers
             return View();
         }
         // GET: User/Details/5
-        public ActionResult Infor(int id)
+        [AuthenticationFilter]
+        public ActionResult Infor()
         {
-            return View();
+            int id = (int)Session["ID"];
+            Customer customer = customerService.FindByAccountID(id);
+
+            return View(customer);
+        }
+
+        [AuthenticationFilter]
+        public ActionResult EditInfor()
+        {
+            int id = (int)Session["ID"];
+            Customer customer = customerService.FindByAccountID(id);
+            return View(customer);
+        }
+        // POST: User/Edit/5
+        [HttpPost]
+        [Obsolete]
+        public ActionResult EditInfor(Customer newCustomer)
+        {
+            try
+            {
+                if (newCustomer == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    bool result = customerService.EditInfoCustomer(newCustomer);
+                    if (result)
+                    {
+                        TempData["SaveSuccess"] = "Sửa thông tin thành công";
+                    }
+                    else
+                    {
+                        TempData["SaveError"] = "Sửa thông tin thất bại";
+                    }
+                }
+                return RedirectToAction("EditInfo", new { id = newCustomer.ID });
+
+            }
+            catch
+            {
+                return RedirectToAction("Index");
+            }
         }
 
         // GET: User/Create

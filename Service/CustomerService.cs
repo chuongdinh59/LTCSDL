@@ -19,6 +19,27 @@ namespace BuildingDemo.Service
 
             return customer;
         }
+        public bool EditInfoCustomer(Customer customer)
+        {
+            try
+            {
+                using (var db = new BuildingDB())
+                {
+                    Customer c = db.Customers.Find(customer.ID);
+                    c.Name = customer.Name;
+                    c.Address = customer.Address;
+                    c.Phone = customer.Phone;
+                    c.Email = customer.Email;
+                    c.Note = customer.Note;
+                    db.SaveChanges();
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
     }
 }

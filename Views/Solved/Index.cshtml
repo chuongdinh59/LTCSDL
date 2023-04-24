@@ -9,8 +9,8 @@
         <div class="row">
             <div class="center_about_1 text-center clearfix">
                 <div class="col-sm-12">
-                    <h1 class="mgt">Welcome, @Session["Username"]</h1>
-                    <p>Your building solved in here</p>
+                    <h1 class="mgt">Chào mừng, @Session["Username"]!</h1>
+                    <p>Những tòa nhà ký gửi đã được duyệt của bạn sẽ hiển thị ở đây</p>
                 </div>
             </div>
         </div>
@@ -22,7 +22,6 @@
         <div class="row">
             <div class="popular_1  clearfix">
                 <div class="col-sm-12">
-                    <h5>Solved</h5>
                     <table id="data-table" class="table">
                         <thead style="background-color:#fff">
                             <tr>
@@ -37,7 +36,7 @@
                             {
                                 <tr>
 
-                                    <td style="max-width: 600px">
+                                    <td style="width: 500px">
                                         <h6>Tên nhà: @building.Name</h6>
                                         <ul style="display: flex">
                                             <li style="font-size: 12px; min-width:100px">
@@ -52,11 +51,10 @@
                                             <li style="font-size: 12px; min-width:100px">
                                                 <span>NumFloors:@building.NumFloors</span>
                                             </li>
-
                                         </ul>
                                         
                                     </td>
-                                    <td>@building.Address</td>
+                                    <td >@building.Address</td>
 
                                     <td>
                                         @building.YearBuild

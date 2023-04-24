@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Infor";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<section id="center" class="clearfix center_about">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="center_about_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h1 class="mgt">Thông tin cá nhân</h1>
+                    <p>Tận hưởng và mua sắm theo nhu cầu của bạn</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@*@if (TempData.ContainsKey("FailMessage"))
+{
+    <div class="alert alert-danger text-center">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thêm thất bại</h5>
+                <p>@TempData["FailMessage"].</p>
+            </div>
+        </div>
+    </div>
+}*@
+<section id="prop" style="background-color: #ebf8fe">
+    <form method="post" enctype="multipart/form-data" class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="submit_1 mgt clearfix">
+                    <h4 class="mgt col_1">Tài khoản của bạn</h4>
+                    <hr>
+                    <div class="submit_3 clearfix m-r-auto">
+                        <h5 class="mgt"><a class="button mgt" style="padding: 10px 10px 10px 10px; width: 280px; text-align: center" href="@Url.Action("Index", "User")">Tòa nhà ký gửi chưa duyệt</a></h5>
+                    </div>
+                    <div class="submit_3 clearfix m-r-auto">
+                        <h5 class="mgt">
+                        <a class="button mgt" style="padding: 10px 10px 10px 10px; width: 280px; text-align:center" href="@Url.Action("Index", "Solved")">Tòa nhà ký gửi đã duyệt</a></h5>
+                    </div>
+                    <div class="submit_3 clearfix m-r-auto">
+                        <h5 class="mgt">
+                            <a class="button mgt" style="padding: 10px 10px 10px 10px; width: 280px; text-align: center" href="@Url.Action("EditInfor", "User")">Chỉnh sửa thông tin cá nhân</a>
+                        </h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="submit_1 mgt clearfix">
+                    <h4 class="mgt col_1">Chi tiết tài khoản</h4>
+                    <hr>
+                    <h5> <i class="fa-solid fa-user"></i> Tên: @Model.Name</h5>
+                    <h5> <i class="fa-sharp fa-solid fa-location-dot"></i> Địa chỉ: @Model.Address</h5>
+                    <h5> <i class="fa-solid fa-phone"></i> Số điện thoại: @Model.Phone</h5>
+                    <h5> <i class="fa-solid fa-envelope"></i> Mail: @Model.Email</h5>
+                    <h5> <i class="fa-solid fa-pen"></i> Note: @Model.Note</h5>
+                </div>
+            </div>
+            
+        </div>
+    </form>
+</section>
+
+
+
+
+
+
+
+

@@ -39,30 +39,26 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i> My Home</a>
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")"><i class="fa fa-home"></i>My Home</a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li>
-                            <a class="tag_menu" href="@Url.Action("Index", "Home")">Home</a>
+                            <a class="tag_menu" href="@Url.Action("Index", "Home")">Trang chủ</a>
                         </li>
                         <li class="dropdown">
-                            <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Property<span class="caret"></span></a>
+                            <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Nhà bán<span class="caret"></span></a>
                             <ul class="dropdown-menu drop_1" role="menu">
-                                <li><a href="@Url.Action("Index", "Property")">Property List</a></li>
-                                <li><a href="@Url.Action("Details", "Property", new { id = "KG1"})">Property Detail</a></li>
+                                <li><a href="@Url.Action("Index", "Property")">Danh sách nhà</a></li>
+                                <li><a href="@Url.Action("Details", "Property", new { id = "KG1"})">Chi tiết nhà</a></li>
                             </ul>
                         </li>
-                        <li class="dropdown">
-                            <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Blog<span class="caret"></span></a>
-                            <ul class="dropdown-menu drop_1" role="menu">
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog_detail.html">Blog Detail</a></li>
-                            </ul>
+                        <li>
+                            <a class="tag_menu" href="@Url.Action("Index", "Booked")">Giỏ hàng</a>
                         </li>
-                        <li class="dropdown">
+                        @*<li class="dropdown">
                             <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
                             <ul class="dropdown-menu drop_1" role="menu">
                                 <li><a href="agent.html">Agent</a></li>
@@ -70,7 +66,7 @@
                                 <li><a href="about.html">About Us</a></li>
                                 <li><a href="property.html">Submit Property</a></li>
                             </ul>
-                        </li>
+                        </li>*@
                         <li>
                             <a class="tag_menu" href="@Url.Action("Index", "Contact")">Contact</a>
                         </li>
@@ -81,25 +77,25 @@
                             @if (Session["ID"] != null)
                             {
                             <li>
-                                <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, @Session["Username"]!<span class="caret"></span></a>
+                                <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Xin chào, @Session["Username"]<span class="caret"></span></a>
                                 <ul class="dropdown-menu drop_1" role="menu">
-                                    <li><a href="@Url.Action("Index", "User")">My Information</a></li>
-                                    <li><a href="@Url.Action("Index", "Solved")">Solved</a></li>
-                                    <li><a id="BookCart" href="@Url.Action("Index", "Booked")">Booked</a></li>
-                                    <li><a href="@Url.Action("Logout", "Logout")">Logout</a></li>
+                                    <li><a href="@Url.Action("Infor", "User")">Thông tin cá nhân</a></li>
+                                    <li><a href="@Url.Action("Index", "User")">Ký gửi chưa duyệt</a></li>
+                                    <li><a href="@Url.Action("Index", "Solved")">Ký gửi đã duyệt</a></li>
+                                    <li><a href="@Url.Action("Logout", "Logout")"><i class="fa-solid fa-arrow-right-from-bracket"></i> Đăng xuất </a></li>
                                 </ul>
                             </li>
 
                         }
                         else
                         {
-                            <a class="tag_menu" href="@Url.Action("Login", "LogIn")">Log In / Sign Up</a>
+                            <a class="tag_menu" href="@Url.Action("Login", "LogIn")">Đăng nhập/Đăng ký</a>
                         }
 
                             </li>
 
                             <li>
-                                <a class="tag_menu button_1 mgt" href="@Url.Action("Create", "Property")">Submit Property</a>
+                                <a class="tag_menu button_1 mgt" href="@Url.Action("Create", "Property")">Thêm ký gửi</a>
                             </li>
                         </ul>
 
