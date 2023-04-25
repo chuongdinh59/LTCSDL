@@ -62,7 +62,12 @@ namespace BuildingDemo.Areas.Admin.Service
             //    return false;
             //}
 
-            List<Schedule> schedules = db.Schedules.Where(s => s.ID != ScheduleID && s.BuildingID == BuildingID && s.Time == DateAppointment && s.Session == Session).ToList();
+            Building building = db.Buildings.Find(BuildingID);
+            if(building.IsPay == null || building.IsPay == false)
+            {
+                return false;
+            }
+            List<Schedule> schedules = db.Schedules.Where(s => s.ID != ScheduleID &&  s.BuildingID == BuildingID && s.Time == DateAppointment && s.Session == Session).ToList();
 
             if (schedules.Any())
             {

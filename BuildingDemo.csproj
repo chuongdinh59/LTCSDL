@@ -370,9 +370,9 @@
     <Compile Include="Areas\Admin\Controllers\CheckedBuildingController.cs" />
     <Compile Include="Areas\Admin\Controllers\CloudinaryController.cs" />
     <Compile Include="Areas\Admin\Controllers\CustomerController.cs" />
-    <Compile Include="Areas\Admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmailController.cs" />
     <Compile Include="Areas\Admin\Controllers\EmployeeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ReportController.cs" />
     <Compile Include="Areas\Admin\Controllers\ScheduleController.cs" />
     <Compile Include="Areas\Admin\Repository\BuildingRepository.cs" />
     <Compile Include="Areas\Admin\Repository\BuildingTypeRepository.cs" />
@@ -385,8 +385,11 @@
     <Compile Include="Areas\Admin\Service\CustomerService.cs" />
     <Compile Include="Areas\Admin\Service\EmployeeService.cs" />
     <Compile Include="Areas\Admin\Service\ImageService.cs" />
+    <Compile Include="Areas\Admin\Service\ReportSchedule.cs" />
+    <Compile Include="Areas\Admin\Service\ReportService.cs" />
     <Compile Include="Areas\Admin\Service\RoleService.cs" />
     <Compile Include="Areas\Admin\Service\ScheduleService.cs" />
+    <Compile Include="Areas\Admin\Service\ReportEmployeeView.cs" />
     <Compile Include="Areas\Admin\Service\ScheduleViewModel.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1302,6 +1305,7 @@
     <Content Include="Areas\Admin\Views\Schedule\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Schedule\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Schedule\EmployeeSchedule.cshtml" />
+    <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

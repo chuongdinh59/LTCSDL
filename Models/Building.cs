@@ -54,6 +54,8 @@ namespace BuildingDemo.Models
 
         public double? Area { get; set; }
 
+        public bool? IsPay { get; set; }
+
         public virtual BuildingType BuildingType { get; set; }
 
         public virtual Customer Customer { get; set; }
