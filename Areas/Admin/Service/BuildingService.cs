@@ -59,6 +59,12 @@ namespace BuildingDemo.Areas.Admin.Service
                 using (var db = new BuildingDB())
                 {
                     Building b = db.Buildings.Find(building.ID);
+
+                    // Xóa hình cũ trên cloudinary
+                    if (b.Image != null)
+                    {
+                        CloudinaryController.DeleteImage(b.Image);
+                    }
                     if (Image != null)
                     {
                         b.Image = CloudinaryController.UploadImage(Image);

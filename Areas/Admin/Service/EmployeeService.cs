@@ -17,6 +17,28 @@ namespace BuildingDemo.Areas.Admin.Service
             }
         }
 
+        public List<Employee> GetEmployeeMangement(Building building)
+        {
+            try
+            {
+                using (BuildingDB db = new BuildingDB())
+                {
+                    var employees = db.Employees
+                        .Join(db.ManagementBuildings, e => e.ID, m => m.EmployeeID, (e, m) => new { Employee = e, Management = m })
+                        .Join(db.Buildings, em => em.Management.BuildingID, b => b.ID, (em, b) => new { Employee = em.Employee, Building = b })
+                        .Where(x => x.Building.ID == building.ID)
+                        .Select(x => x.Employee)
+                        .ToList();
+
+                    return employees;
+                }
+              
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public Employee findByID(int id)
         {
             using (BuildingDB db = new BuildingDB())
@@ -75,8 +97,6 @@ namespace BuildingDemo.Areas.Admin.Service
                     Employee target = db.Employees.Find(employee.ID);
                     target.Address = employee.Address;
                     target.Phone = employee.Phone;
-                    target.Email = employee.Email;
-
                     if (Avatar != null)
                     {
                         target.Avatar = CloudinaryController.UploadImage(Avatar);
@@ -126,26 +146,20 @@ namespace BuildingDemo.Areas.Admin.Service
                     List<string> currBuildingIDOfEmpl = db.ManagementBuildings
                                                         .Where(mb => mb.EmployeeID == id)
                                                         .Select(mb => mb.BuildingID).ToList();
+                    // Đi delete những item có EmployeeID = id
+                    // Remove the existing building assignments that are not in the new list
+                    foreach (var mb in db.ManagementBuildings.Where(mb => mb.EmployeeID == id ))
+                    {
+                        db.ManagementBuildings.Remove(mb);
+                    }
+
                     foreach (var buildingId in buildingids)
                     {
-
-                        if (!currBuildingIDOfEmpl.Contains(buildingId))
-                        {
                             ManagementBuilding mb = new ManagementBuilding {
                                 EmployeeID = id,
                                 BuildingID = buildingId
                             };
                             db.ManagementBuildings.Add(mb);
-                        }
-                        else
-                        {
-                            ManagementBuilding item = db.ManagementBuildings
-                               .FirstOrDefault(mbx => mbx.BuildingID == buildingId );
-                            if (item != null)
-                            {
-                                db.ManagementBuildings.Remove(item);
-                            }
-                        }
                     }
                     db.SaveChanges();
                 }

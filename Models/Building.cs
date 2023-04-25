@@ -12,6 +12,8 @@ namespace BuildingDemo.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Building()
         {
+            ManagementBuildings = new HashSet<ManagementBuilding>();
+            Schedules = new HashSet<Schedule>();
             Images = new HashSet<Image>();
         }
 
@@ -55,6 +57,12 @@ namespace BuildingDemo.Models
         public virtual BuildingType BuildingType { get; set; }
 
         public virtual Customer Customer { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ManagementBuilding> ManagementBuildings { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Schedule> Schedules { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Image> Images { get; set; }

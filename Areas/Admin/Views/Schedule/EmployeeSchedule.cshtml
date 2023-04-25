@@ -1,0 +1,122 @@
+﻿
+@{
+    ViewBag.Title = "EmployeeSchedule";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+
+<h2>Phân công lịch làm việc nhân viên theo tòa nhà</h2>
+
+<div class="page-header">
+    <h2 class="header-title">Data Table</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" href="#">Tables</a>
+            <span class="breadcrumb-item active">Data Table</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4>Data Table</h4>
+        <p>
+            DataTables is a plug-in for the jQuery Javascript library. It
+            is a highly flexible tool, built upon the foundations of
+            progressive enhancement, that adds all of these advanced
+            features to any HTML table. Below is an example of zero
+            configuration.
+        </p>
+        <div class="m-t-25">
+            <table id="data-table" class="table">
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Tòa Nhà</th>
+                        <th>Địa chỉ</th>
+                        <th>Chủ sở hữu</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var b in ViewBag.buildings)
+                    {
+                    <tr>
+
+                        <td>@b.ID</td>
+                        <td>@b.Name</td>
+
+                        <td>@b.Address</td>
+
+                        <td>
+                            @if (b.CustomerID != null)
+                            {
+                                @b.Customer.Name
+                            }
+                            else
+                            {
+                                <span>Hệ thống</span>
+                            }
+                        </td>
+                        <td>
+                            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                <a href="@Url.Action("Create", "Schedule", new { id = b.ID })" class="btn btn-warning">
+                                    <i class="fa-solid fa-pen-to-square">
+                                    </i>
+                                </a>
+                            </div>
+                        </td>
+
+                    </tr>
+                    }
+
+                    @*@foreach (var emp in Model)
+        {
+            <tr>
+
+                <td>@emp.ID</td>
+                <td>@emp.Name</td>
+
+                <td>@emp.Address</td>
+                <td>@emp.Phone</td>
+                <td>
+                    ac
+                </td>
+                <td>
+                    <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                        <a href="@Url.Action("Edit", "AssignmentEmployee", new { id = emp.ID })" class="btn btn-warning">
+                            <i class="fa-solid fa-pen-to-square">
+                            </i>
+                        </a>
+                    </div>
+                </td>
+
+            </tr>
+        }*@
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+
+
+    </div>
+</div>
+
+

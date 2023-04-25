@@ -8,7 +8,7 @@ namespace BuildingDemo.Models
     public partial class BuildingDB : DbContext
     {
         public BuildingDB()
-            : base("name=BuildingDB2")
+            : base("name=BuildingDB1")
         {
         }
 
@@ -41,6 +41,11 @@ namespace BuildingDemo.Models
                 .Property(e => e.Image)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Building>()
+                .HasMany(e => e.ManagementBuildings)
+                .WithRequired(e => e.Building)
+                .WillCascadeOnDelete(false);
+
             modelBuilder.Entity<BuildingType>()
                 .HasMany(e => e.Buildings)
                 .WithRequired(e => e.BuildingType)
@@ -63,12 +68,13 @@ namespace BuildingDemo.Models
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.Email)
+                .Property(e => e.Avatar)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Employee>()
-                .Property(e => e.Avatar)
-                .IsUnicode(false);
+                .HasMany(e => e.ManagementBuildings)
+                .WithRequired(e => e.Employee)
+                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Image>()
                 .Property(e => e.BuildingID)
@@ -81,11 +87,6 @@ namespace BuildingDemo.Models
             modelBuilder.Entity<ManagementBuilding>()
                 .Property(e => e.BuildingID)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<ManagementBuilding>()
-                .HasMany(e => e.Employees)
-                .WithOptional(e => e.ManagementBuilding)
-                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Role>()
                 .HasMany(e => e.Accounts)

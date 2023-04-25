@@ -72,7 +72,8 @@
                         <th>ID</th>
                         <th>Tên tòa nhà</th>
                         <th>Thời gian</th>
-                        <th>Tên nhân vien</th>
+                        <th>Tên khách hàng</th>
+                        <th>Trạng thái</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -83,11 +84,53 @@
                     <tr>
                         <td>@schedule.Schedule.ID</td>
                         <td>@schedule.BuildingName</td>
-                        <td>@schedule.Schedule.Time.ToString("MM/dd/yyyy")</td>
-                        <td>@schedule.EmployeeName</td>
+                        <td>@schedule.Schedule.Time.ToString("MM/dd/yyyy") - 
+                            @if(schedule.Session == true)
+                            {
+                                        <span>Sáng</span> 
+                            }
+                                         else
+                            {
+                                <span>Chiều</span>
+                            }
+                        </td>
+                        <td>@schedule.CustomerName</td>
+
+                        @if (schedule.IsValid)
+                        {
+                            <
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-success badge-dot m-r-10"></div>
+                                    <div>Có thể tạo lịch ngay</div>
+                                </div>
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="badge badge-danger badge-dot m-r-10"></div>
+                                    <div>Cần chỉnh sửa </div>
+                                </div>
+                            </td>
+                        }
+
                         <td>
                             <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                                <a href="@Url.Action("Edit", "Building", new { id = 1 })" class="btn btn-warning">
+                                @if (schedule.IsValid)
+                                {
+                                    <a data-content="1" href="/Admin/Schedule/changeStatus/@schedule.Schedule.ID" class="resolve-btn btn btn-success"><i class="fa-solid fa-plus"></i></a>
+                                }
+                                else
+                                {
+                                    <a href="javascript:void(0);" data-content="1" class="btn btn-secondary btn-tone m-r-5"><i class="fa-solid fa-plus"></i></a>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                <a href="@Url.Action("Edit", "Schedule", new { id = schedule.Schedule.ID })" class="btn btn-warning">
                                     <i class="fa-solid fa-pen-to-square">
                                     </i>
                                 </a>
@@ -115,9 +158,9 @@
                 </tfoot>
 
             </table>
-            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+            @*<div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
                 <a href="@Url.Action("Create", "Schedule")" class="btn btn-success"><i class="fa-solid fa-plus"></i></a>
-            </div>
+            </div>*@
         </div>
 
 
@@ -183,6 +226,7 @@
         //});
     });
 
+    
 
 </script>
 

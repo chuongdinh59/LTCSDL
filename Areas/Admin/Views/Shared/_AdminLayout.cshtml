@@ -234,18 +234,10 @@
                                 <li>
                                     <a href="@Url.Action("Index", "Employee")">Quản lý thông tin nhân viên</a>
                                 </li>
+
                             </ul>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="@Url.Action("Index", "Account")">
-                                <span class="icon-holder">
-                                    <i class="anticon anticon-lock"></i>
-                                </span>
-                                <span class="title">Quản lý tài khoản</span>
 
-                            </a>
-
-                        </li>
                         <li class="nav-item dropdown">
                             <a class="dropdown-toggle" href="javascript:void(0);">
                                 <span class="icon-holder">
@@ -266,11 +258,32 @@
                             </ul>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="@Url.Action("Index", "Schedule")">
+                            <a class="dropdown-toggle" href="javascript:void(0);">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-form"></i>
                                 </span>
                                 <span class="title">Quản lý Lịch Xem Tòa Nhà</span>
+                                <span class="arrow">
+                                    <i class="arrow-icon"></i>
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="@Url.Action("Index", "Schedule")">Quản lý lịch của khách hàng</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("EmployeeSchedule", "Schedule")">Quản lý lịch của nhân viên</a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="dropdown-toggle" href="@Url.Action("Index", "Account")">
+                                <span class="icon-holder">
+                                    <i class="anticon anticon-lock"></i>
+                                </span>
+                                <span class="title">Quản lý tài khoản</span>
+
                             </a>
                         </li>
                     </ul>
