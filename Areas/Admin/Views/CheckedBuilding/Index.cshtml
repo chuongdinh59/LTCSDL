@@ -195,7 +195,13 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                })
+                }).then(res => {
+                    if (res.status === 200) {
+                        // Display success message
+                        alert('Chuyển trạng thái thành công');
+                    }
+                    window.location.href = "https://localhost:44327/Admin/CheckedBuilding";
+                });
             }
         });
     });
@@ -235,11 +241,11 @@
                 'Content-Type': 'application/json'
             },
         }).then(res => {
-            if (res.status === 200) {
+            if (res != null) {
                 // Display success message
                 alert('Xóa thành công');
             }
-            window.location.href = "https://localhost:44327/Admin/Building/CheckBuilding";
+            window.location.href = "https://localhost:44327/Admin/CheckedBuilding";
         });
     });
 

@@ -11,15 +11,22 @@ namespace BuildingDemo.Models
     {
         public int ID { get; set; }
 
-        [Required]
-        [StringLength(256)]
+        [StringLength(255)]
         public string BuildingID { get; set; }
-
-        public int EmployeeID { get; set; }
 
         public DateTime? Time { get; set; }
 
+        public int? EmployeeID { get; set; }
+
+        public int? CustomerID { get; set; }
+
+        public bool? IsResolve { get; set; }
+
         public bool? Session { get; set; }
+
+        public virtual Building Building { get; set; }
+
+        public virtual Customer Customer { get; set; }
 
         public virtual Employee Employee { get; set; }
     }

@@ -36,7 +36,6 @@ namespace BuildingDemo.Areas.Admin.Service
                     target.Address = customer.Address;
                     target.Name = customer.Name;
                     target.Phone = customer.Phone;
-                    target.Email = customer.Email;
                     if(Avatar != null)
                     {
                         target.Avatar = CloudinaryController.UploadImage(Avatar);

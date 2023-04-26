@@ -64,16 +64,21 @@ namespace BuildingDemo.Areas.Admin.Controllers
                 if (isResolve)
                 {
                     TempData["ChangeResolveSucc"] = "Chuyển trạng thái thành công";
+
+                    // Không redirect được ?
+                    return RedirectToAction("Index", "CheckedBuilding");
+
                 }
                 else
                 {
                     TempData["ChangeResolveErr"] = "Không thể chuyển trạng thái vì không tồn tại";
+                    return RedirectToAction("CheckedBuilding", "Admin");
+
                 }
-                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return RedirectToAction("CheckedBuilding", "Admin");
             }
         }
 

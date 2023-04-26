@@ -59,6 +59,12 @@ namespace BuildingDemo.Areas.Admin.Service
                 using (var db = new BuildingDB())
                 {
                     Building b = db.Buildings.Find(building.ID);
+
+                    // Xóa hình cũ trên cloudinary
+                    //if (b.Image != null)
+                    //{
+                    //    CloudinaryController.DeleteImage(b.Image);
+                    //}
                     if (Image != null)
                     {
                         b.Image = CloudinaryController.UploadImage(Image);
@@ -128,10 +134,10 @@ namespace BuildingDemo.Areas.Admin.Service
                 Building target = db.Buildings.Find(id);
                 if (target == null) return false;
                 target.IsResolve = true;
-                EmailController.SendEmail
-                    (target.Customer.Account.Email, 
-                    "Nhà của bạn đã được phê duyệt",
-                    "Thông báo duyệt thành công nhà " + target.Name);
+                //EmailController.SendEmail
+                //    ("chuongdinh2202@gmail.com", 
+                //    "Nhà của bạn đã được phê duyệt",
+                //    "Thông báo duyệt thành công nhà " + target.Name);
                 db.SaveChanges();
                 return true;
             }
