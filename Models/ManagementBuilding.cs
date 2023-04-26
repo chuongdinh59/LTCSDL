@@ -9,23 +9,20 @@ namespace BuildingDemo.Models
     [Table("ManagementBuilding")]
     public partial class ManagementBuilding
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ManagementBuilding()
-        {
-            Employees = new HashSet<Employee>();
-        }
-
         public int ID { get; set; }
 
         [Required]
-        [StringLength(256)]
+        [StringLength(255)]
         public string BuildingID { get; set; }
 
         public int EmployeeID { get; set; }
 
         public DateTime? CreateDate { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Employee> Employees { get; set; }
+        public bool? IsSuccess { get; set; }
+
+        public virtual Building Building { get; set; }
+
+        public virtual Employee Employee { get; set; }
     }
 }

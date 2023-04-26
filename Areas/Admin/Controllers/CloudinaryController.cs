@@ -3,6 +3,7 @@ using CloudinaryDotNet.Actions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -17,9 +18,6 @@ namespace BuildingDemo.Areas.Admin.Controllers
         {   
             if (Image != null && Image.ContentLength > 0)
             {
-                //string IsExists = GetImageUrl(Image.FileName);
-                //if (IsExists != null)
-                //    return IsExists;
                 Cloudinary cloudinary = new Cloudinary(account);
                 var uploadResult = cloudinary.Upload(new ImageUploadParams() {
                     File = new FileDescription(Image.FileName, Image.InputStream),
@@ -49,10 +47,12 @@ namespace BuildingDemo.Areas.Admin.Controllers
 
         public static String DeleteImage(string imageIdOrUrl)
         {
-            Cloudinary cloudinary = new Cloudinary(account);
-            var deletionResult = cloudinary.DeleteResources(imageIdOrUrl);
 
-            if (deletionResult.DeletedCounts.ContainsKey(imageIdOrUrl))
+            Cloudinary cloudinary = new Cloudinary(account);
+            string publicId = GetPublicId(imageIdOrUrl);
+            var deletionResult = cloudinary.DeleteResources(publicId);
+
+            if (deletionResult.DeletedCounts.Count > 0)
             {
                 return "success";
             }
@@ -64,6 +64,14 @@ namespace BuildingDemo.Areas.Admin.Controllers
             {
                 return "fail";
             }
+        }
+
+        private static string GetPublicId(string imageUrl)
+        {
+            int startIndex = imageUrl.LastIndexOf("/") + 1;
+            int endIndex = imageUrl.LastIndexOf(".");
+            string publicId = imageUrl.Substring(startIndex, endIndex - startIndex);
+            return publicId;
         }
     }
 }

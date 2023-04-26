@@ -21,52 +21,166 @@
     </div>
 }
 
+<h3>Toàn bộ lịch của tòa nhà: @ViewBag.building.ID - @ViewBag.building.Name</h3>
+<div class="card">
+    <div class="card-body">
+        <h4>Data Table</h4>
+        <p>
+            DataTables is a plug-in for the jQuery Javascript library. It
+            is a highly flexible tool, built upon the foundations of
+            progressive enhancement, that adds all of these advanced
+            features to any HTML table. Below is an example of zero
+            configuration.
+        </p>
+        <div class="m-t-25">
+            <table id="data-table" class="table">
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Nhân Viên</th>
+                        <th>Tên Khách Hàng</th>
+                        <th>Số điện thoại khách hàng</th>
+                        <th>Ngày Hẹn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var sche in ViewBag.schedules)
+                    {
+                    <tr>
+
+                        <td>@sche.ID</td>
+                        <td>
+                            @if (@sche.Employee == null)
+                            {
+                                <span>Cần phân công </span>
+                            }
+                            else
+                            {
+                                <span>@sche.Employee.Name</span>
+                            }
+                                            </td>
+                        <td>@sche.Customer.Name</td>
+                        <td>@sche.Customer.Phone</td>
+                        <td>@sche.Time.ToString("yyyy-MM-dd") -
+                        @if (sche.Session == true)
+                        {
+                            <span>Sáng</span>
+                        }
+                            else {
+                            <span>Chiều</span>
+                            }
+                        </td>
+                        <td></td>
+                    </tr>
+
+                    }
+                    @*@foreach (var building in Model)
+        {
+            <tr>
+
+                <td>@building.ID</td>
+                <td>@building.Name</td>
+                <td>
+                    @if (building.CustomerID != null)
+                    {
+                        @building.Customer.Name
+                    }
+                    else
+                    {
+                        <span>Hệ thống</span>
+                    }
+                </td>
+                <td>61</td>
+                <td>
+                    <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                        <a href="@Url.Action("Edit", "Building", new { id = building.ID })" class="btn btn-warning">
+                            <i class="fa-solid fa-pen-to-square">
+                            </i>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <a data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
+                        <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+
+        }*@
 
 
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+
+            </table>
+          
+        </div>
+
+
+    </div>
+</div>
 @using (Html.BeginForm("Create", "Schedule", FormMethod.Post,
             HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
 {
 
 
     <div class="form-group">
-        <label for="input readonlyState">ID Tòa nhà</label>
-        <select name="BuildingID" id="input readonlyState" class="form-control">
-            <option disabled selected value="0">Chọn nhà</option>
-            @foreach (var building in ViewBag.buildings)
+        <label for="input readonlyState">ID Lịch Hẹn</label>
+        <select name="ScheduleID" id="input readonlyState" class="form-control">
+            <option disabled selected value="0">Chọn lịch Hẹn</option>
+            @foreach (var sche in ViewBag.schedules)
             {
-                <option value="@building.ID"
-                        data-building-name="@building.Name"
-                        data-building-year="@building.YearBuild"
-                        data-building-floors="@building.NumFloors"
-                        data-building-bed="@building.Bed"
-                        data-building-bath="@building.Bath">
-                    @(building.ID + "_" + building.Name)
-                </option>
+                if (sche.Employee == null)
+                {
+                    <option value="@sche.ID"
+                            data-customer-name="@sche.Customer.Name"
+                            data-customer-phone="@sche.Customer.Phone"
+                            data-customer-time="@sche.Time.ToString("yyyy-MM-dd")">
+                        @(sche.ID + "-" + "Ngày: " + sche.Time.ToString("yyyy-MM-dd") + "-")
+                        @if (sche.Session == true)
+                        {
+                            <span>Sáng</span>
+                        }
+                        else
+                        { <span>Chiều</span>
+                        }
+                    </option>
+                }
             }
         </select>
     </div>
 
     <div class="form-row">
         <div class="form-group col-md-4">
-            <label for="input readonlyCity">Tên tòa nhà</label>
-            <input readonly placeholder="ex: Time city.." name="Name" type="text" class="form-control" id="input readonlyCity">
+            <label for="input readonlyCity">Tên khách hàng</label>
+            <input readonly placeholder="ex: Time city."
+                   name="Name" type="text" class="form-control" id="input readonlyCity"
+                   value="">
         </div>
-        <div class="form-group col-md-2">
-            <label for="input readonlyZip">Năm xây dựng</label>
-            <input readonly placeholder="ex: 2012.." name="YearBuild" type="number" class="form-control" id="year">
+        <div class="form-group col-md-4">
+            <label for="input readonlyZip">Số điện thoại khách hàng</label>
+            <input readonly placeholder="ex: 099999999." name="YearBuild" type="number" class="form-control" id="year"
+                   value="">
         </div>
-        <div class="form-group col-md-2">
-            <label for="input readonlyZip">Số Tầng</label>
-            <input readonly name="NumFloors" placeholder="ex: 2.." type="number" class="form-control" id="input readonlyZip">
+        <div class="form-group col-md-4">
+            <label for="input readonlyZip">Ngày hẹn</label>
+            <input readonly name="NumFloors"
+                   value=""
+                   placeholder="ex: 2." type="text" class="form-control" id="input readonlyZip">
         </div>
-        <div class="form-group col-md-2">
-            <label for="input readonlyZip">Số phòng ngủ</label>
-            <input readonly name="Bed" placeholder="ex: 2.." type="number" class="form-control" id="input readonlyZip">
-        </div>
-        <div class="form-group col-md-2">
-            <label for="input readonlyZip">Số nhà vệ sinh</label>
-            <input readonly name="Bath" placeholder="ex: 2.." type="number" class="form-control" id="input readonlyZip">
-        </div>
+       
     </div>
     <div class="form-group">
         <label for="EmployeeBlock">ID Nhân Viên</label>
@@ -102,17 +216,7 @@
                value=""
                name="Phone" />
     </div>
-    <div class="form-group">
-        <label for="Time">Chọn buổi</label>
-        <select  name="Time" id="Time" class="form-control" onchange="updateInputValue()">
-            <option selected value="true">Sáng</option>
-            <option value="false">Chiều</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label class="font-weight-semibold" for="datepicker">Chọn ngày</label>
-        <input name="DateAppointment" type="date" id="datepicker" class="form-control datepicker" />
-    </div>
+    
 
     <div class="form-group row">
         <div class="col-sm-10">
@@ -134,8 +238,6 @@
     var nameInput = document.getElementById("input readonlyCity");
     var yearInput = document.getElementById("year");
     var floorsInput = document.getElementsByName("NumFloors")[0];
-    var bedInput = document.getElementsByName("Bed")[0];
-    var bathInput = document.getElementsByName("Bath")[0];
 
     // add an event listener to the select element
     selectElement.addEventListener("change", function () {
@@ -143,19 +245,16 @@
         var selectedOption = selectElement.options[selectElement.selectedIndex];
 
         // update the value of the name input element
-        nameInput.value = selectedOption.dataset.buildingName;
+        nameInput.value = selectedOption.dataset.customerName;
 
         // update the value of the year input element
-        yearInput.value = selectedOption.dataset.buildingYear;
+        yearInput.value = selectedOption.dataset.customerPhone;
 
+
+        console.log(typeof (selectedOption.dataset.customerTime))
         // update the value of the floors input element
-        floorsInput.value = selectedOption.dataset.buildingFloors;
+        floorsInput.value = selectedOption.dataset.customerTime;
 
-        // update the value of the bed input element
-        bedInput.value = selectedOption.dataset.buildingBed;
-
-        // update the value of the bath input element
-        bathInput.value = selectedOption.dataset.buildingBath;
     });
 
 

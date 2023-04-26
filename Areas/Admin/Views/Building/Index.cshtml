@@ -86,7 +86,16 @@
                                     <span>Hệ thống</span>
                                 }
                             </td>
-                            <td>61</td>
+                            <td>
+                                @if (@building.PurchasePrice != null)
+                                {
+                                    <span>@building.PurchasePrice</span>
+                                }
+                                else
+                                {
+                                    <span>Thương lượng</span>   
+                                }
+                                                    </td>
                             <td>
                                 <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
                                     <a href="@Url.Action("Edit", "Building", new { id = building.ID })" class="btn btn-warning">

@@ -49,7 +49,9 @@ namespace BuildingDemo.Areas.Admin.Controllers
             Guid uuid = Guid.NewGuid();
             string ID = building.ID + "-" + uuid.ToString();
             building.ID = ID;
-            if (Images.Count > 0)
+            building.IsPay = false;
+            building.IsResolve = false;
+            if (Images[0] != null && Images.Count > 0)
             {
                 for ( int i = 0; i < Images.Count; i++)
                 {

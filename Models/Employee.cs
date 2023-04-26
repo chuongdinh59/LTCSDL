@@ -12,6 +12,7 @@ namespace BuildingDemo.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Employee()
         {
+            ManagementBuildings = new HashSet<ManagementBuilding>();
             Schedules = new HashSet<Schedule>();
         }
 
@@ -32,17 +33,15 @@ namespace BuildingDemo.Models
         [StringLength(250)]
         public string Address { get; set; }
 
-        [StringLength(255)]
-        public string Email { get; set; }
-
         [Column(TypeName = "text")]
         public string Avatar { get; set; }
 
         public virtual Account Account { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Schedule> Schedules { get; set; }
+        public virtual ICollection<ManagementBuilding> ManagementBuildings { get; set; }
 
-        public virtual ManagementBuilding ManagementBuilding { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Schedule> Schedules { get; set; }
     }
 }
