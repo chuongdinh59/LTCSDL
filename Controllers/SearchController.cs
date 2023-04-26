@@ -12,19 +12,19 @@ namespace BuildingDemo.Controllers
     {
         BuildingService buildingService = new BuildingService();
         // GET: Search
-        public ActionResult SearchResult(string keyword, int? page, double? price)
+        public ActionResult SearchResult(string keyword, int? page, double? price, int? BuildingTypeID, string address, int? beds, int? baths)
         {
             int pageNumber = (page ?? 1);
-            int size = 6;
-            var result = buildingService.SearchName(keyword, price);
+            int size = 9;
+            var result = buildingService.Search(keyword, price, BuildingTypeID, address, beds, baths);
             ViewBag.keywork = keyword;
             return View(result.OrderBy(b => b.Name).ToPagedList(pageNumber,size));
         }
-        public ActionResult SearchKW(string keyword, double? price)
+        public ActionResult SearchKW(string keyword, double? price, int? BuildingTypeID, string address, int? beds, int? baths)
         {
-            return RedirectToAction("SearchResult", new { @keyword = keyword, @price = price});
+            return RedirectToAction("SearchResult", new { @keyword = keyword, @price = price, @BuildingTypeID = BuildingTypeID, @address = address, @beds = beds, @baths = baths});
         }
-
+        
 
         // GET: Search/Details/5
         public ActionResult Details(int id)

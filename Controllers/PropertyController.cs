@@ -21,8 +21,11 @@ namespace BuildingManagement.Controllers
             int size = 9;
             IEnumerable<Building> buildings = buildingService.getAll();
             var pageBuildings = buildings.ToPagedList(pageNumber, size);
+            
             return View(pageBuildings);
         }
+
+        
 
         // GET: Property/Details/5
         public ActionResult Details(String id)
@@ -66,19 +69,6 @@ namespace BuildingManagement.Controllers
                 return View();
             }
         }
-
-
-        public ActionResult Load(string id)
-        {
-            List<BuildingType> buildingTypes = buildingTypeService.getAll().ToList();
-            Building building = buildingService.FindByID(id);
-            return View(buildingTypes, building);
-        }
-        private ActionResult View(List<BuildingType> buildingTypes, Building building)
-        {
-            ViewBag.buildingTypes = buildingTypes;
-            ViewBag.building = building;
-            return View();
-        }
+        
     }
 }
