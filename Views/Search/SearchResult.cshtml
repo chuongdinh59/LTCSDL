@@ -1,0 +1,49 @@
+﻿@using PagedList.Mvc;
+@model PagedList.IPagedList<BuildingDemo.Models.Building>
+@{
+    ViewBag.Title = "SearchResult";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section id="popular">
+    <div class="container">
+        <div class="row">
+            <div class="popular_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h1 class="mgt"> Property List</h1>
+                    <p>Find new &amp; top rated property for you.</p>
+                </div>
+            </div>
+            <div class="popular_2 clearfix">
+                @foreach (var building in Model)
+                {
+                    <div class="col-sm-4">
+                        <div class="popular_2i clearfix">
+                            <div class="popular_2i1 clearfix">
+                                <a href="@Url.Action("Details", "Property", new { id = building.ID })"><img style="height: 200px; object-fit: contain;" src="@building.Image" class="iw" alt="abc"></a>
+                            </div>
+                            <div class="popular_2i2 clearfix">
+                                <h5 class="mgt"><a href="@Url.Action("Details", "Property", new { id = building.ID })">FOR RENT</a></h5>
+                            </div>
+                        </div>
+                        <div class="popular_2i3 clearfix">
+                            <h5 class="mgt"><a href="@Url.Action("Details", "Property", new { id = building.ID })">@building.Name<i class="fa fa-check-square col_1"></i></a></h5>
+                            <h4 class="col_1">@building.PurchasePrice / <span class="col_2">Month</span></h4>
+                            <h6><i class="fa fa-hotel col_2"></i> @building.Bed Beds <span><i class="fa fa-home col_2"></i> @building.Bath Bath</span></h6>
+                            <h5 class="inline">
+                                <a class="button" href="#" onclick="RequestInfo('@building.ID', '@building.Name', '@building.PurchasePrice')">
+                                    Request Info
+                                </a>
+                            </h5>
+                            <h5 class="inline"><a class="button_1" href="@Url.Action("Details", "Property", new { id = building.ID } )">Property Detail</a></h5>
+                        </div>
+                    </div>
+                }
+            </div>
+            <div style="text-align:center; padding-top:20px">
+                @Html.PagedListPager(Model, pageNumber => Url.Action("SearchResult", new { page = pageNumber,@keyword = ViewBag.keywork}))
+            </div>
+        </div>
+    </div>
+</section>
+

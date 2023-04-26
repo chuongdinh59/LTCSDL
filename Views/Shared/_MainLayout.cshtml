@@ -48,27 +48,14 @@
                         <li>
                             <a class="tag_menu" href="@Url.Action("Index", "Home")">Trang chủ</a>
                         </li>
-                        <li class="dropdown">
-                            <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Nhà bán<span class="caret"></span></a>
-                            <ul class="dropdown-menu drop_1" role="menu">
-                                <li><a href="@Url.Action("Index", "Property")">Danh sách nhà</a></li>
-                                <li><a href="@Url.Action("Details", "Property", new { id = "KG1"})">Chi tiết nhà</a></li>
-                            </ul>
+                        <li>
+                            <a class="tag_menu" href="@Url.Action("Index", "Property")">Nhà bán</a>
+                        </li>
+                        <li>
+                            <a class="tag_menu" href="@Url.Action("Index", "Contact")">Contact</a>
                         </li>
                         <li>
                             <a class="tag_menu" href="@Url.Action("Index", "Booked")">Giỏ hàng</a>
-                        </li>
-                        @*<li class="dropdown">
-                            <a class="tag_menu" href="#" data-toggle="dropdown" role="button" aria-expanded="false">Pages<span class="caret"></span></a>
-                            <ul class="dropdown-menu drop_1" role="menu">
-                                <li><a href="agent.html">Agent</a></li>
-                                <li><a href="agency.html">Agency Page</a></li>
-                                <li><a href="about.html">About Us</a></li>
-                                <li><a href="property.html">Submit Property</a></li>
-                            </ul>
-                        </li>*@
-                        <li>
-                            <a class="tag_menu" href="@Url.Action("Index", "Contact")">Contact</a>
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">

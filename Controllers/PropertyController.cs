@@ -67,5 +67,18 @@ namespace BuildingManagement.Controllers
             }
         }
 
+
+        public ActionResult Load(string id)
+        {
+            List<BuildingType> buildingTypes = buildingTypeService.getAll().ToList();
+            Building building = buildingService.FindByID(id);
+            return View(buildingTypes, building);
+        }
+        private ActionResult View(List<BuildingType> buildingTypes, Building building)
+        {
+            ViewBag.buildingTypes = buildingTypes;
+            ViewBag.building = building;
+            return View();
+        }
     }
 }

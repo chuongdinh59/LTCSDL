@@ -399,6 +399,7 @@
     <Compile Include="Controllers\LogoutController.cs" />
     <Compile Include="Controllers\PropertyController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Controllers\SolvedController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Filter\AnonymousFilter.cs" />
@@ -1352,6 +1353,7 @@
     <Content Include="Views\Solved\Index.cshtml" />
     <Content Include="Views\User\Infor.cshtml" />
     <Content Include="Views\User\EditInfor.cshtml" />
+    <Content Include="Views\Search\SearchResult.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

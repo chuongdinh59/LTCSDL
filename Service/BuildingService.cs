@@ -15,7 +15,29 @@ namespace BuildingDemo.Service
         {
             return db.Buildings.ToList();
         }
-  
+        public List<Building> SearchName(string keyword, double? price)
+        {
+            var SearchResult = db.Buildings.ToList();
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                if (price != null)
+                {
+                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword) && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)).ToList();
+                }
+                else
+                {
+                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)).ToList(); 
+                }
+            }
+            else
+            {
+                if(price != null)
+                {
+                    SearchResult = db.Buildings.Where(b => b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20).ToList();
+                }    
+            }    
+            return SearchResult;
+        }
         public List<Building> getTop(int x)
         {
             return db.Buildings.Take(x).ToList();

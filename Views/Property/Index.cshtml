@@ -10,76 +10,94 @@
         <div class="row">
             <div class="center_home_1 clearfix">
                 <h1 class="text-center mgt">Find Your RealHome</h1>
-                <div class="center_home_1i clearfix">
-                    <div class="col-sm-4">
-                        <div class="center_home_1i1 clearfix">
-                            <input placeholder="Neighborhood" class="form-control" type="text">
+                @using (Html.BeginForm("SearchKW", "Search"))
+                {
+                    <div class="center_home_1i clearfix">
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                                <input placeholder="Tên tòa nhà" class="form-control" type="text" name="keyword">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                                <input placeholder="Giá" class="form-control" type="number" name="price">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                                <select class="form-control" name="address">
+                                    <option value="">Địa chỉ</option>
+                                    <option value="family-house">Gò Vấp</option>
+                                    <option value="apartment">Nguyễn kiệm</option>
+                                    <option value="condo">Tân phú</option>
+                                    <option value="condo">Hải Phòng</option>
+                                    <option value="condo">Bình thuận</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="center_home_1i1 clearfix">
-                            <select class="form-control" name="Location">
-                                <option value="">All Cities</option>
-                                <option value="family-house">New York</option>
-                                <option value="apartment">Los Angeles</option>
-                                <option value="condo">Chicago</option>
-                                <option value="condo">Philadelphia</option>
-                                <option value="condo">San Francisco</option>
-                            </select>
+                    <div class="center_home_1i clearfix">
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                                <select class="form-control" name="beds" id="beds">
+                                    <option value="">Số phòng ngủ</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                                <select class="form-control" name="beds" id="beds">
+                                    <option value="">Số phòng tắm</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                    <option value="8">8</option>
+                                    <option value="9">9</option>
+                                    <option value="10">10</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                                <select class="form-control" name="property">
+                                    <option value="">Loại tòa nhà</option>
+                                    <option value="family-house">Family House</option>
+                                    <option value="apartment">Apartment</option>
+                                    <option value="condo">Condo</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="center_home_1i1 clearfix">
-                            <select class="form-control" name="property">
-                                <option value="">Property Type</option>
-                                <option value="family-house">Family House</option>
-                                <option value="apartment">Apartment</option>
-                                <option value="condo">Condo</option>
-                            </select>
+                    <div class="center_home_1i clearfix">
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="center_home_1i1 clearfix">
+                            </div>
+                        </div>
+                        <div class="col-sm-4" style="width:100px">
+                            <div class="center_home_1i1 clearfix">
+                                <input style="font-size: 16px; width: 360px; " class="button_1 block mgt" type="submit" value="Tìm kiếm"/>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="center_home_1i clearfix">
-                    <div class="col-sm-4">
-                        <div class="center_home_1i1 clearfix">
-                            <select class="form-control" name="beds" id="beds">
-                                <option value="">Bedrooms</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="center_home_1i1 clearfix">
-                            <select class="form-control" name="beds" id="beds">
-                                <option value="">Bathrooms</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                                <option value="7">7</option>
-                                <option value="8">8</option>
-                                <option value="9">9</option>
-                                <option value="10">10</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="center_home_1i1 clearfix">
-                            <h5 class="mgt text-center"><a class="button_1 block mgt" href="detail.html">Search Result</a></h5>
-                        </div>
-                    </div>
-                </div>
+                }
             </div>
         </div>
     </div>
@@ -108,17 +126,17 @@
                         </div>
                         <div class="popular_2i3 clearfix">
                             <h5 class="mgt"><a href="@Url.Action("Details", "Property", new { id = building.ID })">@building.Name<i class="fa fa-check-square col_1"></i></a></h5>
-                            <h4 class="col_1">@building.PurchasePrice / <span class="col_2">Month</span></h4>
+                            <h4 class="col_1">@building.PurchasePrice<span class="col_2" style="font-size:22px">$</span></h4>
                             <h6><i class="fa fa-hotel col_2"></i> @building.Bed Beds <span><i class="fa fa-home col_2"></i> @building.Bath Bath</span></h6>
                             <h5 class="inline">
                                 <a class="button" href="#" onclick="RequestInfo('@building.ID', '@building.Name', '@building.PurchasePrice')">
                                     Request Info
                                 </a>
                             </h5>
-                            <h5 class="inline"><a class="button_1" href="@Url.Action("Details", "Property", new { id = building.ID } )">Property Detail</a></h5>
+                            <h5 class="inline"><a class="button_1" href="@Url.Action("Details", "Property", new { id = building.ID })">Property Detail</a></h5>
                         </div>
                     </div>
-                }
+                    }
             </div>
             <div style="text-align:center; padding-top:20px">
                 @Html.PagedListPager(Model, pageNumber => Url.Action("Index", new { page = pageNumber }))
