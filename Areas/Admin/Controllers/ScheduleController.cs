@@ -25,7 +25,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
                 BuildingName = buildings.FirstOrDefault(b => b.ID == s.BuildingID)?.Name,
                 CustomerName = customers.FirstOrDefault(c=> c.ID == s.CustomerID)?.Name,
                 IsValid = scheduleService.checkIsValid(s.ID, s.BuildingID, s.EmployeeID, s.Time, s.Session),
-                Session = (bool)s.Session
+                Session = (bool)s.Session   
             }).ToList();
 
             return View(scheduleViewModels);
