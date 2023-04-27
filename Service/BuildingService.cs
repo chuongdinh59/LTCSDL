@@ -15,6 +15,38 @@ namespace BuildingDemo.Service
         {
             return db.Buildings.ToList();
         }
+
+        public bool DeleteBuilding(string id)
+        {
+            try
+            {
+                Building building = db.Buildings.Find(id);
+                if (building == null) return false;
+                db.Buildings.Remove(building);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool ChangePay(string id)
+        {
+            try
+            {
+                Building building = db.Buildings.Find(id);
+                if (building == null) return false;
+                building.IsPay = true;
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public List<Building> SearchName(string keyword, double? price)
         {
             var SearchResult = db.Buildings.ToList();

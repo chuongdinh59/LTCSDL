@@ -78,7 +78,13 @@ namespace BuildingDemo.Controllers
                 return RedirectToAction("Index");
             }
         }
+        [HttpPost]
+        public ActionResult ChangePay(string BuildingID)
+        {
+            bool rs = buildingService.ChangePay(BuildingID);
 
+            return RedirectToAction("Index");
+        }
         // GET: User/Create
         public ActionResult Create()
         {
@@ -162,12 +168,12 @@ namespace BuildingDemo.Controllers
 
         // POST: User/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string BuildingID)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                bool rs = buildingService.DeleteBuilding(BuildingID);
                 return RedirectToAction("Index");
             }
             catch

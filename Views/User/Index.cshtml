@@ -27,7 +27,7 @@
                             <tr>
                                 <th>Tên tòa nhà</th>
                                 <th>Địa chỉ</th>
-                                <th>Giá bán </th>
+                                <th>Phí kí gửi </th>
                                 <th></th>
                                 <th></th>
                                 <th></th>
@@ -56,11 +56,10 @@
                                         </ul>
                                     </td>
                                     <td style="width: 250px">@building.Address</td>
-
                                     <td>
                                         @if (building.CustomerID != null)
                                         {
-                                            @building.PurchasePrice 
+                                            @(building.PurchasePrice * 0.02)
                                         }
                                         else
                                         {
@@ -78,16 +77,27 @@
                                         </div>
                                     </td>
                                     <td style="width:100px">
-                                        <a style="width:80px; align-items:center" data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
+                                        <a onclick="handleDelete('@building.ID')" style="width:80px; align-items:center" data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
                                             <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
                                         </a>
                                     </td>
                                     <td>
-                                        <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white;">
-                                            <a href="#" class="btn btn-success" style="width: 120px">
-                                                Thanh toán <i class="fa-sharp fa-solid fa-cart-shopping"></i>
-                                            </a>
-                                        </div>
+                                        @if (building.IsPay == true)
+                                        {
+                                            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white;">
+                                                <a  href="#" class="btn btn-warning" style="width: 150px">
+                                                    Đã Thanh toán <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                                                </a>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white;">
+                                                <a onclick="handlePay('@building.ID')" href="#" class="btn btn-success" style="width: 150px">
+                                                    Thanh toán <i class="fa-sharp fa-solid fa-cart-shopping"></i>
+                                                </a>
+                                            </div>
+                                        }
                                     </td>
                                 </tr>
 
@@ -104,6 +114,64 @@
     </div>
 </section>
 
+
+<script>
+    function handlePay(id) {
+        fetch("https://localhost:44327/User/ChangePay", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                BuildingID: id
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Network response was not ok");
+                }
+                return response.text();
+            })
+            .then(result => {
+                window.location.href = "https://localhost:44327/User";
+                // do something with the result
+            })
+            .catch(error => {
+                console.error("Fetch error:", error);
+            });
+    }
+
+
+    function handleDelete(id) {
+        if (confirm("Are you sure you want to delete this item?")) {
+            // user clicked "OK", proceed with delete
+            fetch("https://localhost:44327/User/Delete", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    BuildingID: id
+                })
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.text();
+                })
+                .then(result => {
+                    window.location.href = "https://localhost:44327/User";
+                    // do something with the result
+                })
+                .catch(error => {
+                    console.error("Fetch error:", error);
+                });
+        } else {
+            // user clicked "Cancel", do nothing
+        }
+    }
+</script>
 
 
 
