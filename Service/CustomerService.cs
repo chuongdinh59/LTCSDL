@@ -29,7 +29,6 @@ namespace BuildingDemo.Service
                     c.Name = customer.Name;
                     c.Address = customer.Address;
                     c.Phone = customer.Phone;
-                    c.Email = customer.Email;
                     c.Note = customer.Note;
                     db.SaveChanges();
                 }

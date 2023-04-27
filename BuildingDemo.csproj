@@ -420,6 +420,7 @@
     <Compile Include="Models\ManagementBuilding.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\Schedule.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BuildingRepository.cs" />
     <Compile Include="Service\AccountService.cs" />
