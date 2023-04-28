@@ -47,7 +47,11 @@ namespace BuildingDemo.Areas.Admin.Controllers
                 return View();
             }
         }
-
+        public ActionResult EmployeeSchedule()
+        {
+            List<Employee> employees = employeeService.getAll();
+            return View(employees);
+        }
         // GET: Admin/AssignmentEmployee/Edit/5
         public ActionResult Edit(int id)
         {
@@ -80,6 +84,11 @@ namespace BuildingDemo.Areas.Admin.Controllers
             }
         }
 
+        public ActionResult Schedule(int id)
+        {
+            HashSet<Schedule> schedules = assignBuildingService.GetScheduleByEmployee(id);
+            return View(schedules);
+        }
         // GET: Admin/AssignmentEmployee/Delete/5
         public ActionResult Delete(int id)
         {

@@ -50,7 +50,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
             string ID = building.ID + "-" + uuid.ToString();
             building.ID = ID;
             building.IsPay = false;
-            building.IsResolve = false;
+            building.IsResolve = true;
             if (Images[0] != null && Images.Count > 0)
             {
                 for ( int i = 0; i < Images.Count; i++)

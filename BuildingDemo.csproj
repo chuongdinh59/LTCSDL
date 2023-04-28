@@ -1319,6 +1319,8 @@
     <Content Include="Areas\Staff\Views\StaffManagement\Index.cshtml" />
     <Content Include="Areas\Staff\Views\StaffManagement\Edit.cshtml" />
     <Content Include="Areas\Staff\Views\StaffManagement\MySchedule.cshtml" />
+    <Content Include="Areas\Admin\Views\AssignmentEmployee\EmployeeSchedule.cshtml" />
+    <Content Include="Areas\Admin\Views\AssignmentEmployee\Schedule.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />

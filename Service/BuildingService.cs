@@ -13,7 +13,7 @@ namespace BuildingDemo.Service
         private  BuildingDB db = new BuildingDB();
         public List<Building> getAll()
         {
-            return db.Buildings.ToList();
+            return db.Buildings.Where(b => b.IsResolve == true).ToList();
         }
         public List<Building> Search(string keyword, double? price, int? BuildingTypeID, string address, int? beds, int? baths)
         {

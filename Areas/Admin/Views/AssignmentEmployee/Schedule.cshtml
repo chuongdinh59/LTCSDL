@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "Schedule";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Schedule</h2>
+
+<div class="page-header">
+    <h2 class="header-title">Data Table</h2>
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a href="#" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" href="#">Tables</a>
+            <span class="breadcrumb-item active">Data Table</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4>Data Table</h4>
+        <p>
+            DataTables is a plug-in for the jQuery Javascript library. It
+            is a highly flexible tool, built upon the foundations of
+            progressive enhancement, that adds all of these advanced
+            features to any HTML table. Below is an example of zero
+            configuration.
+        </p>
+        <div class="m-t-25">
+            <table id="data-table" class="table">
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên tòa nhà</th>
+                        <th>Người sở hữu</th>
+                        <th>Giá bán </th>
+                        <th>Ngày hẹn</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var sch in Model)
+                    {
+                        <tr>
+                            <td>@sch.ID</td>
+                            <td>@sch.Building.Name</td>
+                            <td>
+                                @if (sch.CustomerID != null)
+                                {
+                                    <span>@sch.Customer.Name</span>
+                                }
+                                else
+                                {
+                                    <span>Hệ thống</span>
+                                }
+                            </td>
+                            <td>@sch.Building.PurchasePrice</td>
+                            <td>
+                                @sch.Time.ToString("yyyy/MM/dd") -
+                            @if (sch.Session == true)
+                            {
+                                <span>Sáng</span>
+                            }
+                            else
+                            {
+                                <span>Chiều</span>
+                            }
+                        </td>
+                    </tr>
+                }
+                    @*@foreach (var building in Model)
+                        {
+                            <tr>
+
+                                <td>@building.ID</td>
+                                <td>@building.Name</td>
+                                <td>
+                                    @if (building.CustomerID != null)
+                                    {
+                                        @building.Customer.Name
+                                    }
+                                    else
+                                    {
+                                        <span>Hệ thống</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (@building.PurchasePrice != null)
+                                    {
+                                        <span>@building.PurchasePrice</span>
+                                    }
+                                    else
+                                    {
+                                        <span>Thương lượng</span>
+                                    }
+                                </td>
+                                <td>
+                                    <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                        <a href="/Staff/StaffManagement/Edit/@building.ID" class="btn btn-warning">
+                                            <i class="fa-solid fa-pen-to-square">
+                                            </i>
+                                        </a>
+                                    </div>
+                                </td>
+                                <td>
+                                    <a onclick="handleDone('@building.ID')" data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-success">
+                                        <i style="color:white" class="fa-solid fa-plus"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        }*@
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Name</th>
+                        <th>Position</th>
+                        <th>Office</th>
+                        <th>Age</th>
+                        <th>Start date</th>
+                        <th>Salary</th>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+
+
+    </div>
+</div>

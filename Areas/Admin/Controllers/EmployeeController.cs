@@ -93,6 +93,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
             return View();
         }
 
+       
         // POST: Admin/Employee/Delete/5
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
