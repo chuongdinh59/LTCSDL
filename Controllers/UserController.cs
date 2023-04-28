@@ -47,10 +47,16 @@ namespace BuildingDemo.Controllers
             Customer customer = customerService.FindByAccountID(id);
             return View(customer);
         }
+        [AuthenticationFilter]
+        public ActionResult MySchedule()
+        {
+            HashSet<Schedule> schedules = customerService.GetMySchedule((int)Session["ID"]);
+            return View(schedules);
+        }
         // POST: User/Edit/5
         [HttpPost]
         [Obsolete]
-        public ActionResult EditInfor(Customer newCustomer)
+        public ActionResult EditInfor(Customer newCustomer, string Email)
         {
             try
             {
@@ -60,7 +66,7 @@ namespace BuildingDemo.Controllers
                 }
                 else
                 {
-                    bool result = customerService.EditInfoCustomer(newCustomer);
+                    bool result = customerService.EditInfoCustomer(newCustomer, (int)Session["ID"], Email);
                     if (result)
                     {
                         TempData["SaveSuccess"] = "Sửa thông tin thành công";
@@ -70,7 +76,7 @@ namespace BuildingDemo.Controllers
                         TempData["SaveError"] = "Sửa thông tin thất bại";
                     }
                 }
-                return RedirectToAction("EditInfo", new { id = newCustomer.ID });
+                return RedirectToAction("EditInfor");
 
             }
             catch

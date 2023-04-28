@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "MySchedule";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<section id="center" class="clearfix center_about">
+    <div class="container clearfix">
+        <div class="row">
+            <div class="center_about_1 text-center clearfix">
+                <div class="col-sm-12">
+                    <h1 class="mgt">Chào mừng, @Session["Username"]!</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<table id="scheduleTable">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Building Name</th>
+            <th>Time</th>
+            <th>Session</th>
+            <th>Employee Name</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Data will be dynamically added here -->
+        @foreach(var sch in Model)
+            {
+        <tr>
+            <td>@sch.ID</td>
+            <td>@sch.Building.Name</td>
+            <td>@sch.Time.ToString("yyyy/MM/dd")</td>
+            <td>
+                @if (@sch.Session == true)
+                {
+                    <span>Sáng</span>
+                }
+                else
+                {
+                    <span>Chiều</span>
+                }
+            </td>
+            <td>
+                @if (@sch.Employee != null)
+                {
+                    <span>@sch.Employee.Name</span>
+                }
+                else
+                {
+                    <span>Chưa xác nhận</span>
+                }
+            </td>
+            <td>
+                @if (@sch.IsResolve == true )
+                {
+                    <span>Đã xác nhận</span>
+                }
+                else
+                {
+                    <span>Chưa xác nhận</span>
+                }
+            </td>
+        </tr>
+            }
+    </tbody>
+</table>

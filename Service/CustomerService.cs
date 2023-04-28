@@ -19,22 +19,32 @@ namespace BuildingDemo.Service
 
             return customer;
         }
-        public bool EditInfoCustomer(Customer customer)
+
+
+
+        public HashSet<Schedule> GetMySchedule(int accountID)
+        {
+            Customer customer = FindByAccountID(accountID);
+            var sortedSchedules = customer.Schedules.OrderBy(s => s.Time);
+            return new HashSet<Schedule>(sortedSchedules);
+        }
+        public bool EditInfoCustomer(Customer customer, int id, string email)
         {
             try
             {
                 using (var db = new BuildingDB())
                 {
-                    Customer c = db.Customers.Find(customer.ID);
-                    c.Name = customer.Name;
-                    c.Address = customer.Address;
-                    c.Phone = customer.Phone;
-                    c.Note = customer.Note;
+                    Customer cus = db.Customers.FirstOrDefault(c => c.AccountID == id);
+                    cus.Account.Email = email;
+                    cus.Name = customer.Name;
+                    cus.Address = customer.Address;
+                    cus.Phone = customer.Phone;
+                    cus.Note = customer.Note;
                     db.SaveChanges();
+                    return true;
                 }
-                return true;
             }
-            catch (Exception ex)
+            catch
             {
                 return false;
             }

@@ -391,9 +391,8 @@
     <Compile Include="Areas\Admin\Service\ScheduleService.cs" />
     <Compile Include="Areas\Admin\Service\ReportEmployeeView.cs" />
     <Compile Include="Areas\Admin\Service\ScheduleViewModel.cs" />
-    <Compile Include="Areas\Staff\Controllers\BuildingStaffController.cs" />
-    <Compile Include="Areas\Staff\Controllers\HomeStaffController.cs" />
-    <Compile Include="Areas\Staff\Controllers\ScheduleStaffController.cs" />
+    <Compile Include="Areas\Staff\Controllers\StaffManagementController.cs" />
+    <Compile Include="Areas\Staff\Service\StaffService.cs" />
     <Compile Include="Areas\Staff\StaffAreaRegistration.cs" />
     <Compile Include="Controllers\BookedController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -1315,6 +1314,11 @@
     <Content Include="Areas\Admin\Views\Schedule\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Schedule\EmployeeSchedule.cshtml" />
     <Content Include="Areas\Admin\Views\Report\Index.cshtml" />
+    <Content Include="Areas\Staff\Views\web.config" />
+    <Content Include="Areas\Staff\Views\Shared\_StaffLayout.cshtml" />
+    <Content Include="Areas\Staff\Views\StaffManagement\Index.cshtml" />
+    <Content Include="Areas\Staff\Views\StaffManagement\Edit.cshtml" />
+    <Content Include="Areas\Staff\Views\StaffManagement\MySchedule.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -1354,6 +1358,7 @@
     <Content Include="Views\User\Infor.cshtml" />
     <Content Include="Views\User\EditInfor.cshtml" />
     <Content Include="Views\Search\SearchResult.cshtml" />
+    <Content Include="Views\User\MySchedule.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1363,6 +1368,7 @@
     <Folder Include="Areas\Admin\Views\Email\" />
     <Folder Include="Areas\Staff\Data\" />
     <Folder Include="Views\Logout\" />
+    <Folder Include="Views\Schedule\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.min.css.map" />

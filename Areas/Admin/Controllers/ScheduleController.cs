@@ -15,6 +15,10 @@ namespace BuildingDemo.Areas.Admin.Controllers
         private CustomerService customerService = new CustomerService();
         private ScheduleService scheduleService = new ScheduleService();
         // GET: Admin/Schedule
+
+
+
+        
         public ActionResult Index()
         {
             List<Schedule> schedules = scheduleService.GetBuildingsNotResolve();
@@ -78,6 +82,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
                 }
                 else
                 {
+                    TempData["ErrorMessage"] = "Nhân viên đã có lịch vào ngày đó rồi";
                     return RedirectToAction("Create");
                 }
 
@@ -93,6 +98,14 @@ namespace BuildingDemo.Areas.Admin.Controllers
         {
             Schedule schedule = scheduleService.FindByID(id);
             return View(schedule);
+        }
+
+
+        [HttpPost]
+        public ActionResult CreateSchedule(string BuildingID, DateTime Time, bool Session1)
+        {
+            bool res = scheduleService.CreateSchedule(BuildingID, Time, Session1, (int)Session["ID"]);
+            return RedirectToAction("Index");
         }
         private ActionResult View(Schedule schedule, List<Employee> employees)
         {

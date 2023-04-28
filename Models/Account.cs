@@ -21,8 +21,6 @@ namespace BuildingDemo.Models
         [StringLength(100)]
         public string Password { get; set; }
 
-        public bool? Active { get; set; }
-
         [StringLength(150)]
         public string Username { get; set; }
 

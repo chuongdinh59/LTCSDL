@@ -31,7 +31,7 @@ namespace BuildingDemo.Areas.Admin.Service
                 {
                     return false;
                 }
-                account.Active = true;
+                account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return true;
@@ -72,7 +72,6 @@ namespace BuildingDemo.Areas.Admin.Service
                 }
                 target.Password = account.Password;
                 target.RoleID = account.RoleID;
-                target.Active = account.Active;
                 db.SaveChanges();
                 return true;
 

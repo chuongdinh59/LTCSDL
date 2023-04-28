@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using System.Web;
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -11,7 +12,6 @@
 
     <!-- page css -->
     <link href="~/Assets/Adminassets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet">
-    <link href="~/Assets/StaffAssets/ScheduleStaff.css" rel="stylesheet" />
 
     <!-- Core css -->
     <link href="~/Assets/Adminassets/css/app.min.css" rel="stylesheet">
@@ -191,87 +191,22 @@
             <div class="side-nav">
                 <div class="side-nav-inner">
                     <ul class="side-nav-menu scrollable">
-                        <li class="nav-item dropdown open">
-                            <a class="dropdown-toggle" href="javascript:void(0);">
-                                <span class="icon-holder">
-                                    <i class="anticon anticon-dashboard"></i>
-                                </span>
-                                <span class="title">Tổng quan</span>
-                            </a>
-                        </li>
-                        @*<li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="javascript:void(0);">
-                                <span class="icon-holder">
-                                    <i class="anticon anticon-appstore"></i>
-                                </span>
-                                <span class="title">Quản lý khách hàng</span>
-                                <span class="arrow">
-                                    <i class="arrow-icon"></i>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="@Url.Action("Index", "Appointment")">Quản lý lịch hẹn</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "Customer")">Quản lý thông tin khách hàng</a>
-                                </li>
-                            </ul>
-                        </li>
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="javascript:void(0);">
-                                <span class="icon-holder">
-                                    <i class="anticon anticon-build"></i>
-                                </span>
-                                <span class="arrow">
-                                    <i class="arrow-icon"></i>
-                                </span>
-                                <span class="title">Quản lý nhân viên</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="@Url.Action("Index", "AssignmentEmployee")">Phân công nhân viên </a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "Employee")">Quản lý thông tin nhân viên</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="@Url.Action("Index", "Account")">
+                            <a class="dropdown-toggle" href="/Staff">
                                 <span class="icon-holder">
                                     <i class="anticon anticon-lock"></i>
                                 </span>
-                                <span class="title">Quản lý tài khoản</span>
+                                <span class="title">Tòa nhà đang quản lý</span>
 
                             </a>
-
-                        </li>*@
-                        <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="javascript:void(0);">
-                                <span class="icon-holder">
-                                    <i class="anticon anticon-hdd"></i>
-                                </span>
-                                <span class="title">Quản lý tòa nhà</span>
-                                <span class="arrow">
-                                    <i class="arrow-icon"></i>
-                                </span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a href="@Url.Action("Index", "BuildingStaff")">Tòa nhà hiện đang quản lý</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Success", "BuildingStaff")">Đã hoàn tất</a>
-                                </li>
-                            </ul>
                         </li>
+
                         <li class="nav-item dropdown">
-                            <a class="dropdown-toggle" href="@Url.Action("Index", "ScheduleStaff")">
+                            <a class="dropdown-toggle" href="/Staff/StaffManagement/MySchedule">
                                 <span class="icon-holder">
-                                    <i class="anticon anticon-form"></i>
+                                    <i class="anticon anticon-appstore"></i>
                                 </span>
-                                <span class="title">Lịch xem nhà</span>
+                                <span class="title">Lịch hẹn xem nhà</span>
                             </a>
                         </li>
                     </ul>

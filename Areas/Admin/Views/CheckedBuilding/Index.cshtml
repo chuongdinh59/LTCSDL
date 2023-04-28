@@ -91,7 +91,8 @@
                     <tr>
                         <th>ID</th>
                         <th>Tên tòa nhà</th>
-                        <th>Trạng thái tòa nhà</th>
+                        <th>Trạng thái</th>
+                        <th>Thanh toán</th>
                         <th></th>
                         <th></th>
                         <th></th>
@@ -100,39 +101,56 @@
                 <tbody>
                     @foreach (var building in Model)
                     {
-                        <tr>
+                    <tr>
 
-                            <td>@building.ID</td>
-                            <td>@building.Name</td>
-                            <td>
-                                @if (building.IsOccupied != null)
+                        <td>@building.ID</td>
+                        <td>@building.Name</td>
+                        <td>
+                            @if (building.IsOccupied != null)
+                            {
+                                <span>Đang rao bán</span>
+                            }
+                            else
+                            {
+                                <span>Đang cho thuê</span>
+                            }
+                        </td>
+                        <td>
+                            @if (building.IsPay == true)
+                            {
+                                <span>Đã thanh toán </span>
+                            }
+                            else
+                            {
+                                <span>Chưa thanh toán</span>
+                            }
+                        </td>
+                        <td>
+                            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                @if (building.IsPay)
                                 {
-                                    <span>Đang rao bán</span>
+                                <a data-content="@building.ID" class="resolve-btn btn btn-success"><i class="fa-solid fa-plus"></i></a>
                                 }
                                 else
                                 {
-                                    <span>Đang cho thuê</span>
+                                    <a href="javascript:void(0);" data-content="1" class="btn btn-secondary btn-tone m-r-5"><i class="fa-solid fa-plus"></i></a>
                                 }
-                            </td>
-                            <td>
-                                <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                                    <a data-content="@building.ID" class="resolve-btn btn btn-success"><i class="fa-solid fa-plus"></i></a>
-                                </div>
-                            </td>
-                            <td>
-                                <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                                    <a href="@Url.Action("Edit", "Building", new { id = building.ID })" class="btn btn-warning">
-                                        <i class="fa-solid fa-pen-to-square">
-                                        </i>
-                                    </a>
-                                </div>
-                            </td>
-                            <td>
-                                <a data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
-                                    <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
+                            </div>
+                        </td>
+                        <td>
+                            <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
+                                <a href="@Url.Action("Edit", "Building", new { id = building.ID })" class="btn btn-warning">
+                                    <i class="fa-solid fa-pen-to-square">
+                                    </i>
                                 </a>
-                            </td>
-                        </tr>
+                            </div>
+                        </td>
+                        <td>
+                            <a data-toggle="modal" data-content="@building.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
+                                <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
 
                     }
 

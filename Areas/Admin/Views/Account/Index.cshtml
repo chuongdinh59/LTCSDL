@@ -60,7 +60,7 @@
                         <th>ID</th>
                         <th>Vai trò</th>
                         <th>Tên đăng nhập</th>
-                        <th>Tình trạng</th>
+                        <th>Email</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -74,24 +74,16 @@
                         <td>@account.Role.RoleName</td>
 
                         <td>@account.Username</td>
-                        @if (@account.Active == true)
-                        {
-                                                <<td>
-                        <div class="d-flex align-items-center">
-                            <div class="badge badge-success badge-dot m-r-10"></div>
-                            <div>Active</div>
-                        </div>
-                    </td>
-                        }
-                        else
-                        {
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <div class="badge badge-danger badge-dot m-r-10"></div>
-                                    <div>Pending</div>
-                                </div>
-                            </td>
-                        }
+                        <td>
+                            @if(account.Email != null)
+                {
+                            <span>@account.Email</span>
+                }
+                else
+                {
+                    <span>Cần bổ sung</span>
+                }
+                        </td>
                         <td>
                             <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
                                 <a href="@Url.Action("Edit", "Account", new { id = account.ID })" class="btn btn-warning">

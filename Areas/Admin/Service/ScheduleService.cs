@@ -9,7 +9,27 @@ namespace BuildingDemo.Areas.Admin.Service
     public class ScheduleService
     {
         private BuildingDB db = new BuildingDB();
-
+        public bool CreateSchedule(string BuildingID, DateTime Time, bool Session, int AccountID)
+        {
+            try
+            {
+                Customer customer = db.Customers.FirstOrDefault(c => c.AccountID == AccountID);
+                if (customer == null) return false;
+                Schedule schedule = new Schedule();
+                schedule.BuildingID = BuildingID;
+                schedule.Time = Time;
+                schedule.Session = Session;
+                schedule.IsResolve = false;
+                schedule.CustomerID = customer.ID;
+                db.Schedules.Add(schedule);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         public List<Schedule> GetBuildingsNotResolve()
         {
             return db.Schedules.Where(s => s.IsResolve == false).ToList();
@@ -62,11 +82,6 @@ namespace BuildingDemo.Areas.Admin.Service
             //    return false;
             //}
 
-            Building building = db.Buildings.Find(BuildingID);
-            if(building.IsPay == null || building.IsPay == false)
-            {
-                return false;
-            }
             List<Schedule> schedules = db.Schedules.Where(s => s.ID != ScheduleID &&  s.BuildingID == BuildingID && s.Time == DateAppointment && s.Session == Session).ToList();
 
             if (schedules.Any())

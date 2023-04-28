@@ -61,8 +61,12 @@ namespace BuildingDemo.Areas.Admin.Service
                     {
                         return false;
                     }
-                    // Check if Employee exists in any Account record
-                    if (db.Accounts.Find(employee.AccountID) == null )
+                    if (db.Accounts.Find(employee.AccountID).RoleID != 2)
+                    {
+                        return false;
+                    }
+                        // Check if Employee exists in any Account record
+                        if (db.Accounts.Find(employee.AccountID) == null )
                     {
                         return false;
                     }
@@ -121,6 +125,7 @@ namespace BuildingDemo.Areas.Admin.Service
                     Employee employee = db.Employees.Find(id);
                     if (employee != null)
                     {
+                        db.Accounts.Remove(employee.Account);
                         db.Employees.Remove(employee);
                     }
                     db.SaveChanges();
@@ -159,6 +164,7 @@ namespace BuildingDemo.Areas.Admin.Service
                                 EmployeeID = id,
                                 BuildingID = buildingId
                             };
+                            mb.IsSuccess = false;
                             db.ManagementBuildings.Add(mb);
                     }
                     db.SaveChanges();

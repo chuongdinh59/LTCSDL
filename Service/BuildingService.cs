@@ -15,7 +15,578 @@ namespace BuildingDemo.Service
         {
             return db.Buildings.ToList();
         }
-
+        public List<Building> Search(string keyword, double? price, int? BuildingTypeID, string address, int? beds, int? baths)
+        {
+            var SearchResult = db.Buildings.ToList();
+            if (!string.IsNullOrEmpty(keyword)) // có nhập tên nhà
+            {
+                if (price != null) //có nhập giá
+                {
+                    if (BuildingTypeID != null) // có chọn loại nhà 
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID).ToList();
+                                }
+                            }
+                        }
+                    }
+                    else // không chọn loại nhà
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)).ToList();
+                                }
+                            }
+                        }
+                    }
+                }
+                else // không nhập giá 
+                {
+                    if (BuildingTypeID != null) // có chọn loại nhà 
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.BuildingTypeID == BuildingTypeID).ToList();
+                                }
+                            }
+                        }
+                    }
+                    else // không chọn loại nhà
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)).ToList();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else //không nhập tên nhà
+            {
+                if (price != null) //có nhập giá
+                {
+                    if (BuildingTypeID != null) // có chọn loại nhà 
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.BuildingTypeID == BuildingTypeID).ToList();
+                                }
+                            }
+                        }
+                    }
+                    else // không chọn loại nhà
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)).ToList();
+                                }
+                            }
+                        }
+                    }
+                }
+                else // không nhập giá 
+                {
+                    if (BuildingTypeID != null) // có chọn loại nhà 
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID
+                                    && b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.BuildingTypeID == BuildingTypeID).ToList();
+                                }
+                            }
+                        }
+                    }
+                    else // không chọn loại nhà
+                    {
+                        if (!string.IsNullOrEmpty(address)) // có nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Address.Contains(address)
+                                    && b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Address.Contains(address)
+                                    && b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Address.Contains(address)
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Address.Contains(address)).ToList();
+                                }
+                            }
+                        }
+                        else // không nhập địa chỉ
+                        {
+                            if (beds != null) // có chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Bed == beds
+                                    && b.Bath == baths).ToList();
+                                }
+                                else // không chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Bed == beds).ToList();
+                                }
+                            }
+                            else //không chọn số phòng ngủ
+                            {
+                                if (baths != null)  // có chọn số phòng tắm
+                                {
+                                    SearchResult = db.Buildings.Where(b => b.Bath == baths).ToList();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            return SearchResult;
+        }
         public bool DeleteBuilding(string id)
         {
             try
@@ -76,15 +647,18 @@ namespace BuildingDemo.Service
         }
 
         [Obsolete]
-        public bool CreateBuilding(Building building, HttpPostedFileBase Image)
+        public bool CreateBuilding(Building building, HttpPostedFileBase Image, int AccountID)
         {
             try
             {
+                Customer cus = db.Customers.FirstOrDefault(c => c.AccountID == AccountID);
+                if (cus == null) return false;
                 Guid uuid = Guid.NewGuid();
                 string ID = "KG-" + uuid.ToString();
                 building.ID = ID;
                 building.IsResolve = false;
-                building.CustomerID = 43;
+                building.IsPay = false;
+                building.CustomerID = cus.ID;
                 if (Image != null) // Đoạn này kiểm tra có hình không 
                 {
                     building.Image = CloudinaryController.UploadImage(Image);

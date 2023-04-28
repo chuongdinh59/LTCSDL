@@ -17,7 +17,7 @@ namespace BuildingDemo.Areas.Staff
             context.MapRoute(
                 "Staff_default",
                 "Staff/{controller}/{action}/{id}",
-                new {controller = "HomeStaff", action = "Index", id = UrlParameter.Optional }
+                new { controller = "StaffManagement", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

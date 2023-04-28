@@ -64,18 +64,20 @@
                     <div class="col-sm-6 space_left">
                         <div class="submit_1i1 clearfix">
                             <h5>Số điện thoại</h5>
-                            <input value="@Model.Phone" name="PurchasePrice" class="form-control" placeholder="Tính bằng triệu" type="text">
+                            <input value="@Model.Phone" name="Phone" class="form-control" placeholder="Số điện thoại" type="text">
                         </div>
                     </div>
-                    <div class="col-sm-6 space_right">
+                </div>
+                <div class="submit_1i clearfix">
+                    <div class="col-sm-6 space_left">
                         <div class="submit_1i1 clearfix">
-                            <h5>Mail</h5>
-                            <input value="@Model.Email" name="Area" class="form-control" placeholder="Tính bằng m²" type="text">
+                            <h5>Email</h5>
+                            <input value="@Model.Account.Email" name="Email" class="form-control" placeholder="Email" type="email">
                         </div>
                     </div>
                 </div>
                 <h5>Note</h5>
-                <input name="Name" class="form-control" placeholder="Tên" type="text" value="@Model.Note">
+                <input name="Name" class="form-control" placeholder="Ghi chú" type="text" value="@Model.Note">
             </div>
             
         </div>

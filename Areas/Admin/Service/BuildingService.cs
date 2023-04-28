@@ -134,10 +134,10 @@ namespace BuildingDemo.Areas.Admin.Service
                 Building target = db.Buildings.Find(id);
                 if (target == null) return false;
                 target.IsResolve = true;
-                //EmailController.SendEmail
-                //    ("chuongdinh2202@gmail.com", 
-                //    "Nhà của bạn đã được phê duyệt",
-                //    "Thông báo duyệt thành công nhà " + target.Name);
+                EmailController.SendEmail
+                    ("chuongdinh2202@gmail.com",
+                    "Nhà của bạn đã được phê duyệt",
+                    "Thông báo duyệt thành công nhà " + target.Name);
                 db.SaveChanges();
                 return true;
             }

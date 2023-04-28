@@ -14,10 +14,12 @@ namespace BuildingDemo.Filter
             var currentUser = filterContext.HttpContext.Session["ID"];
             if (currentUser == null)
             {
-                filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new {
-                    controller = "Login",
-                    action = "Login"
-                }));
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary(new {
+                        controller = "Login",
+                        action = "Login"
+                    })
+                );
             }
             base.OnActionExecuting(filterContext);
         }

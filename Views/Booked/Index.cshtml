@@ -19,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="center_home_1 clearfix">
-                <h1>Danh sách nhà đã thêm</h1>
+                <h1>Danh sách nhà đã đặt xem</h1>
 
                 <table id="myTable">
                     <thead>
@@ -27,6 +27,9 @@
                             <th>Mã tòa nhà</th>
                             <th>Tên</th>
                             <th>Giá</th>
+                            <th>Chọn ngày</th>
+                            <th></th>
+
                         </tr>
                     </thead>
                     <tbody></tbody>
@@ -46,14 +49,60 @@
         // Đổ dữ liệu vào bảng
         var $tbody = $("#myTable tbody");
         for (var i = 0; i < data.length; i++) {
-            var row =
-                "<tr>" +
+            var row = "<tr>" +
                 "<td>" + data[i].ma + "</td>" +
                 "<td>" + data[i].ten + "</td>" +
                 "<td>" + data[i].gia + "</td>" +
+                "<td>" + '<input type="date" class="datepicker">' + "</td>" +
+                '<td><select name="Session" class="form-select">' +
+                '<option value="true">Sáng</option>' +
+                '<option value="false">Chiều</option>' +
+                '</select></td>' +
+                '<td><div style="display: flex; justify-content: space-between; font-size: 20px; color: white;">' +
+                '<a href="#" class="btn btn-warning" style="width: 150px;">' +
+                'Đặt lịch <i class="fa-sharp fa-solid fa-cart-shopping"></i>' +
+                '</a>' +
+                '</div></td>' +
                 "</tr>";
             $tbody.append(row);
         }
+
+        $('#myTable tbody').on('click', '.btn-warning', function (event) {
+            // Lấy giá trị Ma từ dòng tương ứng
+            var ma = $(this).closest('tr').find('td:eq(0)').text();
+
+            // Lấy giá trị ngày tháng từ input tương ứng
+            var ngayThang = $(this).closest('tr').find('.datepicker').val();
+
+            // Lấy giá trị select từ element tương ứng
+            var session = $(this).closest('tr').find('.form-select').val();
+
+            if (ngayThang == "" || session == "") {
+                alert("Cần cho ngày hẹn và buổi hẹn");
+            } else {
+                $.ajax({
+                    type: "POST",
+                    url: "https://localhost:44327/Admin/Schedule/CreateSchedule",
+                    data: { BuildingID: ma, Time: ngayThang, Session1: session },
+                    success: function (response) {
+                        var data = JSON.parse(localStorage.getItem("Book"));
+                        for (var i = 0; i < data.length; i++) {
+                            if (data[i].ma === ma) {
+                                data.splice(i, 1);
+                                break;
+                            }
+                        }
+                        localStorage.setItem("Book", JSON.stringify(data));
+                        window.location.href = "https://localhost:44327/Booked";
+                        // Thực hiện hành động sau khi gửi dữ liệu thành công
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                        // Thực hiện hành động khi có lỗi xảy ra
+                    }
+                });
+            }
+        });
     });
 </script>
 
