@@ -12,6 +12,23 @@ namespace BuildingDemo.Areas.Admin.Service
     {
         private BuildingRepository buildingRepository = new BuildingRepository();
         private BuildingDB db = new BuildingDB();
+
+        public List<Building> GetBuildingAssign()
+        {
+            try
+            {
+                List<string> buildingSuccess = db.ManagementBuildings.
+                    Where(mb => mb.IsSuccess == true).Select(mb => mb.BuildingID).ToList();
+                List<Building> buildings = db.Buildings
+                          .Where(b => !buildingSuccess.Contains(b.ID))
+                          .ToList();
+                return buildings;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         public bool save(Building building)
         {
             return buildingRepository.save(building);

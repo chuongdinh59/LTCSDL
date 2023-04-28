@@ -51,7 +51,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
         // GET: Admin/AssignmentEmployee/Edit/5
         public ActionResult Edit(int id)
         {
-            List<Building> buildings = buildingService.getAll().ToList();
+            List<Building> buildings = buildingService.GetBuildingAssign();
             Employee employee = employeeService.findByID(id);
             List<ManagementBuilding> buildingChecked = assignBuildingService.getAll();
             return View(buildings, employee, buildingChecked);
