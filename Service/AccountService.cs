@@ -11,21 +11,40 @@ namespace BuildingDemo.Service
         BuildingDB db = new BuildingDB();
         public Account CreateAccount(Account account)
         {
-            account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
-            account.RoleID = 3;
-            db.Configuration.ValidateOnSaveEnabled = false;
-            db.Accounts.Add(account);
-            db.SaveChanges();
-            return account;
+            try
+            {
+                account.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
+                account.RoleID = 3;
+                //db.Configuration.ValidateOnSaveEnabled = false;
+                db.Accounts.Add(account);
+                db.SaveChanges();
+                Account account1 = db.Accounts.SingleOrDefault(a => a.Username == account.Username); // Retrieve the account entity from the database
+                Customer customer = new Customer();
+                customer.AccountID = account1.ID;
+                db.Customers.Add(customer);
+                db.SaveChanges();
+                return account;
+            }
+            catch
+            {
+                return null;
+            }
         }
         public bool Check(Account account)
         {
-            var check = db.Accounts.FirstOrDefault(s => s.Username == account.Username);
-            if (check == null)
+            try
             {
-                return true;
+                var check = db.Accounts.FirstOrDefault(s => s.Username == account.Username);
+                if (check == null)
+                {
+                    return true;
+                }
+                return false;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
         public List<Account> getAccount()
         {

@@ -116,13 +116,23 @@
                 <h4 class="mgt col_1">Ảnh chính</h4>
                 <div class="col-md-12">
                     <div class="custom-file">
-                        <input name="Image" type="file" class="form-control custom-file-input" id="thumbnailFile" accept="image/*">
+                        <input value="" name="Image" type="file" class="form-control custom-file-input" id="thumbnailFile" accept="image/*">
                         <label class="custom-file-label" for="thumbnailFile">Choose thumbnail</label>
                     </div>
                     <div id="uploadSuccessNotification" style="display: none;">
                         + Thumbnail uploaded successfully!
                     </div>
-                    <img id="thumbnailPreview" src="#" alt="Thumbnail preview" style="display:none; max-width:100%">
+                    @if (@ViewBag.building.Image == null)
+                    {
+                        <img src="" id="thumbnailPreview" alt="Thumbnail preview"
+                             style="display:none; max-width:100%">
+                    }
+                    else
+                    {
+                        <img src="@ViewBag.building.Image" id="thumbnailPreview" alt="Thumbnail preview"
+                             style=" max-width:100%">
+                    }
+
                 </div>
             </div>
             <div class="submit_1 clearfix">

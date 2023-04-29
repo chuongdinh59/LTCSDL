@@ -130,7 +130,7 @@ namespace BuildingDemo.Controllers
         // POST: Admin/Building/Edit/5
         [HttpPost]
         [Obsolete]
-        public ActionResult Edit(Building newBuilding)
+        public ActionResult Edit(Building newBuilding, HttpPostedFileBase Image)
         {
 
             // Delete hình cũ
@@ -144,7 +144,7 @@ namespace BuildingDemo.Controllers
                 else
                 {
 
-                    bool result = buildingService.EditInfoBuilding(newBuilding);
+                    bool result = buildingService.EditInfoBuilding(newBuilding, Image);
                     //bool updateImage = buildingService.UpdateImage(newBuilding, Image, Images);
                     if (result)
                     {
