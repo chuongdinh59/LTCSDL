@@ -61,15 +61,16 @@ namespace BuildingDemo.Areas.Admin.Service
                     {
                         return false;
                     }
-                    if (db.Accounts.Find(employee.AccountID).RoleID != 2)
+                    Account account = db.Accounts.Find(employee.AccountID);
+                    if (account == null || account.RoleID != 2)
                     {
                         return false;
                     }
                         // Check if Employee exists in any Account record
-                        if (db.Accounts.Find(employee.AccountID) == null )
-                    {
-                        return false;
-                    }
+                    //    if (db.Accounts.Find(employee.AccountID) == null )
+                    //{
+                    //    return false;
+                    //}
                     // dup accout id 
                     if (db.Employees
                         .FirstOrDefault(e => e.AccountID == employee.AccountID) != null)
@@ -157,7 +158,11 @@ namespace BuildingDemo.Areas.Admin.Service
                     {
                         db.ManagementBuildings.Remove(mb);
                     }
-
+                    if (buildingids == null)
+                    {
+                        db.SaveChanges();
+                        return true;
+                    }
                     foreach (var buildingId in buildingids)
                     {
                             ManagementBuilding mb = new ManagementBuilding {

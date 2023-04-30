@@ -76,11 +76,20 @@ namespace BuildingDemo.Areas.Admin.Controllers
             {
                 // TODO: Add update logic here
                 bool result = employeeService.AssignBuilding(id, buildingids);
-                return RedirectToAction("Index");
+                if (result)
+                {
+                    TempData["success"] = "Phân công nhân viên thành công";
+                }
+                else
+                {
+                    TempData["error"] = "Phân công nhân viên thất bại";
+                }
+                return RedirectToAction("Edit", new { id = id });
             }
             catch
             {
-                return View();
+                return RedirectToAction("Index");
+
             }
         }
 

@@ -657,7 +657,7 @@ namespace BuildingDemo.Service
         }
         public List<Building> getTop(int x)
         {
-            return db.Buildings.Take(x).ToList();
+            return db.Buildings.Where(b =>b.IsResolve == true).Take(x).ToList();
         }
 
         [Obsolete]

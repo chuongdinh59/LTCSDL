@@ -89,11 +89,18 @@ namespace BuildingDemo.Areas.Admin.Service
                     {
                         return false;
                     }
-                    if (db.Accounts.Find(customer.AccountID) == null)
+                    Account account = db.Accounts.Find(customer.AccountID);
+                    if (account == null || account.RoleID != 3)
                     {
                         return false;
                     }
-                    if(Avatar != null)
+                    // dup account cho 2 người
+                    if (db.Customers
+                        .FirstOrDefault(e => e.AccountID == customer.AccountID) != null)
+                    {
+                        return false;
+                    }
+                    if (Avatar != null)
                     {
                         customer.Avatar = CloudinaryController.UploadImage(Avatar);
                     }

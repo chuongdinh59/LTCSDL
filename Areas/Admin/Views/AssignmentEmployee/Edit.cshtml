@@ -3,9 +3,36 @@
     ViewBag.Title = "Edit";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-
-<h3>Tên nhân viên: @ViewBag.employee.Name</h3>
-<h3>Mã nhân viên: #@ViewBag.employee.ID</h3>
+@if (TempData.ContainsKey("success"))
+{
+    <div class="alert alert-success">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thao tác thành công</h5>
+                <p>@TempData["success"].</p>
+            </div>
+        </div>
+    </div>
+}
+@if (TempData.ContainsKey("error"))
+{
+    <div class="alert alert-danger">
+        <div class="d-flex justify-content-start">
+            <span class="alert-icon m-r-20 font-size-30">
+                <i class="anticon anticon-close-circle"></i>
+            </span>
+            <div>
+                <h5 class="alert-heading">Thao tác thất bại</h5>
+                <p>@TempData["error"].</p>
+            </div>
+        </div>
+    </div>
+}
+@*<h3>Tên nhân viên: @Model.Name</h3>
+<h3>Mã nhân viên: #@Model.ID</h3>*@
 <div class="page-header">
     <h2 class="header-title">Data Table</h2>
     <div class="header-sub-title">
@@ -32,11 +59,11 @@
 
                     <tr>
                         @*<th>
-                            <div class="checkbox">
-                                <input id="checkAll" type="checkbox">
-                                <label for="checkAll" class="m-b-0"></label>
-                            </div>
-                        </th>*@
+                                <div class="checkbox">
+                                    <input id="checkAll" type="checkbox">
+                                    <label for="checkAll" class="m-b-0"></label>
+                                </div>
+                            </th>*@
                         <th>
                             Chọn
                         </th>
@@ -49,47 +76,47 @@
                 <tbody>
                     @foreach (var building in ViewBag.buildings)
                     {
-                    <tr>
-                        <td>
-                            <div class="checkbox">
+                        <tr>
+                            <td>
                                 <div class="checkbox">
-                                    @{
-                                        bool isChecked = false;
-                                        foreach (var bc in ViewBag.buildingChecked)
-                                        {
-                                            if (bc.BuildingID == building.ID && bc.EmployeeID == ViewBag.employee.ID)
+                                    <div class="checkbox">
+                                        @{
+                                            bool isChecked = false;
+                                            foreach (var bc in ViewBag.buildingChecked)
                                             {
-                                                isChecked = true;
-                                                break;
+                                                if (bc.BuildingID == building.ID && bc.EmployeeID == ViewBag.employee.ID)
+                                                {
+                                                    isChecked = true;
+                                                    break;
+                                                }
                                             }
                                         }
-                                    }
-                                    @if (isChecked)
-                                    {
-                                        <input checked id="checkAll @building.ID" type="checkbox">
-                                    }
-                                    else
-                                    {
-                                        <input id="checkAll @building.ID" type="checkbox">
-                                    }
-                                    <label for="checkAll @building.ID" class="m-b-0" />
+                                        @if (isChecked)
+                                        {
+                                            <input checked id="checkAll @building.ID" type="checkbox">
+                                        }
+                                        else
+                                        {
+                                            <input id="checkAll @building.ID" type="checkbox">
+                                        }
+                                        <label for="checkAll @building.ID" class="m-b-0" />
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>@building.ID</td>
-                        <td>@building.Name</td>
-                        <td>
-                            @if (building.CustomerID != null)
-                            {
-                                @building.Customer.Name
-                            }
-                            else
-                            {
-                                <span>Hệ thống</span>
-                            }
-                        </td>
-                        <td>61</td>
-                    </tr>
+                            </td>
+                            <td>@building.ID</td>
+                            <td>@building.Name</td>
+                            <td>
+                                @if (building.CustomerID != null)
+                                {
+                                    @building.Customer.Name
+                                }
+                                else
+                                {
+                                    <span>Hệ thống</span>
+                                }
+                            </td>
+                            <td>61</td>
+                        </tr>
 
                     }
 
@@ -109,7 +136,7 @@
 
             </table>
             <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white; ">
-                <a id="submit"  class="btn btn-success">Phân công nhân viên</a>
+                <a id="submit" class="btn btn-success">Phân công nhân viên</a>
             </div>
         </div>
     </div>
@@ -134,7 +161,7 @@
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ "buildingids": selectedIds})
+            body: JSON.stringify({ "buildingids": selectedIds })
         })
             .then(function (response) {
                 if (response.ok) {
