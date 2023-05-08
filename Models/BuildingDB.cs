@@ -8,7 +8,7 @@ namespace BuildingDemo.Models
     public partial class BuildingDB : DbContext
     {
         public BuildingDB()
-            : base("name=BuildingDB4")
+            : base("name=BuildingDB")
         {
         }
 
@@ -62,6 +62,11 @@ namespace BuildingDemo.Models
             modelBuilder.Entity<Customer>()
                 .Property(e => e.Note)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<Customer>()
+                .HasMany(e => e.Buildings)
+                .WithOptional(e => e.Customer)
+                .WillCascadeOnDelete();
 
             modelBuilder.Entity<Customer>()
                 .HasMany(e => e.Schedules)

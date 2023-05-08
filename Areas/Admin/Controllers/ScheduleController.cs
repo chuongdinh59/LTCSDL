@@ -146,19 +146,19 @@ namespace BuildingDemo.Areas.Admin.Controllers
         }
 
         // GET: Admin/Schedule/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+        //public ActionResult Delete(int id)
+        //{
+        //    return View();
+        //}
 
         // POST: Admin/Schedule/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int id)
         {
             try
             {
                 // TODO: Add delete logic here
-
+                bool IsDeleted = scheduleService.DeleteSchedule(id);
                 return RedirectToAction("Index");
             }
             catch

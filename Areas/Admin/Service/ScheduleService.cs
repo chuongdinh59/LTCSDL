@@ -163,6 +163,23 @@ namespace BuildingDemo.Areas.Admin.Service
                 return false;
             }
         }
-    
+
+        public bool DeleteSchedule(int id)
+        {
+            try
+            {
+                Schedule schedule = db.Schedules.Find(id);
+                db.Schedules.Remove(schedule);
+                db.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
     }
+
+   
 }

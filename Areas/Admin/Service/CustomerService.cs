@@ -59,6 +59,21 @@ namespace BuildingDemo.Areas.Admin.Service
                     Customer customer = db.Customers.Find(id);
                     if (customer != null)
                     {
+                        // hot fix 5
+                        foreach (var building in customer.Buildings.ToList())
+                        {
+                            foreach (var schedule in building.Schedules.ToList())
+                            {
+                                db.Schedules.Remove(schedule);
+                            }
+                            db.Buildings.Remove(building);
+                        }
+
+                        foreach (var schedule in customer.Schedules.ToList())
+                        {
+                            db.Schedules.Remove(schedule);
+                        }
+                        db.Accounts.Remove(customer.Account);
                         db.Customers.Remove(customer);
                         db.SaveChanges();
                     }
@@ -71,7 +86,7 @@ namespace BuildingDemo.Areas.Admin.Service
                 }
                 return true;
             }
-            catch
+            catch(Exception e)
             {
                 return false;
             }

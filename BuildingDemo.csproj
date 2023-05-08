@@ -981,6 +981,14 @@
     <Content Include="Assets\css\list.css" />
     <Content Include="Assets\css\login.css" />
     <Content Include="Assets\css\property.css" />
+    <Content Include="Assets\img\ar1.jpg" />
+    <Content Include="Assets\img\ar2.png" />
+    <Content Include="Assets\img\art3.png" />
+    <Content Include="Assets\img\home-banner.jpg" />
+    <Content Include="Assets\img\Q1.jpg" />
+    <Content Include="Assets\img\rent.jpg" />
+    <Content Include="Assets\img\toancanh.jpg" />
+    <Content Include="Assets\img\villa.jpg" />
     <Content Include="Assets\StaffAssets\ScheduleStaff.css" />
     <Content Include="Assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Assets\fonts\glyphicons-halflings-regular.svg" />

@@ -10,10 +10,11 @@ namespace BuildingDemo.Service
 {
     public class BuildingService
     {
+        private const int space = 1000000;
         private  BuildingDB db = new BuildingDB();
         public List<Building> getAll()
         {
-            return db.Buildings.Where(b => b.IsResolve == true).ToList();
+            return db.Buildings.Where(b => b.IsResolve == true && b.ManagementBuildings.Any(m => m.IsSuccess == false)).ToList();
         }
         public List<Building> Search(string keyword, double? price, int? BuildingTypeID, string address, int? beds, int? baths)
         {
@@ -33,7 +34,7 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)
                                         && b.Bed == beds
@@ -42,7 +43,7 @@ namespace BuildingDemo.Service
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)
                                         && b.Bed == beds).ToList();
@@ -53,7 +54,7 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)
                                         && b.Bath == baths).ToList();
@@ -61,7 +62,7 @@ namespace BuildingDemo.Service
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)).ToList();
                                     }
@@ -74,7 +75,7 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Bed == beds
                                         && b.Bath == baths).ToList();
@@ -82,7 +83,7 @@ namespace BuildingDemo.Service
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Bed == beds).ToList();
                                     }
@@ -92,14 +93,14 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID).ToList();
                                     }
                                 }
@@ -114,7 +115,7 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)
                                         && b.Bed == beds
                                         && b.Bath == baths).ToList();
@@ -122,7 +123,7 @@ namespace BuildingDemo.Service
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)
                                         && b.Bed == beds).ToList();
                                     }
@@ -132,14 +133,14 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)).ToList();
                                     }
                                 }
@@ -151,14 +152,14 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Bed == beds
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Bed == beds).ToList();
                                     }
                                 }
@@ -167,13 +168,13 @@ namespace BuildingDemo.Service
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
                                         SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword)
-                                        && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)).ToList();
+                                        && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)).ToList();
                                     }
                                 }
                             }
@@ -333,7 +334,7 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)
                                         && b.Bed == beds
@@ -341,7 +342,7 @@ namespace BuildingDemo.Service
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)
                                         && b.Bed == beds).ToList();
@@ -351,14 +352,14 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Address.Contains(address)).ToList();
                                     }
@@ -370,14 +371,14 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Bed == beds
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Bed == beds).ToList();
                                     }
@@ -386,13 +387,13 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.BuildingTypeID == BuildingTypeID).ToList();
                                     }
                                 }
@@ -406,14 +407,14 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)
                                         && b.Bed == beds
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)
                                         && b.Bed == beds).ToList();
                                     }
@@ -422,13 +423,13 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Address.Contains(address)).ToList();
                                     }
                                 }
@@ -439,13 +440,13 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Bed == beds
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Bed == beds).ToList();
                                     }
                                 }
@@ -453,12 +454,12 @@ namespace BuildingDemo.Service
                                 {
                                     if (baths != null)  // có chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)
                                         && b.Bath == baths).ToList();
                                     }
                                     else // không chọn số phòng tắm
                                     {
-                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)).ToList();
+                                        SearchResult = db.Buildings.Where(b => (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)).ToList();
                                     }
                                 }
                             }
@@ -634,7 +635,7 @@ namespace BuildingDemo.Service
                 {
                     if (price != null)
                     {
-                        SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword) && (b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20)).ToList();
+                        SearchResult = db.Buildings.Where(b => b.Name.Contains(keyword) && (b.PurchasePrice <= price + space && b.PurchasePrice >= price - space)).ToList();
                     }
                     else
                     {
@@ -645,7 +646,7 @@ namespace BuildingDemo.Service
                 {
                     if (price != null)
                     {
-                        SearchResult = db.Buildings.Where(b => b.PurchasePrice <= price + 20 && b.PurchasePrice >= price - 20).ToList();
+                        SearchResult = db.Buildings.Where(b => b.PurchasePrice <= price + space && b.PurchasePrice >= price - space).ToList();
                     }
                 }
                 return SearchResult;

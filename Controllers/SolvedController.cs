@@ -18,12 +18,14 @@ namespace BuildingDemo.Controllers
         [AuthenticationFilter]
         public ActionResult Index()
         {
+            // Check lại có thể sai 
             int id = (int)Session["ID"];
             Customer customer = customerService.FindByAccountID(id);
-            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer).Where(b => b.IsResolve == true).ToList();
+            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer).
+                Where(b => b.IsResolve == true && b.ManagementBuildings.Any(m => m.IsSuccess == false)).ToList();
             return View(buildings, customer);
         }
-        private ActionResult View(List<Building> buildings, Customer customer)
+        private ActionResult View(List<Building> buildings, Customer customer)  
         {
             ViewBag.buildings = buildings;
             ViewBag.customer = customer;

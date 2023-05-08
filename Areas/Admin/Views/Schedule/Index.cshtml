@@ -137,7 +137,7 @@
                             </div>
                         </td>
                         <td>
-                            <a data-toggle="modal" data-content="1" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
+                            <a data-toggle="modal" data-content="@schedule.Schedule.ID" data-target="#exampleModalCenter" class="deleteBtn btn btn-danger">
                                 <i style="color:white" class="fa-sharp fa-solid fa-trash"></i>
                             </a>
                         </td>
@@ -191,7 +191,6 @@
     buildingIDButtons.forEach(function (buildingIDButton) {
         buildingIDButton.addEventListener('click', function () {
             // Get the modal element
-            console.log(1);
             const modal = document.querySelector('#exampleModalCenter');
 
             // Set the building ID in the modal body element
@@ -215,15 +214,15 @@
 
         console.log(buildingID)
         // Do something with the building ID (e.g., send an AJAX request to delete the building)
-        //console.log('Deleting building with ID:', buildingID);
-        //fetch("https://localhost:44327/Admin/Building/Delete/" + buildingID, {
-        //    method: 'POST',
-        //    headers: {
-        //        'Content-Type': 'application/json'
-        //    },
-        //}).then(res => {
-        //    window.location.href = "https://localhost:44327/Admin/Building";
-        //});
+        console.log('Deleting building with ID:', buildingID);
+        fetch("https://localhost:44327/Admin/Schedule/Delete/" + buildingID, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        }).then(res => {
+            window.location.href = "https://localhost:44327/Admin/Schedule";
+        });
     });
 
     
