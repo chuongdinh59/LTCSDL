@@ -30,8 +30,7 @@ namespace BuildingManagement.Controllers
         // GET: Property/Details/5
         public ActionResult Details(string id)
         {
-            List<Building> buildings = buildingService.getAll();
-            var pageDetail = buildings.Find(b => b.ID.Equals(id));
+            var pageDetail = buildingService.FindByID(id);
 
             return View(pageDetail);
         }

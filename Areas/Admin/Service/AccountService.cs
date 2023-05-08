@@ -70,7 +70,10 @@ namespace BuildingDemo.Areas.Admin.Service
                 {
                     return false;
                 }
-                target.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
+                if (account.Password != target.Password)
+                {
+                    target.Password = BCrypt.Net.BCrypt.HashPassword(account.Password);
+                }
                 target.RoleID = account.RoleID;
                 db.SaveChanges();
                 return true;

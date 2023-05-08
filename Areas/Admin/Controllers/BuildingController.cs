@@ -47,7 +47,7 @@ namespace BuildingDemo.Areas.Admin.Controllers
             , List<HttpPostedFileBase> Images)
         {
             Guid uuid = Guid.NewGuid();
-            string ID = building.ID + "-" + uuid.ToString();
+            string ID = "HT" + "-" + uuid.ToString();
             building.ID = ID;
             building.IsPay = false;
             building.IsResolve = true;

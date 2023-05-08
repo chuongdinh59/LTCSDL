@@ -84,13 +84,13 @@ namespace BuildingDemo.Controllers
                 return RedirectToAction("Index");
             }
         }
-        [HttpPost]
-        public ActionResult ChangePay(string BuildingID)
-        {
-            bool rs = buildingService.ChangePay(BuildingID);
+        //[HttpPost]
+        //public ActionResult ChangePay(string BuildingID)
+        //{
+        //    bool rs = buildingService.ChangePay(BuildingID);
 
-            return RedirectToAction("Index");
-        }
+        //    return RedirectToAction("Index");
+        //}
         // GET: User/Create
         public ActionResult Create()
         {

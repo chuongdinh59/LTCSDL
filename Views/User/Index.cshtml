@@ -93,7 +93,7 @@
                                         else
                                         {
                                             <div style=" display: flex; justify-content: space-between; font-size: 20px; color: white;">
-                                                <a onclick="handlePay('@building.ID')" href="#" class="btn btn-success" style="width: 150px">
+                                                <a onclick="handlePay('@building.ID', @(building.PurchasePrice * 0.02))" href="#" class="btn btn-success" style="width: 150px">
                                                     Thanh toán <i class="fa-sharp fa-solid fa-cart-shopping"></i>
                                                 </a>
                                             </div>
@@ -116,29 +116,33 @@
 
 
 <script>
-    function handlePay(id) {
-        fetch("https://localhost:44327/User/ChangePay", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                BuildingID: id
-            })
-        })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.text();
-            })
-            .then(result => {
-                window.location.href = "https://localhost:44327/User";
-                // do something with the result
-            })
-            .catch(error => {
-                console.error("Fetch error:", error);
-            });
+    function handlePay(id, price) {
+        const exchangeRate = 23000; // 1 USD = 23,000 VND
+        const usdAmount = price / exchangeRate;
+        let data =  usdAmount.toFixed(2); // Round to 2 decimal places
+        window.location.href = `https://localhost:44327/PayPal/PaymentWithPaypal?buildingid=${id}&price=${data}`;
+        //fetch("https://localhost:44327/User/ChangePay", {
+        //    method: "POST",
+        //    headers: {
+        //        "Content-Type": "application/json"
+        //    },
+        //    body: JSON.stringify({
+        //        BuildingID: id
+        //    })
+        //})
+        //    .then(response => {
+        //        if (!response.ok) {
+        //            throw new Error("Network response was not ok");
+        //        }
+        //        return response.text();
+        //    })
+        //    .then(result => {
+        //        window.location.href = "https://localhost:44327/User";
+        //        // do something with the result
+        //    })
+        //    .catch(error => {
+        //        console.error("Fetch error:", error);
+        //    });
     }
 
 
