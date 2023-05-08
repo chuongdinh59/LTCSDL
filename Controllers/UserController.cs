@@ -21,7 +21,8 @@ namespace BuildingDemo.Controllers
         {
             int id = (int)Session["ID"];
             Customer customer = customerService.FindByAccountID(id);
-            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer).Where(b => b.IsResolve == false).ToList();
+            List<Building> buildings = buildingService.GetBuildingFromCustomer(customer).
+                Where(b => b.IsResolve == false && !b.ManagementBuildings.Any(mb => mb.IsSuccess == true)).ToList();
             return View(buildings, customer);
         }
         private ActionResult View(List<Building> buildings, Customer customer)
